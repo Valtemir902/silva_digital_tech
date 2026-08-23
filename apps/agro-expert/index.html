@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Agro Expert: Gestão Rural e ERP Agrícola Offline</title>
+    
+    <meta name="google-site-verification" content="Klqpt3kAsGcRwmW459DGKkt10X_BXAxgc-TCfurlVaY" />
+    
+    <meta name="description" content="O ERP da fazenda 100% offline. Gestão de talhões, controle financeiro, estoque e Inteligência Artificial para identificar pragas na lavoura. Baixe grátis!">
+    <meta name="keywords" content="Agro Expert, aplicativo de gestão agrícola, app para produtor rural, ERP agrícola grátis, controle financeiro offline roça, gestão de fazenda, caderno de campo digital, identificar doença folha de café, inteligência artificial agricultura...">
+
+    <meta property="og:site_name" content="Agro Expert">
+    <meta property="og:title" content="Agro Expert: O ERP das Grandes Fazendas no seu Bolso">
+    <meta property="og:description" content="Controle os custos dos seus talhões offline e identifique doenças na lavoura em segundos com nosso Scanner de IA. Baixe agora!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://agro-expert.netlify.app/">
+    <meta property="og:image" content="https://agro-expert.netlify.app/sua-imagem-aqui.jpg">
+    
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous"></script>
+    <!-- SEO DE ELITE: SCHEMA GRAPH COM SUPORTE A IA DE RASTREAMENTO (SGE EXCLUSIVE) -->
+    <script type="application/ld+json" id="jsonld-schema">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Agro Expert",
+          "url": "https://agro-expert.netlify.app/"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Agro Expert",
+          "operatingSystem": "Android",
+          "applicationCategory": "BusinessApplication",
+          "applicationSubCategory": "Agricultural ERP & Farm Management Software",
+          "softwareRequirements": "Android 5.0 ou superior",
+          "featureList": "Gestão de talhões, controle financeiro offline, controle de estoque, scanner de lavoura com inteligência artificial, relatórios em PDF",
+          "description": "O ERP Agrícola 100% offline mais completo do mercado. Gestão financeira, talhões e Inteligência Artificial para diagnóstico de lavouras.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+          },
+          "author": {
+            "@type": "Organization",
+            "name": "Silva Digital Tech",
+            "url": "https://silvadigitaltech.com"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        agro: {
+                            50: '#f0fdf4', 100: '#dcfce7', 500: '#22c55e',
+                            600: '#16a34a', 800: '#166534', 900: '#14532d',
+                            earth: '#78350f', dark: '#1f2937'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        @keyframes flutuar {
+            0% { transform: translateY(0px) rotate(-1deg); }
+            50% { transform: translateY(-15px) rotate(0deg); }
+            100% { transform: translateY(0px) rotate(-1deg); }
+        }
+
+        .mockup-animado {
+            animation: flutuar 5s ease-in-out infinite;
+            filter: drop-shadow(0px 25px 35px rgba(0,0,0,0.4));
+        }
+
+        .btn-dinamico { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .btn-dinamico:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(34, 197, 94, 0.4);
+        }
+
+        .card-dinamico { transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease; }
+        .card-dinamico:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            border-color: #22c55e;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased selection:bg-agro-500 selection:text-white overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-gray-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="window.scrollTo(0,0)">
+                    <i class="fa-solid fa-leaf text-agro-600 text-3xl"></i>
+                    <span class="font-bold text-2xl tracking-tight text-agro-900">Agro<span class="text-agro-600">Expert</span></span>
+                </div>
+                
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#funcionalidades" data-i18n="nav_tech" class="text-gray-600 hover:text-agro-600 font-medium transition">A Tecnologia</a>
+                    <a href="#galeria" data-i18n="nav_gallery" class="text-gray-600 hover:text-agro-600 font-medium transition">O App</a>
+                    <a href="#beneficios" data-i18n="nav_benefits" class="text-gray-600 hover:text-agro-600 font-medium transition">Benefícios Práticos</a>
+                    <a href="https://play.google.com/store/apps/details?id=br.com.madeinroca.agroexpert" target="_blank" data-i18n="nav_download" class="btn-dinamico bg-agro-600 text-white px-6 py-2.5 rounded-lg font-semibold shadow-md">
+                        Baixe Agora Grátis
+                    </a>
+                    
+                    <div class="flex items-center gap-3 border-l border-gray-300 pl-6 ml-2">
+                        <button class="lang-btn font-semibold text-sm text-gray-400 hover:text-agro-600 transition" data-lang="pt" onclick="changeLanguage('pt')">PT</button>
+                        <button class="lang-btn font-semibold text-sm text-gray-400 hover:text-agro-600 transition" data-lang="en" onclick="changeLanguage('en')">EN</button>
+                        <button class="lang-btn font-semibold text-sm text-gray-400 hover:text-agro-600 transition" data-lang="es" onclick="changeLanguage('es')">ES</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-gradient-to-br from-agro-900 via-agro-800 to-agro-earth">
+        <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
+        
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
+            <div class="w-full lg:w-1/2 text-center lg:text-left z-10">
+                <!-- AQUI ESTÁ O BOTÃO DE VOLTAR CORRIGIDO -->
+                <a href="../../index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-agro-500/20 border border-agro-500/30 text-agro-100 font-medium text-sm mb-6 hover:bg-agro-500/40 hover:scale-105 transition-all cursor-pointer shadow-lg shadow-agro-500/20">
+                    <i class="fa-solid fa-arrow-left"></i> 
+                    <span data-i18n="hero_badge">Desenvolvido pela Silva Digital Tech</span>
+                </a>
+                
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6" data-i18n="hero_title">
+                    A Gestão de Grandes Fazendas, <span class="text-agro-500">Agora no seu Bolso.</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed" data-i18n="hero_desc">
+                    O ERP da fazenda 100% offline. Lançamento financeiro por talhão, controle de estoque e um Agrônomo de Inteligência Artificial para identificar pragas na lavoura direto na câmera do celular.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                    <a href="https://play.google.com/store/apps/details?id=br.com.madeinroca.agroexpert" target="_blank" class="btn-dinamico flex items-center justify-center gap-3 bg-white text-agro-900 px-8 py-4 rounded-xl font-bold text-lg hover:bg-gray-100 transition shadow-xl">
+                        <i class="fa-brands fa-google-play text-2xl text-agro-600"></i>
+                        <span data-i18n="hero_btn_play">Disponível no Google Play</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="w-full lg:w-1/2 flex justify-center relative">
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-agro-500/40 rounded-full blur-[80px]"></div>
+                
+                <div class="mockup-animado relative z-10 w-[280px] sm:w-[320px] flex justify-center">
+                    <img id="app-screenshot" src="assets/pt/tela-inicial.png" alt="Print do App Agro Expert" class="rounded-[2.5rem] border-[8px] border-gray-800 shadow-2xl object-cover w-full h-auto bg-gray-900">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="funcionalidades" class="py-24 bg-white relative">
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-agro-500 to-transparent opacity-30"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="feat_title">A Dualidade Perfeita para o Campo</h2>
+                <p class="text-lg text-gray-600" data-i18n="feat_desc">Projetado com arquitetura de software avançada (ERP) para lidar com a dura realidade da agricultura: o trabalho pesado na terra e a necessidade de dados exatos para a colheita.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="card-dinamico bg-gray-50 rounded-2xl p-10 border border-gray-200">
+                    <div class="w-16 h-16 bg-white shadow-sm border border-gray-100 rounded-xl flex items-center justify-center mb-6 relative">
+                        <i class="fa-solid fa-wifi text-3xl text-gray-400"></i>
+                        <i class="fa-solid fa-slash absolute text-4xl text-agro-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="feat_1_title">Gestão no Talhão <span class="text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm">100% Offline</span></h3>
+                    <p class="text-gray-600 leading-relaxed" data-i18n="feat_1_desc">
+                        A roça não tem sinal de celular. Mapeie seus talhões, registre custos de adubação, defensivos agrícolas, horas de trator e manejo usando nosso banco de dados local. Trabalhe o dia todo sem travamentos.
+                    </p>
+                </div>
+
+                <div class="card-dinamico bg-agro-50 rounded-2xl p-10 border border-agro-100 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-agro-500/10 rounded-full blur-2xl"></div>
+                    <div class="w-16 h-16 bg-white shadow-sm border border-agro-100 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa-solid fa-microchip text-3xl text-agro-600"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4" data-i18n="feat_2_title">Scanner de Lavoura <span class="text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm">IA Online</span></h3>
+                    <p class="text-gray-600 leading-relaxed" data-i18n="feat_2_desc">
+                        Conectou à internet? A inteligência artificial entra em ação. Tire foto de uma planta doente e o motor do Agro Expert gera um laudo em PDF da praga, fungo ou deficiência nutricional em segundos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galeria" class="py-24 bg-gray-50 border-t border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4" data-i18n="gallery_title">Por Dentro do Agro Expert</h2>
+                <p class="text-lg text-gray-600" data-i18n="gallery_desc">Conheça o ecossistema de ferramentas que vai transformar a gestão da sua propriedade.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="group relative flex justify-center">
+                    <div class="absolute inset-0 bg-agro-500/20 rounded-3xl blur-xl transition duration-300 group-hover:bg-agro-500/40"></div>
+                    <img id="app-screen-1" src="assets/pt/tela-inicial.png" alt="Dashboard Agro Expert" class="relative z-10 w-[260px] rounded-[2rem] border-[6px] border-gray-800 shadow-2xl transition transform duration-500 group-hover:-translate-y-4">
+                </div>
+
+                <div class="group relative flex justify-center lg:mt-12">
+                    <div class="absolute inset-0 bg-agro-500/20 rounded-3xl blur-xl transition duration-300 group-hover:bg-agro-500/40"></div>
+                    <img id="app-screen-2" src="assets/pt/tela-ferramentas.png" alt="Ferramentas Agro Expert" class="relative z-10 w-[260px] rounded-[2rem] border-[6px] border-gray-800 shadow-2xl transition transform duration-500 group-hover:-translate-y-4">
+                </div>
+
+                <div class="group relative flex justify-center">
+                    <div class="absolute inset-0 bg-agro-500/20 rounded-3xl blur-xl transition duration-300 group-hover:bg-agro-500/40"></div>
+                    <img id="app-screen-3" src="assets/pt/tela-biblioteca.png" alt="Biblioteca de Culturas" class="relative z-10 w-[260px] rounded-[2rem] border-[6px] border-gray-800 shadow-2xl transition transform duration-500 group-hover:-translate-y-4">
+                </div>
+
+                <div class="group relative flex justify-center lg:mt-12">
+                    <div class="absolute inset-0 bg-agro-500/20 rounded-3xl blur-xl transition duration-300 group-hover:bg-agro-500/40"></div>
+                    <img id="app-screen-4" src="assets/pt/tela-mapa.png" alt="Mapeamento GPS Agro Expert" class="relative z-10 w-[260px] rounded-[2rem] border-[6px] border-gray-800 shadow-2xl transition transform duration-500 group-hover:-translate-y-4">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="beneficios" class="py-24 bg-gray-900 text-white border-t-4 border-agro-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4" data-i18n="ben_title">Desenvolvido de Produtor para Produtor</h2>
+                <p class="text-lg text-gray-400" data-i18n="ben_desc">Funcionalidades testadas na terra, feitas para acabar com o prejuízo invisível na cafeicultura e agricultura geral.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div class="text-center lg:text-left card-dinamico p-4 rounded-xl border border-transparent hover:border-gray-700 bg-gray-800/30">
+                    <div class="w-14 h-14 mx-auto lg:mx-0 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-chart-pie text-2xl text-agro-500"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-gray-100" data-i18n="ben_1_title">Controle Financeiro ERP</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="ben_1_desc">Calcule rentabilidade por hectare, custos de armazém e fluxo de caixa. Descubra qual área da fazenda está dando lucro.</p>
+                </div>
+                
+                <div class="text-center lg:text-left card-dinamico p-4 rounded-xl border border-transparent hover:border-gray-700 bg-gray-800/30">
+                    <div class="w-14 h-14 mx-auto lg:mx-0 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-seedling text-2xl text-agro-500"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-gray-100" data-i18n="ben_2_title">Calculadora e Clima</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="ben_2_desc">Cálculos agronômicos avançados interligados com central meteorológica para você aplicar os defensivos na hora certa.</p>
+                </div>
+                
+                <div class="text-center lg:text-left card-dinamico p-4 rounded-xl border border-transparent hover:border-gray-700 bg-gray-800/30">
+                    <div class="w-14 h-14 mx-auto lg:mx-0 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-hand-holding-dollar text-2xl text-agro-500"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-gray-100" data-i18n="ben_3_title">Aplicativo Grátis</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="ben_3_desc">Software rural completo disponibilizado de forma gratuita, monetizado com transparência via Google AdMob.</p>
+                </div>
+                
+                <div class="text-center lg:text-left card-dinamico p-4 rounded-xl border border-transparent hover:border-gray-700 bg-gray-800/30">
+                    <div class="w-14 h-14 mx-auto lg:mx-0 bg-gray-800 border border-gray-700 rounded-lg flex items-center justify-center mb-5">
+                        <i class="fa-solid fa-file-pdf text-2xl text-agro-500"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3 text-gray-100" data-i18n="ben_4_title">Laudos e Planilhas</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="ben_4_desc">Gerador embutido para criar relatórios em PDF do seu histórico de safra, laudos da IA e compartilhar áreas mapeadas.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black text-gray-400 py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-leaf text-agro-500 text-2xl"></i>
+                        <span class="font-bold text-xl text-white tracking-tight">Agro<span class="text-agro-500">Expert</span></span>
+                    </div>
+                    <p class="text-sm" data-i18n="footer_desc">Transformando a agricultura com tecnologia acessível, inteligência artificial avançada e respeito ao produtor rural.</p>
+                    <p class="text-xs text-gray-500 mt-4" data-i18n="footer_rights">&copy; 2026 Silva Digital Tech. Desenvolvido no Brasil. Todos os direitos reservados.</p>
+                </div>
+
+                <div class="flex flex-col md:items-center space-y-3">
+                    <h5 class="text-white font-semibold mb-2" data-i18n="footer_legal">Legal & Transparência</h5>
+                    <a href="politica.html" class="text-sm hover:text-agro-500 transition flex items-center gap-2"><i class="fa-solid fa-shield-halved text-xs"></i> <span data-i18n="footer_privacy">Política de Privacidade</span></a>
+                    <a href="../../app-ads.txt" target="_blank" class="text-sm hover:text-agro-500 transition flex items-center gap-2"><i class="fa-solid fa-file-code text-xs"></i> app-ads.txt</a>
+                </div>
+
+                <div class="flex flex-col md:items-end space-y-3">
+                    <h5 class="text-white font-semibold mb-2" data-i18n="footer_support">Suporte Direto</h5>
+                    <a href="mailto:silvadigitaltech@gmail.com" class="text-sm hover:text-white transition flex items-center gap-2"><i class="fa-solid fa-envelope"></i> silvadigitaltech@gmail.com</a>
+                    <div class="flex space-x-5 mt-4">
+                        <a href="https://play.google.com/store/apps/details?id=br.com.madeinroca.agroexpert" target="_blank" class="text-gray-400 hover:text-agro-500 transition transform hover:scale-110">
+                            <i class="fa-brands fa-google-play text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-agro-500 transition transform hover:scale-110">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-agro-500 transition transform hover:scale-110">
+                            <i class="fa-brands fa-youtube text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            pt: {
+                meta_title: "Agro Expert: Gestão Rural e ERP Agrícola Offline",
+                meta_desc: "O ERP da fazenda 100% offline. Gestão de talhões, controle financeiro, estoque e Inteligência Artificial para identificar pragas na lavoura. Baixe grátis!",
+                meta_keys: "Agro Expert, aplicativo de gestão agrícola, app para produtor rural, ERP agrícola grátis, controle financeiro offline roça, gestão de fazenda, caderno de campo digital, identificar doença folha de café, inteligência artificial agricultura, scanner de doenças em plantas, IA no agronegócio, aplicativo cafeicultura, ferrugem do café, bicho mineiro café, broca do café, phoma, cercosporiose café, mancha aureolada, folha amarelada café, identificar deficiência nutricional plantas, calcular custo adubação, cálculo de calagem, gestão de talhões, controle de defensivos, registro de pulverização, controle de pragas, agrotech, tecnologia no campo, aplicativo offline roça, fluxo de caixa rural, custo de produção por hectare, rentabilidade agrícola, controle de trator, consumo de diesel trator, horas máquina, gestão de safra, planejamento agrícola, análise de solo, nutrição de plantas, receituário agronômico, identificar lagarta lavoura, controle de ervas daninhas, fungicida, herbicida, inseticida, cotação do café, preço da saca de café, agricultura de precisão, aplicativo para agrônomo, agronomia no celular, produtor de café, cafeicultura de montanha, café conilon, café arábica, manejo integrado de pragas, MIP, controle de estoque fazenda, controle de diárias trabalhador rural, acerto de boia-fria, custo de colheita, mapa da fazenda, clima agrícola, previsão de chuva roça, alerta de geada, monitoramento de lavoura, sistema para fazendeiro, lucro na roça, produtividade por hectare, adubação foliar, fertilizantes NPK, aplicação de uréia, calcário, plantio direto, rotação de culturas, taxa de semeadura, estande de plantas, agricultura familiar, pequeno produtor rural, made in roça, agro inteligente, gestão de agronegócio, fazenda inteligente, smart farming, agro 4.0, inovação no campo, startup agro, baixar app rural, sistema de gestão agrícola Android",
+                og_title: "Agro Expert: O ERP das Grandes Fazendas no seu Bolso",
+                og_desc: "Controle os custos dos seus talhões offline e identifique doenças na lavoura em segundos com nosso Scanner de IA. Baixe agora!",
+                nav_tech: "A Tecnologia",
+                nav_gallery: "O App",
+                nav_benefits: "Benefícios Práticos",
+                nav_download: "Baixe Agora Grátis",
+                hero_badge: "Desenvolvido pela Silva Digital Tech",
+                hero_title: "A Gestão de Grandes Fazendas, <span class='text-agro-500'>Agora no seu Bolso.</span>",
+                hero_desc: "O ERP da fazenda 100% offline. Lançamento financeiro por talhão, controle de estoque e um Agrônomo de Inteligência Artificial para identificar pragas na lavoura direto na câmera do celular.",
+                hero_btn_play: "Disponível no Google Play",
+                feat_title: "A Dualidade Perfeita para o Campo",
+                feat_desc: "Projetado com arquitetura de software avançada (ERP) para lidar com a dura realidade da agricultura: o trabalho pesado na terra e a necessidade de dados exatos para a colheita.",
+                feat_1_title: "Gestão no Talhão <span class='text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm'>100% Offline</span>",
+                feat_1_desc: "A roça não tem sinal de celular. Mapeie seus talhões, registre custos de adubação, defensivos agrícolas, horas de trator e manejo usando nosso banco de dados local. Trabalhe o dia todo sem travamentos.",
+                feat_2_title: "Scanner de Lavoura <span class='text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm'>IA Online</span>",
+                feat_2_desc: "Conectou à internet? A inteligência artificial entra em ação. Tire foto de uma planta doente e o motor do Agro Expert gera um laudo em PDF da praga, fungo ou deficiência nutricional em segundos.",
+                gallery_title: "Por Dentro do Agro Expert",
+                gallery_desc: "Conheça o ecossistema de ferramentas que vai transformar a gestão da sua propriedade.",
+                ben_title: "Desenvolvido de Produtor para Produtor",
+                ben_desc: "Funcionalidades testadas na terra, feitas para acabar com o prejuízo invisível na cafeicultura e agricultura geral.",
+                ben_1_title: "Controle Financeiro ERP",
+                ben_1_desc: "Calcule rentabilidade por hectare, custos de armazém e fluxo de caixa. Descubra qual área da fazenda está dando lucro.",
+                ben_2_title: "Calculadora e Clima",
+                ben_2_desc: "Cálculos agronômicos avançados interligados com central meteorológica para você aplicar os defensivos na hora certa.",
+                ben_3_title: "Aplicativo Grátis",
+                ben_3_desc: "Software rural completo disponibilizado de forma gratuita, monetizado com transparência via Google AdMob.",
+                ben_4_title: "Laudos e Planilhas",
+                ben_4_desc: "Gerador embutido para criar relatórios em PDF do seu histórico de safra, laudos da IA e compartilhar áreas mapeadas.",
+                footer_desc: "Transformando a agricultura com tecnologia acessível, inteligência artificial avançada e respeito ao produtor rural.",
+                footer_rights: "&copy; 2026 Silva Digital Tech. Desenvolvido no Brasil. Todos os direitos reservados.",
+                footer_legal: "Legal & Transparência",
+                footer_privacy: "Política de Privacidade",
+                footer_support: "Suporte Direto"
+            },
+            en: {
+                meta_title: "Agro Expert: Farm Management & Offline Agricultural ERP",
+                meta_desc: "The 100% offline farm ERP. Field management, financial control, inventory, and Artificial Intelligence to identify crop pests. Download for free!",
+                meta_keys: "Agro Expert, agricultural management app, app for farmers, free agricultural ERP, offline farm financial control, farm management, digital field notebook, identify coffee leaf disease, artificial intelligence agriculture, plant disease scanner, AI in agribusiness, coffee farming app, coffee rust, coffee leaf miner, coffee berry borer, phoma, coffee cercospora, halo blight, yellow coffee leaf, identify plant nutritional deficiency, calculate fertilization cost, liming calculation, field management, pesticide control, spraying record, pest control, agrotech, field technology, offline farm app, rural cash flow, production cost per hectare, agricultural profitability, tractor control, tractor diesel consumption, machine hours, harvest management, agricultural planning, soil analysis, plant nutrition, agronomic prescription, identify crop caterpillar, weed control, fungicide, herbicide, insecticide, coffee quotation, coffee bag price, precision agriculture, app for agronomists, agronomy on mobile, coffee producer, mountain coffee farming, conilon coffee, arabica coffee, integrated pest management, IPM, farm inventory control, rural worker daily rate control, harvest cost, farm map, agricultural climate, farm rain forecast, frost alert, crop monitoring, system for farmers, farm profit, yield per hectare, foliar fertilization, NPK fertilizers, urea application, limestone, no-till farming, crop rotation, seeding rate, plant stand, family farming, small farmer, smart agro, agribusiness management, smart farm, smart farming, agro 4.0, innovation in the field, agro startup, download rural app, Android agricultural management system",
+                og_title: "Agro Expert: Large Farm Technology in your Pocket",
+                og_desc: "Control your field costs offline and identify crop diseases in seconds with our AI Scanner. Download now!",
+                nav_tech: "The Technology",
+                nav_gallery: "The App",
+                nav_benefits: "Practical Benefits",
+                nav_download: "Download Free",
+                hero_badge: "Developed by Silva Digital Tech",
+                hero_title: "Large Farm Management, <span class='text-agro-500'>Now in your Pocket.</span>",
+                hero_desc: "The 100% offline farm ERP. Financial tracking by field, inventory control, and an Artificial Intelligence Agronomist to identify crop pests directly from your phone's camera.",
+                hero_btn_play: "Get it on Google Play",
+                feat_title: "The Perfect Duality for the Field",
+                feat_desc: "Designed with advanced ERP software architecture to handle the harsh reality of agriculture: heavy groundwork and the need for exact data for harvest.",
+                feat_1_title: "Field Management <span class='text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm'>100% Offline</span>",
+                feat_1_desc: "Farms often lack cell signal. Map your fields, log fertilization costs, pesticides, tractor hours, and management using our local database. Work all day without lag.",
+                feat_2_title: "Crop Scanner <span class='text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm'>Online AI</span>",
+                feat_2_desc: "Connected to the internet? Artificial Intelligence steps in. Take a photo of a sick plant and the Agro Expert engine generates a PDF report of the pest, fungus or nutritional deficiency in seconds.",
+                gallery_title: "Inside Agro Expert",
+                gallery_desc: "Discover the ecosystem of tools that will transform the management of your property.",
+                ben_title: "Developed by Farmers for Farmers",
+                ben_desc: "Features tested in the dirt, built to stop invisible losses in coffee growing and general agriculture.",
+                ben_1_title: "Financial ERP Control",
+                ben_1_desc: "Calculate profitability per hectare, warehouse costs, and cash flow. Discover exactly which area of the farm is making a profit.",
+                ben_2_title: "Calculator & Climate",
+                ben_2_desc: "Advanced agronomic calculations linked with a meteorological central so you can apply pesticides at the right time.",
+                ben_3_title: "Free Application",
+                ben_3_desc: "Complete rural software made available for free, transparently monetized via Google AdMob.",
+                ben_4_title: "Reports & Spreadsheets",
+                ben_4_desc: "Built-in generator to create PDF reports of your harvest history, AI diagnostics, and share mapped areas.",
+                footer_desc: "Transforming agriculture with accessible technology, advanced AI, and respect for the farmer.",
+                footer_rights: "&copy; 2026 Silva Digital Tech. Developed in Brazil. All rights reserved.",
+                footer_legal: "Legal & Transparency",
+                footer_privacy: "Privacy Policy",
+                footer_support: "Direct Support"
+            },
+            es: {
+                meta_title: "Agro Expert: Gestión Rural y ERP Agrícola Offline",
+                meta_desc: "El ERP de la granja 100% offline. Gestión de lotes, control financiero, inventario e Inteligencia Artificial para identificar plagas. ¡Descarga gratis!",
+                meta_keys: "Agro Expert, aplicación de gestión agrícola, app para productores rurales, ERP agrícola gratis, control financiero offline granja, gestión de fincas, cuaderno de campo digital, identificar enfermedad hoja de café, inteligencia artificial agricultura, escáner de enfermedades de plantas, IA en agronegocios, aplicación caficultura, roya del café, minador de la hoja del café, broca del café, phoma, cercosporiosis del café, mancha aureolada, hoja amarillenta café, identificar deficiencia nutricional plantas, calcular costo fertilización, cálculo de encalado, gestión de lotes, control de pesticidas, registro de pulverización, control de plagas, agrotech, tecnología en el campo, aplicación offline granja, flujo de caja rural, costo de producción por hectárea, rentabilidad agrícola, control de tractores, consumo de diésel tractor, horas máquina, gestión de cosechas, planificación agrícola, análisis de suelo, nutrition de plantas, receta agronómica, identificar oruga cultivo, control de malezas, fungicida, herbicida, insecticida, cotización del café, precio del saco de café, agricultura de precisión, aplicación para agrónomo, agronomía en el celular, productor de café, caficultura de montaña, café conilon, café arábica, manejo integrado de pragas, MIP, control de inventario granja, control de jornales trabajador rural, costo de cosecha, mapa de la finca, clima agrícola, pronóstico de lluvia granja, alerta de heladas, monitoreo de cultivos, sistema para agricultores, ganancia en la granja, productividad por hectárea, fertilización foliar, fertilizantes NPK, aplicación de urea, caliza, siembra directa, rotación de culturas, tasa de siembra, stand de plantas, agricultura familiar, pequeño productor rural, agro inteligente, gestión de agronegocios, granja inteligente, smart farming, agro 4.0, innovación en el campo, startup agro, descargar app rural, sistema de gestão agrícola Android",
+                og_title: "La Tecnología de las Grandes Granjas en tu Bolsillo",
+                og_desc: "Controla los costos de tus lotes offline e identifica enfermedades en cultivos en segundos con nuestro Escáner de IA. ¡Descarga ahora!",
+                nav_tech: "La Tecnología",
+                nav_gallery: "La App",
+                nav_benefits: "Benefícios Práticos",
+                nav_download: "Descargar Gratis",
+                hero_badge: "Desarrollado por Silva Digital Tech",
+                hero_title: "La Gestión de Grandes Granjas, <span class='text-agro-500'>Ahora en tu Bolsillo.</span>",
+                hero_desc: "El ERP de la granja 100% offline. Registro financiero por lote, control de inventario y un Agrónomo de Inteligencia Artificial para identificar plagas directamente desde la cámara de tu celular.",
+                hero_btn_play: "Disponible en Google Play",
+                feat_title: "La Dualidade Perfeita para el Campo",
+                feat_desc: "Diseñado con arquitectura de software avanzada (ERP) para enfrentar la dura realidad de la agricultura: el trabajo pesado en la tierra y la necesidad de datos exactos.",
+                feat_1_title: "Gestión en Lote <span class='text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm'>100% Offline</span>",
+                feat_1_desc: "El campo no tiene señal. Mapea tus lotes, registra costos de fertilización, agroquímicos, horas de tractor y manejo usando nuestra base de datos local. Trabaja todo el día sin interrupciones.",
+                feat_2_title: "Escáner de Cultivos <span class='text-agro-600 text-lg ml-2 font-black tracking-widest uppercase text-sm'>IA Online</span>",
+                feat_2_desc: "¿Te conectaste a internet? La inteligencia artificial entra en acción. Toma foto de una planta enferma y el motor de Agro Expert genera un informe PDF de la plaga, hongo o deficiencia en segundos.",
+                gallery_title: "Por Dentro de Agro Expert",
+                gallery_desc: "Descubre el ecosistema de herramientas que transformará la gestión de tu propiedad.",
+                ben_title: "Desarrollado de Productor a Productor",
+                ben_desc: "Funcionalidades probadas en la tierra, hechas para acabar con las pérdidas invisibles en la caficultura y la agricultura general.",
+                ben_1_title: "Control Financiero ERP",
+                ben_1_desc: "Calcula la rentabilidad por hectárea, costos de almacén y flujo de caja. Descubre qué área de la granja genera ganancias.",
+                ben_2_title: "Calculadora y Clima",
+                ben_2_desc: "Cálculos agronômicos avanzados conectados con la central meteorológica para que apliques los agroquímicos en el momento exacto.",
+                ben_3_title: "Aplicación Gratis",
+                ben_3_desc: "Software rural completo disponible de forma gratuita, monetizado con transparencia a través de Google AdMob.",
+                ben_4_title: "Informes y Planillas",
+                ben_4_desc: "Generador integrado para crear informes en PDF de tu historial de cosecha, diagnósticos de IA y compartir áreas mapeadas.",
+                footer_desc: "Transformando la agricultura con tecnología accesible, inteligencia artificial avanzada y respeto al productor rural.",
+                footer_rights: "&copy; 2026 Silva Digital Tech. Desarrollado en Brasil. Todos os direitos reservados.",
+                footer_legal: "Legal y Transparencia",
+                footer_privacy: "Política de Privacidad",
+                footer_support: "Soporte Directo"
+            }
+        };
+
+        function changeLanguage(lang) {
+            if (!translations[lang]) lang = 'pt';
+            localStorage.setItem('agro_lang', lang);
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+
+            const t = translations[lang];
+
+            // 1. Atualização SEO Dinâmico (Incluindo Title Otimizado)
+            document.title = t.meta_title;
+            document.querySelector('meta[name="description"]').setAttribute("content", t.meta_desc);
+            document.querySelector('meta[name="keywords"]').setAttribute("content", t.meta_keys); 
+            document.querySelector('meta[property="og:title"]').setAttribute("content", t.og_title);
+            document.querySelector('meta[property="og:description"]').setAttribute("content", t.og_desc);
+
+            // 1.5 INTERNACIONALIZAÇÃO DO SCHEMA JSON-LD EM TEMPO REAL (MÁXIMO NÍVEL DE SEO 2026)
+            const schemaElement = document.getElementById('jsonld-schema');
+            if (schemaElement) {
+                const schemaData = {
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "WebSite",
+                            "name": "Agro Expert",
+                            "url": window.location.href
+                        },
+                        {
+                            "@type": "SoftwareApplication",
+                            "name": "Agro Expert",
+                            "operatingSystem": "Android",
+                            "applicationCategory": "BusinessApplication",
+                            "applicationSubCategory": lang === 'pt' ? "ERP Agrícola e Gestão Rural" : lang === 'en' ? "Agricultural ERP & Farm Management Software" : "ERP Agrícola y Gestión Rural",
+                            "softwareRequirements": "Android 5.0+",
+                            "featureList": lang === 'pt' ? "Gestão de talhões, controle financeiro offline, controle de estoque, scanner de lavoura com IA" : lang === 'en' ? "Field tracking, offline financial controls, warehouse stock tool, AI crop diagnostics" : "Gestión de lotes, control financiero offline, control de inventario, escáner de cultivos con IA",
+                            "description": t.meta_desc,
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "0",
+                                "priceCurrency": lang === 'pt' ? "BRL" : "USD"
+                            },
+                            "author": {
+                                "@type": "Organization",
+                                "name": "Silva Digital Tech",
+                                "url": "../../index.html"
+                            }
+                        }
+                    ]
+                };
+                schemaElement.text = JSON.stringify(schemaData);
+            }
+
+            // 2. Atualização dos Textos na Tela
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (t[key]) {
+                    el.innerHTML = t[key]; 
+                }
+            });
+
+            // 3. Atualização Simultânea de TODAS as 5 Imagens (Hero + Galeria)
+            const imagesToUpdate = [
+                { id: 'app-screenshot', file: 'tela-inicial.png', defaultAlt: "Print Inicial" },
+                { id: 'app-screen-1', file: 'tela-inicial.png', defaultAlt: "Dashboard Agro Expert" },
+                { id: 'app-screen-2', file: 'tela-ferramentas.png', defaultAlt: "Ferramentas Agro Expert" },
+                { id: 'app-screen-3', file: 'tela-biblioteca.png', defaultAlt: "Biblioteca de Culturas" },
+                { id: 'app-screen-4', file: 'tela-mapa.png', defaultAlt: "Mapeamento GPS" }
+            ];
+
+            imagesToUpdate.forEach(item => {
+                const imgElement = document.getElementById(item.id);
+                if (imgElement) {
+                    imgElement.src = `assets/${lang}/${item.file}`;
+                    // SEO Dinâmico nas Imagens
+                    imgElement.alt = lang === 'pt' ? `Print ${item.defaultAlt}` : lang === 'en' ? `Agro Expert ${item.defaultAlt} App` : `Captura de App ${item.defaultAlt}`;
+                }
+            });
+
+            // 4. Atualização Visual dos Botões
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('text-agro-600', 'font-extrabold', 'underline');
+                btn.classList.add('text-gray-400');
+                if(btn.getAttribute('data-lang') === lang) {
+                    btn.classList.remove('text-gray-400');
+                    btn.classList.add('text-agro-600', 'font-extrabold');
+                }
+            });
+        }
+
+        // Sistema de Inicialização e Detecção Automática
+        document.addEventListener('DOMContentLoaded', () => {
+            let savedLang = localStorage.getItem('agro_lang');
+            if (!savedLang) {
+                const browserLang = navigator.language.slice(0, 2).toLowerCase();
+                savedLang = ['pt', 'en', 'es'].includes(browserLang) ? browserLang : 'pt';
+            }
+            changeLanguage(savedLang);
+        });
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745"
+    crossorigin="anonymous"></script>
+<!-- silvadigitaltech sites -->
+<ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-5388021156952745"
+    data-ad-slot="5513311007"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>

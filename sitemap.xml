@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <!-- Página Inicial da Software House (Atualizada com novo card) -->
+  <url>
+    <loc>https://silvadigitaltech.com/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- NOVO: Ferramenta MicroCRM (Alta prioridade para ranqueamento e AdSense) -->
+  <url>
+    <loc>https://silvadigitaltech.com/gerador-de-recibos-e-orcamentos/</loc>
+    <lastmod>2026-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- App: Agro Expert (Página de Venda/Apresentação) -->
+  <url>
+    <loc>https://silvadigitaltech.com/apps/agro-expert/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- App: Agro Expert - Política de Privacidade -->
+  <url>
+    <loc>https://silvadigitaltech.com/apps/agro-expert/politica.html</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- App: Trilha Navigator (Página de Venda/Apresentação) -->
+  <url>
+    <loc>https://silvadigitaltech.com/apps/trilha-navigator/</loc>
+    <lastmod>2026-06-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Artigo Épico do Blog: Tecnologia no Campo -->
+  <url>
+    <loc>https://silvadigitaltech.com/blog/tecnologia-extrema-no-campo.html</loc>
+    <lastmod>2026-07-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+</urlset>

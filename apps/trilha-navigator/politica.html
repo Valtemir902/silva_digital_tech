@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidade | Trilha Navigator</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        trilha: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                            dark: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-trilha-500 selection:text-white flex flex-col min-h-screen">
+
+    <nav class="w-full z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-compass text-trilha-600 text-3xl"></i>
+                    <span class="font-bold text-2xl tracking-tight text-trilha-900">Trilha<span class="text-trilha-600">Navigator</span></span>
+                </div>
+                <div class="flex space-x-8 items-center">
+                    <a href="index.html" class="flex items-center gap-2 text-slate-600 hover:text-trilha-600 font-medium transition">
+                        <i class="fa-solid fa-arrow-left"></i> Voltar ao Início
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-grow max-w-4xl mx-auto px-4 py-16 w-full">
+        <h1 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-8 border-b-4 border-trilha-500 inline-block pb-2">Política de Privacidade</h1>
+        
+        <div class="bg-white p-8 md:p-12 rounded-2xl shadow-lg border border-slate-100 text-slate-700 leading-relaxed space-y-6">
+            
+            <p>Esta política de privacidade aplica-se ao aplicativo <strong>Trilha Navigator</strong> (doravante denominado "Aplicativo") para dispositivos móveis, criado pela <strong>Silva Digital Tech</strong> (doravante denominado "Fornecedora de Serviços") como um serviço Freemium. Este serviço destina-se ao uso "TAL COMO ESTÁ".</p>
+            
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Coleta e Uso de Informações</h2>
+            <p>O Aplicativo coleta informações automaticamente quando você baixa, instala e utiliza. Essas informações são fundamentais para garantir a segurança operacional, telemetria de navegação e as funcionalidades de campo do sistema.</p>
+            <p>Os dados coletados podem incluir:</p>
+            <ul class="list-disc pl-6 space-y-2 text-slate-600">
+                <li>O endereço do protocolo de internet (endereço IP) do seu dispositivo.</li>
+                <li>O sistema operacional, modelo do dispositivo móvel e identificadores exclusivos do aparelho.</li>
+                <li>As páginas ou painéis do aplicativo que você visita, os dados e hora da visita, o tempo gasto nessas telas e dados de depuração de falhas técnicas.</li>
+            </ul>
+            
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Dados de Localização Geográfica (GPS de Alta Precisão)</h2>
+            <p>Para funcionar como um sistema tático de navegação, o Aplicativo exige acesso contínuo e obrigatório à localização exata e aproximada do seu dispositivo através do hardware de GPS.</p>
+            <ul class="list-disc pl-6 space-y-3 text-slate-600">
+                <li><strong>Uso em Segundo Plano (Localização em Segundo Plano):</strong> Os dados de localização são encontrados no primeiro plano e em segundo plano (mesmo quando a tela está desligada ou o aplicativo está minimizado) quando o usuário ativa as funções de:</li>
+                <li><strong>Trilha / Gravação de Expedição:</strong> Para desenhar e iniciar o rastro geográfico contínuo.</li>
+                <li><strong>Guiar Rota / Navegação Ativa:</strong> Para calcular o azimute, desvio de rota e emitir alertas sonoros ou de vibração de campo.</li>
+                <li><strong>Rádio Mesh Offline e Radar Cloud:</strong> Para transmitir suas coordenadas em tempo real para sua equipe ou trem conectado.</li>
+                <li><strong>Calibração e Telemetria:</strong> As coordenadas brutas são processadas localmente pelo motor de rastreamento (com filtros anti-ruído Doppler) e podem ser ajustadas manualmente através do painel de deslocamento espacial de satélites do aplicativo.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Comunicação Offline (Rádio Mesh P2P) e Radar Cloud</h2>
+            <p>O Aplicativo possui um sistema de transmissão de dados independente para coordenação de equipes em áreas remotas:</p>
+            <ul class="list-disc pl-6 space-y-3 text-slate-600">
+                <li><strong>Rádio Mesh Offline:</strong> Utiliza tecnologias de hardware de Bluetooth, Wi-Fi Direct e APIs de conexões por proximidade (Nearby Connections) para descobrir, conectar e transmitir pacotes de dados (coordenadas de GPS, mensagens de texto e arquivos de áudio) de forma direta entre dispositivos adjacentes, sem dependência de internet ou sinal de operadora de celular.</li>
+                <li><strong>Radar Cloud (Recurso PRO):</strong> Caso haja conexão ativa com a internet e o recurso seja acionado através de códigos de identificação exclusivos, o aplicativo transmite as coordenadas de localização para os servidores de nuvem para fins de monitoramento remoto de frotas ou expedições a longa distância.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Permissões de Hardware Específicas</h2>
+            <p>Para o cumprimento integral de suas funções militares e agrícolas, o Aplicativo solicita acesso aos seguintes recursos do dispositivo:</p>
+            <ul class="list-disc pl-6 space-y-3 text-slate-600">
+                <li><strong>Microfone (Gravação de Áudio):</strong> Utilizado com restrição quando o usuário aciona o gravador de voz do Rádio Mesh para enviar mensagens de áudio compactadas para os membros da frequência de rádio. Os arquivos de áudio são processados localmente.</li>
+                <li><strong>Armazenamento e Arquivos (Leitura e Escrita):</strong> Necessário para importar, exportar e salvar arquivos de mapas, bancos de dados locais de talhões/áreas, arquivos de rastreio universais (GPX, KML, KMZ) e fotografias anexadas a alfinetes georreferenciados (Waypoints).</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Acesso de Terceiros e Provedores de Serviços</h2>
+            <p>Para viabilizar a arquitetura Freemium, a segurança das transações financeiras e o monitoramento de erros de código, o Aplicativo utiliza serviços terceirizados confiáveis. Estes serviços possuem políticas de privacidade próprias para o tratamento de dados anonimizados e agregados:</p>
+            <ul class="list-disc pl-6 space-y-2 text-slate-600 font-medium">
+                <li>Serviços do Google Play: Infraestrutura base do ecossistema Android.</li>
+                <li>Firebase (Auth, Crashlytics e Firestore): Utilizado para autenticação segura de usuários e persistência do Radar Cloud.</li>
+                <li>Google AdMob: Utilizado para veiculação de anúncios e banners publicitários discretos exclusivamente na versão gratuita do aplicativo.</li>
+                <li>RevenueCat: Motor de validação criptográfica integrado para processamento de recibos oficiais de assinaturas e compras da Google Play Store, impedindo burlas locais e garantindo o status PRO legítimo.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Retenção de Dados e Direito de Exclusão</h2>
+            <p>O Fornecedor de Serviços reterá os dados fornecidos pelo usuário (como nome de usuário ID de Rádio e foto de perfil) enquanto o aplicativo estiver instalado. Os dados gerados em expedições (trilhas e profundidade de terra) são armazenados localmente na memória interna e criptografados do dispositivo do usuário. Você pode excluir permanentemente todas as marcações e registros locais através do menu de configurações avançadas de armazenamento do aplicativo ou desinstalando o Aplicativo utilizando os processos padrão do sistema operacional.</p>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Categoria de Divulgação Legal</h2>
+            <p>O Fornecedor de Serviços poderá divulgar informações coletadas apenas sob condições restritas:</p>
+            <ul class="list-disc pl-6 space-y-2 text-slate-600">
+                <li>Conforme exigido por lei, para cumprir intimações ou processos jurídicos equivalentes.</li>
+                <li>Quando há crenças de boa fé de que a divulgação é imperativa para proteger direitos de segurança, investigam fraudes graves ou respondem a autoridades governamentais legítimas.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Segurança</h2>
+            <p>A segurança dos seus dados de campo é tratada com extrema seriedade. O aplicativo emprega proteção física, eletrônica e processual para cegar as informações processadas localmente e transmitidas via rádio mesh ou servidores web.</p>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Alterações</h2>
+            <p>Esta Política de Privacidade poderá ser atualizada periodicamente. O Fornecedor de Serviços notificará você sobre quaisquer alterações modificando o texto desta página e atualizando os dados de alteração. Recomenda-se uma revisão regular deste documento no repositório oficial para ciência das práticas de segurança.</p>
+
+            <h2 class="text-2xl font-bold text-trilha-800 mt-10 mb-4 border-b border-slate-100 pb-2">Contato</h2>
+            <p>Se você tiver dúvidas sobre privacidade, tratamento de dados ou funcionamento dos sensores durante o uso do Aplicativo, entre em contato com a equipe de engenharia da Silva Digital Tech através do e-mail oficial de suporte fornecido na página do desenvolvedor da Google Play Store.</p>
+
+        </div>
+    </main>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 border-t border-slate-800 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8 items-center">
+                
+                <div>
+                    <div class="flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-compass text-trilha-500 text-2xl"></i>
+                        <span class="font-bold text-xl text-white tracking-tight">Trilha<span class="text-trilha-500">Navigator</span></span>
+                    </div>
+                    <p class="text-sm">Sua bússola definitiva para a aventura. Sistema de navegação GPS robusto que não depende de sinal de internet para guiar suas rotas.</p>
+                    <p class="text-xs text-slate-500 mt-4">&copy; 2026 Silva Digital Tech. Desenvolvido no Brasil. Todos os direitos reservados.</p>
+                </div>
+
+                <div class="flex flex-col md:items-center space-y-3">
+                    <h5 class="text-white font-semibold mb-2">Legal & Transparência</h5>
+                    <a href="politica.html" class="text-sm hover:text-trilha-500 transition flex items-center gap-2 text-trilha-500"><i class="fa-solid fa-shield-halved text-xs"></i> Política de Privacidade</a>
+                    <a href="https://fv515b5e6.app-ads-txt.com" target="_blank" class="text-sm hover:text-trilha-500 transition flex items-center gap-2"><i class="fa-solid fa-file-code text-xs"></i> app-ads.txt</a>
+                </div>
+
+                <div class="flex flex-col md:items-end space-y-3">
+                    <h5 class="text-white font-semibold mb-2">Suporte Direto</h5>
+                    <a href="mailto:silvadigitaltech@gmail.com" class="text-sm hover:text-white transition flex items-center gap-2"><i class="fa-solid fa-envelope"></i> silvadigitaltech@gmail.com</a>
+                    <div class="flex space-x-5 mt-4">
+                        <a href="#" class="text-slate-400 hover:text-trilha-500 transition transform hover:scale-110" title="Baixar na Google Play">
+                            <i class="fa-brands fa-google-play text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-trilha-500 transition transform hover:scale-110">
+                            <i class="fa-brands fa-whatsapp text-2xl"></i>
+                        </a>
+                        <a href="#" class="text-slate-400 hover:text-trilha-500 transition transform hover:scale-110">
+                            <i class="fa-brands fa-youtube text-2xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

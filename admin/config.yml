@@ -1,0 +1,33 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "assets/uploads"
+
+collections:
+  # PAINEL 1: SEUS APLICATIVOS (VITRINE)
+  - name: "aplicativos"
+    label: "Meus Aplicativos (Vitrine)"
+    folder: "content/apps"
+    create: true
+    extension: "json"
+    fields:
+      - {label: "Nome do Aplicativo", name: "title", widget: "string"}
+      - {label: "Tag (Ex: Radar Mesh, Ferramenta Gratuita)", name: "tag", widget: "string"}
+      - {label: "Link Oficial (Play Store ou Web)", name: "link", widget: "string"}
+      - {label: "Ícone do App", name: "icone", widget: "image"}
+      - {label: "Descrição para a Home", name: "descricao", widget: "text"}
+
+  # PAINEL 2: ARTIGOS DE SEO GIGANTES
+  - name: "artigos"
+    label: "Artigos de SEO (Blog)"
+    folder: "content/blog"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - {label: "Título do Artigo", name: "title", widget: "string"}
+      - {label: "Descrição SEO (Google)", name: "description", widget: "text"}
+      - {label: "Palavras-Chave", name: "keywords", widget: "string"}
+      - {label: "Imagem de Capa", name: "thumbnail", widget: "image"}
+      - {label: "Texto Completo (Editor Visual)", name: "body", widget: "markdown"}
