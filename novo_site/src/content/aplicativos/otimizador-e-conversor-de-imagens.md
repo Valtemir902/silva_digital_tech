@@ -1,6 +1,6 @@
 ---
 title: "Otimizador e Conversor de Imagens"
-categoria: "Ferramentas Web"
+categoria: "Soluções Web & Sites"
 tag: "🚀 Aceleração Web & Compressão Lossless"
 link: "/apps/otimizador-e-conversor-de-imagens/"
 icone: "/assets/icons/otimizador-e-conversor-de-imagens_icon.svg"
