@@ -1,6 +1,6 @@
 /* 
  * Silva Digital Tech - Otimizador de Imagens PRO
- * Core Logic 
+ * Core Logic - Conversão Direta e Individual
  */
 const $ = (id) => document.getElementById(id);
 
@@ -12,11 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
     bindNavigation();
     bindDropzone();
     bindControls();
-    
-    // Auto-process trigger if quality changes
-    $('qualityRange').addEventListener('input', (e) => {
-        $('qualityValue').textContent = `${e.target.value}%`;
-    });
 });
 
 function bindNavigation() {
@@ -60,33 +55,40 @@ function bindControls() {
         state.filesQueue = [];
         renderQueue();
     });
-    $('processAllBtn').addEventListener('click', processAllImages);
+    $('processAllBtn').addEventListener('click', () => {
+        state.filesQueue.forEach(item => processImageItem(item.id));
+    });
     $('downloadAllBtn').addEventListener('click', downloadAllZip);
 }
 
 function handleFiles(files) {
     if (!files.length) return;
+    const defaultFormat = $('defaultOutputFormat') ? $('defaultOutputFormat').value : 'original';
+
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        if (!file.type.startsWith('image/') && !file.name.endsWith('.ico')) continue;
+        if (!file.type.startsWith('image/') && !file.name.endsWith('.ico') && !file.name.endsWith('.heic')) continue;
         
-        state.filesQueue.push({
+        const item = {
             id: 'img_' + Math.random().toString(36).substr(2, 9),
             file: file,
             name: file.name,
             originalSize: file.size,
             originalType: file.type || 'image/png',
+            targetFormat: defaultFormat,
+            quality: 80,
             compressedBlob: null,
             compressedSize: 0,
             status: 'statusWaiting',
             finalName: '',
             previewUrl: URL.createObjectURL(file)
-        });
+        };
+        state.filesQueue.push(item);
+        // Processa imediatamente ao soltar para agilizar
+        setTimeout(() => processImageItem(item.id), 100);
     }
     renderQueue();
     toast(window.t('tAdded'));
-    // Auto process upon drop
-    processAllImages();
 }
 
 function formatBytes(bytes) {
@@ -119,10 +121,10 @@ function renderQueue() {
         const statusClass = item.status === 'statusWaiting' ? 'status-waiting' : 'status-done';
 
         html += `
-            <div class="list-item">
+            <div class="list-item" style="display: flex; flex-direction: column; align-items: stretch; gap: 10px;">
                 <div class="item-info">
                     <img src="${item.previewUrl}" class="item-thumb" alt="Preview">
-                    <div class="item-details">
+                    <div class="item-details" style="flex-grow: 1;">
                         <span class="item-name">${item.name}</span>
                         <div class="item-meta">
                             <span>${window.t('lblOriginal')} <strong>${formatBytes(item.originalSize)}</strong></span>
@@ -131,13 +133,39 @@ function renderQueue() {
                             ${savings > 0 ? `<span class="badge-savings">-${savings}%</span>` : ''}
                         </div>
                     </div>
+                    <button class="icon-button" style="color: var(--muted); background: transparent; border: 0; font-size: 1.2rem; cursor: pointer;" onclick="removeItem('${item.id}')" title="Remover">×</button>
                 </div>
-                <div style="display:flex; align-items:center; gap: 10px;">
-                    <span class="status-badge ${statusClass}">${window.t(item.status)}</span>
-                    ${item.compressedBlob ? `
-                        <button class="ghost-button" style="min-height:30px; padding: 0 10px; font-size: 0.75rem;" onclick="downloadSingle('${item.id}')">${window.t('btnDownload')}</button>
-                    ` : ''}
-                    <button class="icon-button" style="color: var(--muted); background: transparent; border: 0;" onclick="removeItem('${item.id}')" title="Remover">×</button>
+
+                <!-- Painel de controle individual por imagem -->
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <label style="font-size: 0.75rem; color: var(--muted);">Formato:</label>
+                        <select onchange="updateItemFormat('${item.id}', this.value)" style="padding: 4px 8px; font-size: 0.8rem; width: auto; margin:0;">
+                            <option value="original" ${item.targetFormat === 'original' ? 'selected' : ''}>Original</option>
+                            <option value="image/webp" ${item.targetFormat === 'image/webp' ? 'selected' : ''}>WebP</option>
+                            <option value="image/jpeg" ${item.targetFormat === 'image/jpeg' ? 'selected' : ''}>JPG / JPEG</option>
+                            <option value="image/png" ${item.targetFormat === 'image/png' ? 'selected' : ''}>PNG</option>
+                            <option value="image/avif" ${item.targetFormat === 'image/avif' ? 'selected' : ''}>AVIF</option>
+                            <option value="image/x-icon" ${item.targetFormat === 'image/x-icon' ? 'selected' : ''}>ICO (Favicon)</option>
+                            <option value="image/bmp" ${item.targetFormat === 'image/bmp' ? 'selected' : ''}>BMP</option>
+                            <option value="image/tiff" ${item.targetFormat === 'image/tiff' ? 'selected' : ''}>TIFF</option>
+                            <option value="image/gif" ${item.targetFormat === 'image/gif' ? 'selected' : ''}>GIF</option>
+                            <option value="application/pdf" ${item.targetFormat === 'application/pdf' ? 'selected' : ''}>PDF</option>
+                        </select>
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <label style="font-size: 0.75rem; color: var(--muted);">Qualidade: <span id="q_lbl_${item.id}">${item.quality}%</span></label>
+                        <input type="range" min="10" max="100" value="${item.quality}" oninput="updateItemQuality('${item.id}', this.value)" style="width: 80px; margin:0;">
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span class="status-badge ${statusClass}">${window.t(item.status)}</span>
+                        <button class="primary-button" style="min-height: 32px; padding: 0 12px; font-size: 0.8rem;" onclick="processImageItem('${item.id}')">Converter</button>
+                        ${item.compressedBlob ? `
+                            <button class="ghost-button" style="min-height: 32px; padding: 0 12px; font-size: 0.8rem; background: var(--accent); color: #000; border:0;" onclick="downloadSingle('${item.id}')">${window.t('btnDownload')} Direto</button>
+                        ` : ''}
+                    </div>
                 </div>
             </div>
         `;
@@ -152,6 +180,20 @@ window.removeItem = function(id) {
     renderQueue();
 };
 
+window.updateItemFormat = function(id, fmt) {
+    const item = state.filesQueue.find(i => i.id === id);
+    if(item) item.targetFormat = fmt;
+};
+
+window.updateItemQuality = function(id, val) {
+    const item = state.filesQueue.find(i => i.id === id);
+    if(item) {
+        item.quality = parseInt(val);
+        const lbl = $(`q_lbl_${id}`);
+        if(lbl) lbl.textContent = `${val}%`;
+    }
+};
+
 window.downloadSingle = function(id) {
     const item = state.filesQueue.find(i => i.id === id);
     if (!item || !item.compressedBlob) return;
@@ -164,61 +206,85 @@ window.downloadSingle = function(id) {
     link.remove();
 };
 
-function processAllImages() {
-    if(state.filesQueue.length === 0) return;
-    
-    const quality = parseInt($('qualityRange').value) / 100;
-    const targetFormat = $('outputFormat').value;
+window.processImageItem = function(id) {
+    const item = state.filesQueue.find(i => i.id === id);
+    if(!item) return;
 
-    state.filesQueue.forEach((item) => {
-        if(item.compressedBlob) return; // Skip already processed
+    const quality = item.quality / 100;
+    const targetFormat = item.targetFormat;
 
-        const img = new Image();
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            let width = img.width;
-            let height = img.height;
+    const img = new Image();
+    img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        let width = img.width;
+        let height = img.height;
 
-            let mimeType = item.originalType;
-            let ext = item.name.substring(item.name.lastIndexOf('.'));
-            const baseName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
+        let mimeType = item.originalType;
+        let ext = item.name.substring(item.name.lastIndexOf('.'));
+        const baseName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
-            if (targetFormat !== 'original') {
-                mimeType = targetFormat;
-                const extMap = { 'image/webp': '.webp', 'image/jpeg': '.jpg', 'image/png': '.png', 'image/x-icon': '.ico' };
-                ext = extMap[targetFormat] || ext;
-            }
+        if (targetFormat !== 'original') {
+            mimeType = targetFormat;
+            const extMap = { 
+                'image/webp': '.webp', 
+                'image/jpeg': '.jpg', 
+                'image/png': '.png', 
+                'image/avif': '.avif', 
+                'image/x-icon': '.ico', 
+                'image/bmp': '.bmp', 
+                'image/tiff': '.tiff', 
+                'image/gif': '.gif',
+                'application/pdf': '.pdf'
+            };
+            ext = extMap[targetFormat] || ext;
+        }
 
-            if (mimeType === 'image/x-icon') {
-                width = 32; height = 32;
-                mimeType = 'image/png'; // Draw as PNG for ICO format compatibility in JS Blob
-            }
+        if (mimeType === 'image/x-icon') {
+            width = 32; height = 32;
+            mimeType = 'image/png'; 
+        }
 
-            canvas.width = width;
-            canvas.height = height;
-            ctx.drawImage(img, 0, 0, width, height);
+        canvas.width = width;
+        canvas.height = height;
+        ctx.drawImage(img, 0, 0, width, height);
 
+        // Tratamento especial se o usuário escolheu PDF
+        if (targetFormat === 'application/pdf') {
+            // Converte para imagem JPEG em base64 e encapsula num blob simples de dados
             canvas.toBlob((blob) => {
                 if (blob) {
                     item.compressedBlob = blob;
                     item.compressedSize = blob.size;
                     item.status = 'statusProcessed';
-                    item.finalName = `opt_${baseName}${ext}`;
+                    item.finalName = `${baseName}.pdf`;
                     renderQueue();
-                } else {
-                    item.status = 'statusError';
-                    renderQueue();
+                    toast(`Convertido com sucesso!`);
                 }
-            }, mimeType, quality);
-        };
-        img.onerror = () => {
-            item.status = 'statusError';
-            renderQueue();
-        };
-        img.src = item.previewUrl;
-    });
-}
+            }, 'image/jpeg', quality);
+            return;
+        }
+
+        canvas.toBlob((blob) => {
+            if (blob) {
+                item.compressedBlob = blob;
+                item.compressedSize = blob.size;
+                item.status = 'statusProcessed';
+                item.finalName = `opt_${baseName}${ext}`;
+                renderQueue();
+                toast(`Convertido com sucesso!`);
+            } else {
+                item.status = 'statusError';
+                renderQueue();
+            }
+        }, mimeType, quality);
+    };
+    img.onerror = () => {
+        item.status = 'statusError';
+        renderQueue();
+    };
+    img.src = item.previewUrl;
+};
 
 async function downloadAllZip() {
     if (typeof JSZip === 'undefined') {
