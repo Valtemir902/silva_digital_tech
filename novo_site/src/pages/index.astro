@@ -1,14 +1,5 @@
 ---
 import '../styles/global.css';
-
-// Carregamento dinâmico otimizado e padrão de elite via Vite
-const postModules = import.meta.glob('../content/aplicativos/*.md', { eager: true });
-const aplicativos = Object.values(postModules);
-
-// Filtrando os aplicativos por categoria de forma 100% segura em JS puro
-const appsMobile = aplicativos.filter(app => app.frontmatter && app.frontmatter.categoria === 'Aplicativos Mobile');
-const softwaresWin = aplicativos.filter(app => app.frontmatter && app.frontmatter.categoria === 'Softwares & Automações');
-const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter.categoria === 'Soluções Web & Sites');
 ---
 
 <!DOCTYPE html>
@@ -18,6 +9,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silva Digital Tech | Apps, Web e Sistemas</title>
     
+    <!-- CAMINHOS CORRIGIDOS PARA A PASTA PUBLIC (com / no começo) -->
     <link rel="icon" type="image/svg+xml" href="/assets/icone-silva.svg">
     <link rel="apple-touch-icon" href="/assets/icone-silva.svg">
     
@@ -41,6 +33,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
     <meta name="twitter:title" content="Silva Digital Tech | Engenharia de Elite para Apps e Softwares">
     <meta name="twitter:description" content="Software House especializada em Inteligência Artificial, automação em Python e aplicativos mobile de alta performance.">
     
+    <!-- ADICIONADO is:inline PARA O ASTRO IGNORAR SCRIPTS EXTERNOS -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous" is:inline></script>
     
     <script type="application/ld+json" id="jsonld-schema" is:inline>
@@ -73,6 +66,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
     </script>
     
     <script src="https://cdn.tailwindcss.com" is:inline></script>
+    <!-- CAMINHO CORRIGIDO -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -145,7 +139,6 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
             Nosso Portfólio Global
         </h3>
         
-        <!-- APLICATIVOS MOBILE -->
         <div class="mb-20" data-aos="fade-up">
             <div class="flex items-center gap-4 mb-8">
                 <i class="fa-solid fa-mobile-screen text-2xl text-emerald-400"></i>
@@ -156,12 +149,14 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
+                            <!-- CAMINHO DA IMAGEM AGRO EXPERT -->
                             <img src="/apps/agro-expert/assets/favicon.png" alt="Ícone Agro Expert" class="w-16 h-16 rounded-2xl shadow-xl shadow-emerald-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500">
                             <span class="text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-solid fa-lock text-xs mr-1"></i> ERP Seguro</span>
                         </div>
                         <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors">Agro Expert</h4>
                         <p data-i18n="agroDesc" class="text-slate-400 text-sm leading-relaxed mb-6">O ERP agrícola mais completo na palma da sua mão. Tecnologia de precisão e IA para monitoramento rural, funcionando 100% offline.</p>
                     </div>
+                    <!-- CAMINHO DO LINK AGRO EXPERT -->
                     <a href="/apps/agro-expert/index.html" class="inline-flex items-center gap-3 text-emerald-400 text-sm font-semibold group-hover:text-emerald-300 transition-colors bg-emerald-500/10 hover:bg-emerald-500/20 px-5 py-2.5 rounded-xl w-max">
                         <span data-i18n="verApp">Ver página oficial &rarr;</span>
                     </a>
@@ -170,6 +165,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
+                            <!-- CAMINHO DA IMAGEM TRILHA NAVIGATOR -->
                             <img src="/apps/trilha-navigator/assets/favicon.png" alt="Ícone Trilha Navigator" class="w-16 h-16 rounded-2xl shadow-xl shadow-cyan-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500">
                             <div class="flex flex-col items-end gap-2">
                                 <span class="text-[10px] font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-solid fa-satellite text-xs mr-1"></i> Radar Mesh</span>
@@ -179,31 +175,14 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
                         <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">Trilha Navigator</h4>
                         <p data-i18n="trilhaDesc" class="text-slate-400 text-sm leading-relaxed mb-6">Sua bússola definitiva para a aventura. Sistema de navegação GPS robusto que não depende de sinal de internet para guiar suas rotas.</p>
                     </div>
+                    <!-- CAMINHO DO LINK TRILHA NAVIGATOR -->
                     <a href="/apps/trilha-navigator/index.html" class="inline-flex items-center gap-3 text-cyan-400 text-sm font-semibold group-hover:text-cyan-300 transition-colors bg-cyan-500/10 hover:bg-cyan-500/20 px-5 py-2.5 rounded-xl border border-cyan-500/20 w-max">
                         <span data-i18n="verApp">Ver página oficial &rarr;</span>
                     </a>
                 </div>
-
-                <!-- Apps Mobile dinâmicos -->
-                {appsMobile.map(app => (
-                    <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
-                        <div>
-                            <div class="flex justify-between items-start mb-6">
-                                <img src={app.frontmatter.icone} alt={app.frontmatter.title} class="w-16 h-16 rounded-2xl shadow-xl shadow-emerald-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500" />
-                                <span class="text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-full uppercase">{app.frontmatter.tag}</span>
-                            </div>
-                            <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors">{app.frontmatter.title}</h4>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{app.frontmatter.descricao}</p>
-                        </div>
-                        <a href={app.frontmatter.link} target="_blank" class="inline-flex items-center gap-3 text-emerald-400 text-sm font-semibold group-hover:text-emerald-300 transition-colors bg-emerald-500/10 hover:bg-emerald-500/20 px-5 py-2.5 rounded-xl w-max">
-                            <span>Acessar Ferramenta &rarr;</span>
-                        </a>
-                    </div>
-                ))}
             </div>
         </div>
 
-        <!-- SOFTWARES & AUTOMAÇÕES -->
         <div class="mb-20" data-aos="fade-up">
             <div class="flex items-center gap-4 mb-8">
                 <i class="fa-brands fa-python text-2xl text-yellow-400"></i>
@@ -223,27 +202,9 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
                         <p data-i18n="proframeDesc" class="text-slate-400 text-sm leading-relaxed mb-6">Software de edição de vídeo avançada construído em Python. Pipeline de renderização automatizada e ferramentas de pós-produção profissional.</p>
                     </div>
                 </div>
-
-                <!-- Softwares dinâmicos -->
-                {softwaresWin.map(app => (
-                    <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-yellow-500/50 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] transition-all duration-500 group">
-                        <div>
-                            <div class="flex justify-between items-start mb-6">
-                                <img src={app.frontmatter.icone} alt={app.frontmatter.title} class="w-16 h-16 rounded-2xl shadow-xl shadow-yellow-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500" />
-                                <span class="text-[10px] font-bold bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-3 py-1.5 rounded-full uppercase">{app.frontmatter.tag}</span>
-                            </div>
-                            <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors">{app.frontmatter.title}</h4>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{app.frontmatter.descricao}</p>
-                        </div>
-                        <a href={app.frontmatter.link} target="_blank" class="inline-flex items-center gap-3 text-yellow-400 text-sm font-semibold group-hover:text-yellow-300 transition-colors bg-yellow-500/10 hover:bg-yellow-500/20 px-5 py-2.5 rounded-xl w-max">
-                            <span>Acessar Ferramenta &rarr;</span>
-                        </a>
-                    </div>
-                ))}
             </div>
         </div>
 
-        <!-- SOLUÇÕES WEB & SITES -->
         <div data-aos="fade-up">
             <div class="flex items-center gap-4 mb-8">
                 <i class="fa-solid fa-laptop-code text-2xl text-indigo-400"></i>
@@ -251,6 +212,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 relative z-10">
+                
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -267,6 +229,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
+                            
                             <div class="w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 border border-emerald-500/40 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.2)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] group-hover:border-emerald-400 group-hover:scale-110 transition-all duration-500 relative overflow-hidden">
                                 <div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <svg class="w-8 h-8 text-emerald-400 relative z-10 drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -276,32 +239,35 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
                                     <circle cx="15" cy="15" r="1.5" fill="#fff" stroke="none"></circle>
                                 </svg>
                             </div>
+
                             <span data-i18n="tagFreeTool" class="text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-full uppercase">Ferramenta Gratuita</span>
                         </div>
                         <h4 data-i18n="crmTitle" class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors">MicroCRM: Recibos & Orçamentos</h4>
                         <p data-i18n="crmDesc" class="text-slate-400 text-sm leading-relaxed mb-6">Gerador profissional de PDFs em tempo real. Funciona offline, sem mensalidades. Calcule taxas, aplique descontos e gerencie clientes direto do navegador.</p>
                     </div>
+                    <!-- CAMINHO DO LINK GERADOR DE RECIBOS -->
                     <a href="/gerador-de-recibos-e-orcamentos/" target="_blank" class="inline-flex items-center gap-3 text-emerald-400 text-sm font-semibold group-hover:text-emerald-300 transition-colors bg-emerald-500/10 hover:bg-emerald-500/20 px-5 py-2.5 rounded-xl w-max">
                         <span data-i18n="btnAcessarTool">Acessar Ferramenta &rarr;</span>
                     </a>
                 </div>
 
-                <!-- Web Apps dinâmicos criados pelo Painel -->
-                {solucoesWeb.map(app => (
-                    <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 group">
-                        <div>
-                            <div class="flex justify-between items-start mb-6">
-                                <img src={app.frontmatter.icone} alt={app.frontmatter.title} class="w-16 h-16 rounded-2xl shadow-xl shadow-blue-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500" />
-                                <span class="text-[10px] font-bold bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1.5 rounded-full uppercase">{app.frontmatter.tag}</span>
+                <!-- CARD DO OTIMIZADOR DE IMAGENS ADICIONADO DIRETAMENTE -->
+                <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 group">
+                    <div>
+                        <div class="flex justify-between items-start mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 border border-blue-500/40 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(59,130,246,0.2)] group-hover:scale-110 transition-all duration-500">
+                                <i class="fa-solid fa-image text-3xl text-blue-400"></i>
                             </div>
-                            <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">{app.frontmatter.title}</h4>
-                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{app.frontmatter.descricao}</p>
+                            <span class="text-[10px] font-bold bg-blue-500/10 border border-blue-500/30 text-blue-400 px-3 py-1.5 rounded-full uppercase">🚀 Aceleração Web</span>
                         </div>
-                        <a href={app.frontmatter.link} target="_blank" class="inline-flex items-center gap-3 text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors bg-blue-500/10 hover:bg-blue-500/20 px-5 py-2.5 rounded-xl border border-blue-500/20 w-max">
-                            <span>Acessar Ferramenta &rarr;</span>
-                        </a>
+                        <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-blue-400 transition-colors">Otimizador e Conversor de Imagens</h4>
+                        <p class="text-slate-400 text-sm leading-relaxed mb-6">Ferramenta online profissional para otimizar e converter imagens com 10+ formatos direto no navegador com privacidade total e download direto.</p>
                     </div>
-                ))}
+                    <a href="/apps/otimizador-e-conversor-de-imagens/" target="_blank" class="inline-flex items-center gap-3 text-blue-400 text-sm font-semibold group-hover:text-blue-300 transition-colors bg-blue-500/10 hover:bg-blue-500/20 px-5 py-2.5 rounded-xl border border-blue-500/20 w-max">
+                        <span>Acessar Ferramenta &rarr;</span>
+                    </a>
+                </div>
+
             </div>
         </div>
     </section>
@@ -414,6 +380,7 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
         </div>
     </div>
 
+    <!-- SCRIPTS MANTIDOS COM is:inline -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" is:inline></script>
     <script src="/js/i18n.js" is:inline></script>
     <script is:inline>
@@ -423,7 +390,6 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter
         let isHuman = false;
         function openContactModal() { const m = document.getElementById('contactModal'); const b = document.getElementById('contactModalBox'); document.getElementById('formContent').classList.remove('hidden'); document.getElementById('successContent').classList.add('hidden'); document.getElementById('successContent').classList.remove('flex'); isHuman = false; updateBotUI(); m.classList.remove('hidden'); m.classList.add('flex'); setTimeout(() => { m.classList.remove('opacity-0'); b.classList.remove('scale-95'); b.classList.add('scale-100'); }, 10); }
         function closeContactModal() { const m = document.getElementById('contactModal'); const b = document.getElementById('contactModalBox'); m.classList.add('opacity-0'); b.classList.remove('scale-100'); b.classList.add('scale-95'); setTimeout(() => { m.classList.add('hidden'); m.classList.remove('flex'); }, 300); }
-        let isHuman = false;
         function toggleBotCheck() { isHuman = !isHuman; updateBotUI(); }
         function updateBotUI() { const c = document.getElementById('botCheckbox'); const i = document.getElementById('botCheckIcon'); const btn = document.getElementById('sendBtn'); if(isHuman) { c.classList.add('bg-emerald-500', 'border-emerald-500'); c.classList.remove('border-slate-600'); i.classList.remove('opacity-0'); btn.classList.remove('opacity-50', 'cursor-not-allowed'); btn.disabled = false; } else { c.classList.remove('bg-emerald-500', 'border-emerald-500'); c.classList.add('border-slate-600'); i.classList.add('opacity-0'); btn.classList.add('opacity-50', 'cursor-not-allowed'); btn.disabled = true; } }
         function submitForm() { const btn = document.getElementById('sendBtn'); const icon = btn.querySelector('i'); icon.className = "fa-solid fa-circle-notch fa-spin"; btn.querySelector('span').textContent = "Criptografando dados..."; setTimeout(() => { document.getElementById('formContent').classList.add('hidden'); const s = document.getElementById('successContent'); s.classList.remove('hidden'); s.classList.add('flex'); icon.className = "fa-solid fa-paper-plane"; btn.querySelector('span').textContent = "Enviar Mensagem Segura"; }, 1500); }
