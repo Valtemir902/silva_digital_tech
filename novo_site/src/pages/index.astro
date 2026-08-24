@@ -1,13 +1,14 @@
 ---
 import '../styles/global.css';
 
-// Automação de Elite: Lendo os arquivos .md gerados pelo Control Center PRO
-const aplicativos = await Astro.glob('../content/aplicativos/*.md').catch(() => []);
+// Arquitetura de Elite: Carregamento dinâmico blindado via Vite import.meta.glob
+const arquivosApps = import.meta.glob('../content/aplicativos/*.md', { eager: true });
+const aplicativos = Object.values(arquivosApps).map((file: any) => file);
 
-// Distribuindo os apps nas vitrines corretas
-const appsMobile = aplicativos.filter(app => app.frontmatter.categoria === 'Aplicativos Mobile');
-const softwaresWin = aplicativos.filter(app => app.frontmatter.categoria === 'Softwares & Automações');
-const solucoesWeb = aplicativos.filter(app => app.frontmatter.categoria === 'Soluções Web & Sites');
+// Distribuindo os apps nas vitrines corretas do site
+const appsMobile = aplicativos.filter((app: any) => app.frontmatter?.categoria === 'Aplicativos Mobile');
+const softwaresWin = aplicativos.filter((app: any) => app.frontmatter?.categoria === 'Softwares & Automações');
+const solucoesWeb = aplicativos.filter((app: any) => app.frontmatter?.categoria === 'Soluções Web & Sites');
 ---
 
 <!DOCTYPE html>
@@ -152,7 +153,6 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter.categoria === 'Sol
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 relative z-10">
-                <!-- Apps Fixos -->
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -184,8 +184,8 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter.categoria === 'Sol
                     </a>
                 </div>
 
-                <!-- Automação: Apps do Painel -->
-                {appsMobile.map(app => (
+                <!-- Renderização Dinâmica: Aplicativos Mobile criados pelo Painel -->
+                {appsMobile.map((app: any) => (
                     <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                         <div>
                             <div class="flex justify-between items-start mb-6">
@@ -224,8 +224,8 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter.categoria === 'Sol
                     </div>
                 </div>
 
-                <!-- Automação: Apps do Painel -->
-                {softwaresWin.map(app => (
+                <!-- Renderização Dinâmica: Softwares criados pelo Painel -->
+                {softwaresWin.map((app: any) => (
                     <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-yellow-500/50 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] transition-all duration-500 group">
                         <div>
                             <div class="flex justify-between items-start mb-6">
@@ -286,8 +286,8 @@ const solucoesWeb = aplicativos.filter(app => app.frontmatter.categoria === 'Sol
                     </a>
                 </div>
 
-                <!-- Automação: Apps do Painel -->
-                {solucoesWeb.map(app => (
+                <!-- Renderização Dinâmica: Web Apps criados pelo Painel -->
+                {solucoesWeb.map((app: any) => (
                     <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 group">
                         <div>
                             <div class="flex justify-between items-start mb-6">
