@@ -1,14 +1,14 @@
 ---
 import '../styles/global.css';
 
-// Solução definitiva exigida pela Netlify e Astro v5+: import.meta.glob
+// Carregamento dinâmico otimizado e padrão de elite via Vite
 const postModules = import.meta.glob('../content/aplicativos/*.md', { eager: true });
 const aplicativos = Object.values(postModules);
 
-// Distribuindo os apps nas vitrines corretas
-const appsMobile = aplicativos.filter((app: any) => app.frontmatter?.categoria === 'Aplicativos Mobile');
-const softwaresWin = aplicativos.filter((app: any) => app.frontmatter?.categoria === 'Softwares & Automações');
-const solucoesWeb = aplicativos.filter((app: any) => app.frontmatter?.categoria === 'Soluções Web & Sites');
+// Filtrando os aplicativos por categoria de forma 100% segura em JS puro
+const appsMobile = aplicativos.filter(app => app.frontmatter && app.frontmatter.categoria === 'Aplicativos Mobile');
+const softwaresWin = aplicativos.filter(app => app.frontmatter && app.frontmatter.categoria === 'Softwares & Automações');
+const solucoesWeb = aplicativos.filter(app => app.frontmatter && app.frontmatter.categoria === 'Soluções Web & Sites');
 ---
 
 <!DOCTYPE html>
@@ -184,8 +184,8 @@ const solucoesWeb = aplicativos.filter((app: any) => app.frontmatter?.categoria 
                     </a>
                 </div>
 
-                <!-- Renderização Dinâmica: Aplicativos Mobile criados pelo Painel -->
-                {appsMobile.map((app: any) => (
+                <!-- Apps Mobile dinâmicos -->
+                {appsMobile.map(app => (
                     <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                         <div>
                             <div class="flex justify-between items-start mb-6">
@@ -224,8 +224,8 @@ const solucoesWeb = aplicativos.filter((app: any) => app.frontmatter?.categoria 
                     </div>
                 </div>
 
-                <!-- Renderização Dinâmica: Softwares criados pelo Painel -->
-                {softwaresWin.map((app: any) => (
+                <!-- Softwares dinâmicos -->
+                {softwaresWin.map(app => (
                     <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-yellow-500/50 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] transition-all duration-500 group">
                         <div>
                             <div class="flex justify-between items-start mb-6">
@@ -286,8 +286,8 @@ const solucoesWeb = aplicativos.filter((app: any) => app.frontmatter?.categoria 
                     </a>
                 </div>
 
-                <!-- Renderização Dinâmica: Web Apps criados pelo Painel -->
-                {solucoesWeb.map((app: any) => (
+                <!-- Web Apps dinâmicos criados pelo Painel -->
+                {solucoesWeb.map(app => (
                     <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 group">
                         <div>
                             <div class="flex justify-between items-start mb-6">
@@ -432,13 +432,13 @@ const solucoesWeb = aplicativos.filter((app: any) => app.frontmatter?.categoria 
             if (schemaElement) {
                 let orgDesc = "Software House global especializada em Inteligência Artificial, automação em Python, aplicativos mobile e sistemas web de alta performance.";
                 if (lang === 'en') orgDesc = "Global Software House specialized in Artificial Intelligence, Python automation, high-performance mobile applications, and web systems.";
-                else if (lang === 'es') orgDesc = "Software House global especializada en Inteligência Artificial, automatización en Python, aplicaciones móviles de alto rendimiento y sistemas web.";
+                else if (lang === 'es') orgDesc = "Software House global especializada en Inteligencia Artificial, automatización en Python, aplicaciones móviles de alto rendimiento y sistemas web.";
                 else if (lang === 'fr') orgDesc = "Software House mondiale spécialisée dans l'Intelligence Artificielle, l'automatisation Python, les applications mobiles et les systèmes web.";
                 else if (lang === 'de') orgDesc = "Globales Softwarehaus, spezialisiert auf Künstliche Intelligenz, Python-Automatisierung, mobile Apps und Websysteme.";
                 else if (lang === 'ru') orgDesc = "Глобальная компания по разработке ПО, специализирующаяся на искусственном интеллекте, автоматизации Python и мобильных приложениях.";
                 else if (lang === 'zh') orgDesc = "全球软件公司，专注于人工智能、Python 自动化、高性能移动应用程序和网络系统。";
                 const baseUrl = window.location.href.split('?')[0];
-                const schemaData = { "@context": "https://schema.org", "@graph": [ { "@type": "Organization", "@id": baseUrl + "#organization", "name": "Silva Digital Tech", "url": baseUrl, "description": orgDesc, "contactPoint": { "@type": "ContactPoint", "email": "silvadigitaltech@gmail.com", "contactType": "customer support" } }, { "@type": "WebSite", "@id": baseUrl + "#website", "url": baseUrl, "name": "Silva DigitalTech", "publisher": { "@id": baseUrl + "#organization" } } ] };
+                const schemaData = { "@context": "https://schema.org", "@graph": [ { "@type": "Organization", "@id": baseUrl + "#organization", "name": "Silva Digital Tech", "url": baseUrl, "description": orgDesc, "contactPoint": { "@type": "ContactPoint", "email": "silvadigitaltech@gmail.com", "contactType": "customer support" } }, { "@type": "WebSite", "@id": baseUrl + "#website", "url": baseUrl, "name": "Silva Digital Tech", "publisher": { "@id": baseUrl + "#organization" } } ] };
                 schemaElement.text = JSON.stringify(schemaData);
             }
         });
