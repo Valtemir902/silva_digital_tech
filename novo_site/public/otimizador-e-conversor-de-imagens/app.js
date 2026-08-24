@@ -1,6 +1,6 @@
 /* 
  * Silva Digital Tech - Otimizador de Imagens PRO
- * Core Logic - Conversão Direta e Individual
+ * Core Logic - Botões de Download Gigantes e Conversão Instantânea
  */
 const $ = (id) => document.getElementById(id);
 
@@ -9,26 +9,13 @@ const state = {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    bindNavigation();
     bindDropzone();
     bindControls();
 });
 
-function bindNavigation() {
-    document.querySelectorAll("[data-view]").forEach((button) => {
-        button.addEventListener("click", () => {
-            document.querySelectorAll(".view").forEach((view) => view.classList.toggle("active", view.id === button.dataset.view));
-            document.querySelectorAll(".nav-button").forEach((btn) => {
-                const active = btn.dataset.view === button.dataset.view;
-                btn.classList.toggle("active", active);
-            });
-        });
-    });
-    
-    $('headerAddBtn').addEventListener('click', () => {
-        $('fileInput').click();
-    });
-}
+document.getElementById('headerAddBtn').addEventListener('click', () => {
+    $('fileInput').click();
+});
 
 function bindDropzone() {
     const dropzone = $('dropzone');
@@ -55,15 +42,11 @@ function bindControls() {
         state.filesQueue = [];
         renderQueue();
     });
-    $('processAllBtn').addEventListener('click', () => {
-        state.filesQueue.forEach(item => processImageItem(item.id));
-    });
     $('downloadAllBtn').addEventListener('click', downloadAllZip);
 }
 
 function handleFiles(files) {
     if (!files.length) return;
-    const defaultFormat = $('defaultOutputFormat') ? $('defaultOutputFormat').value : 'original';
 
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
@@ -75,20 +58,20 @@ function handleFiles(files) {
             name: file.name,
             originalSize: file.size,
             originalType: file.type || 'image/png',
-            targetFormat: defaultFormat,
+            targetFormat: 'original',
             quality: 80,
             compressedBlob: null,
             compressedSize: 0,
-            status: 'statusWaiting',
+            status: 'Aguardando',
             finalName: '',
             previewUrl: URL.createObjectURL(file)
         };
         state.filesQueue.push(item);
-        // Processa imediatamente ao soltar para agilizar
+        // Processa automaticamente ao carregar
         setTimeout(() => processImageItem(item.id), 100);
     }
     renderQueue();
-    toast(window.t('tAdded'));
+    toast("Imagens adicionadas e processadas com sucesso!");
 }
 
 function formatBytes(bytes) {
@@ -104,7 +87,7 @@ function renderQueue() {
     const downloadBtn = $('downloadAllBtn');
     
     if (state.filesQueue.length === 0) {
-        container.innerHTML = `<div class="empty-state"><p>${window.t('emptyQueue')}</p></div>`;
+        container.innerHTML = `<div class="empty-state"><p>Nenhuma imagem carregada na fila ainda. Selecione ou arraste acima.</p></div>`;
         downloadBtn.style.display = 'none';
         return;
     }
@@ -117,35 +100,48 @@ function renderQueue() {
         const savings = item.compressedSize && item.compressedSize < item.originalSize 
             ? Math.round((1 - item.compressedSize / item.originalSize) * 100) 
             : 0;
-            
-        const statusClass = item.status === 'statusWaiting' ? 'status-waiting' : 'status-done';
+
+        // Formato legível para exibir no botão gigante
+        const formatNames = {
+            'original': 'Original',
+            'image/webp': 'WebP',
+            'image/jpeg': 'JPG',
+            'image/png': 'PNG',
+            'image/avif': 'AVIF',
+            'image/x-icon': 'ICO',
+            'image/bmp': 'BMP',
+            'image/tiff': 'TIFF',
+            'image/gif': 'GIF',
+            'application/pdf': 'PDF'
+        };
+        const currentFormatName = formatNames[item.targetFormat] || 'Arquivo';
 
         html += `
-            <div class="list-item" style="display: flex; flex-direction: column; align-items: stretch; gap: 10px;">
-                <div class="item-info">
-                    <img src="${item.previewUrl}" class="item-thumb" alt="Preview">
+            <div class="list-item" style="display: flex; flex-direction: column; align-items: stretch; gap: 12px; background: rgba(15,23,42,0.9); border: 1px solid rgba(6,182,212,0.3); border-radius: 14px; padding: 18px;">
+                <div class="item-info" style="display: flex; align-items: center; gap: 16px;">
+                    <img src="${item.previewUrl}" class="item-thumb" alt="Preview" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
                     <div class="item-details" style="flex-grow: 1;">
-                        <span class="item-name">${item.name}</span>
-                        <div class="item-meta">
-                            <span>${window.t('lblOriginal')} <strong>${formatBytes(item.originalSize)}</strong></span>
+                        <span class="item-name" style="font-size: 1rem; font-weight: bold; color: #fff;">${item.name}</span>
+                        <div class="item-meta" style="display: flex; gap: 10px; margin-top: 4px; font-size: 0.85rem;">
+                            <span>Original: <strong>${formatBytes(item.originalSize)}</strong></span>
                             <span>•</span>
-                            <span>${window.t('lblFinal')} <strong style="color: var(--accent);">${item.compressedSize ? formatBytes(item.compressedSize) : '-'}</strong></span>
+                            <span>Final: <strong style="color: var(--accent);">${item.compressedSize ? formatBytes(item.compressedSize) : 'Processando...'}</strong></span>
                             ${savings > 0 ? `<span class="badge-savings">-${savings}%</span>` : ''}
                         </div>
                     </div>
-                    <button class="icon-button" style="color: var(--muted); background: transparent; border: 0; font-size: 1.2rem; cursor: pointer;" onclick="removeItem('${item.id}')" title="Remover">×</button>
+                    <button class="danger-button" style="padding: 6px 12px; font-size: 0.8rem;" onclick="removeItem('${item.id}')">Remover</button>
                 </div>
 
-                <!-- Painel de controle individual por imagem -->
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 8px; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <label style="font-size: 0.75rem; color: var(--muted);">Formato:</label>
-                        <select onchange="updateItemFormat('${item.id}', this.value)" style="padding: 4px 8px; font-size: 0.8rem; width: auto; margin:0;">
-                            <option value="original" ${item.targetFormat === 'original' ? 'selected' : ''}>Original</option>
-                            <option value="image/webp" ${item.targetFormat === 'image/webp' ? 'selected' : ''}>WebP</option>
+                <!-- Controles individuais limpos e profissionais -->
+                <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; background: rgba(0,0,0,0.4); padding: 12px 16px; border-radius: 10px; flex-wrap: wrap;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <label style="font-size: 0.85rem; color: #fff; font-weight:600;">Converter para:</label>
+                        <select onchange="updateItemFormat('${item.id}', this.value)" style="padding: 6px 12px; font-size: 0.9rem; border-radius: 8px; background: #0b0f19; color: #fff; border: 1px solid var(--line);">
+                            <option value="original" ${item.targetFormat === 'original' ? 'selected' : ''}>Manter Formato Original</option>
+                            <option value="image/webp" ${item.targetFormat === 'image/webp' ? 'selected' : ''}>WebP (Web)</option>
                             <option value="image/jpeg" ${item.targetFormat === 'image/jpeg' ? 'selected' : ''}>JPG / JPEG</option>
                             <option value="image/png" ${item.targetFormat === 'image/png' ? 'selected' : ''}>PNG</option>
-                            <option value="image/avif" ${item.targetFormat === 'image/avif' ? 'selected' : ''}>AVIF</option>
+                            <option value="image/avif" ${item.targetFormat === 'image/avif' ? 'selected' : ''}>AVIF (Alta Compressão)</option>
                             <option value="image/x-icon" ${item.targetFormat === 'image/x-icon' ? 'selected' : ''}>ICO (Favicon)</option>
                             <option value="image/bmp" ${item.targetFormat === 'image/bmp' ? 'selected' : ''}>BMP</option>
                             <option value="image/tiff" ${item.targetFormat === 'image/tiff' ? 'selected' : ''}>TIFF</option>
@@ -154,17 +150,20 @@ function renderQueue() {
                         </select>
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <label style="font-size: 0.75rem; color: var(--muted);">Qualidade: <span id="q_lbl_${item.id}">${item.quality}%</span></label>
-                        <input type="range" min="10" max="100" value="${item.quality}" oninput="updateItemQuality('${item.id}', this.value)" style="width: 80px; margin:0;">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <label style="font-size: 0.85rem; color: #fff; font-weight:600;">Qualidade: <span id="q_lbl_${item.id}" style="color: var(--primary);">${item.quality}%</span></label>
+                        <input type="range" min="10" max="100" value="${item.quality}" oninput="updateItemQuality('${item.id}', this.value)" style="width: 100px; accent-color: var(--accent);">
                     </div>
 
-                    <div style="display: flex; align-items: center; gap: 8px;">
-                        <span class="status-badge ${statusClass}">${window.t(item.status)}</span>
-                        <button class="primary-button" style="min-height: 32px; padding: 0 12px; font-size: 0.8rem;" onclick="processImageItem('${item.id}')">Converter</button>
+                    <!-- BOTÃO DE BAIXAR IMAGEM GIGANTE E DESTACADO COM O FORMATO ESCOLHIDO -->
+                    <div>
                         ${item.compressedBlob ? `
-                            <button class="ghost-button" style="min-height: 32px; padding: 0 12px; font-size: 0.8rem; background: var(--accent); color: #000; border:0;" onclick="downloadSingle('${item.id}')">${window.t('btnDownload')} Direto</button>
-                        ` : ''}
+                            <button class="primary-button" style="padding: 10px 24px; font-size: 0.95rem; background: linear-gradient(135deg, var(--accent), #059669); box-shadow: 0 4px 20px rgba(16,185,129,0.4);" onclick="downloadSingle('${item.id}')">
+                                📥 Baixar Imagem (${currentFormatName})
+                            </button>
+                        ` : `
+                            <button class="ghost-button" style="padding: 10px 20px; font-size: 0.9rem;" onclick="processImageItem('${item.id}')">Processar</button>
+                        `}
                     </div>
                 </div>
             </div>
@@ -182,7 +181,10 @@ window.removeItem = function(id) {
 
 window.updateItemFormat = function(id, fmt) {
     const item = state.filesQueue.find(i => i.id === id);
-    if(item) item.targetFormat = fmt;
+    if(item) {
+        item.targetFormat = fmt;
+        processImageItem(id); // Converte automaticamente ao trocar o formato
+    }
 };
 
 window.updateItemQuality = function(id, val) {
@@ -191,6 +193,7 @@ window.updateItemQuality = function(id, val) {
         item.quality = parseInt(val);
         const lbl = $(`q_lbl_${id}`);
         if(lbl) lbl.textContent = `${val}%`;
+        processImageItem(id); // Recomprime automaticamente ao mover o slider
     }
 };
 
@@ -204,6 +207,7 @@ window.downloadSingle = function(id) {
     document.body.appendChild(link);
     link.click();
     link.remove();
+    toast(`Download concluído: ${item.finalName}`);
 };
 
 window.processImageItem = function(id) {
@@ -249,17 +253,14 @@ window.processImageItem = function(id) {
         canvas.height = height;
         ctx.drawImage(img, 0, 0, width, height);
 
-        // Tratamento especial se o usuário escolheu PDF
         if (targetFormat === 'application/pdf') {
-            // Converte para imagem JPEG em base64 e encapsula num blob simples de dados
             canvas.toBlob((blob) => {
                 if (blob) {
                     item.compressedBlob = blob;
                     item.compressedSize = blob.size;
-                    item.status = 'statusProcessed';
+                    item.status = 'Pronto';
                     item.finalName = `${baseName}.pdf`;
                     renderQueue();
-                    toast(`Convertido com sucesso!`);
                 }
             }, 'image/jpeg', quality);
             return;
@@ -269,29 +270,24 @@ window.processImageItem = function(id) {
             if (blob) {
                 item.compressedBlob = blob;
                 item.compressedSize = blob.size;
-                item.status = 'statusProcessed';
+                item.status = 'Pronto';
                 item.finalName = `opt_${baseName}${ext}`;
                 renderQueue();
-                toast(`Convertido com sucesso!`);
             } else {
-                item.status = 'statusError';
+                item.status = 'Erro';
                 renderQueue();
             }
         }, mimeType, quality);
     };
     img.onerror = () => {
-        item.status = 'statusError';
+        item.status = 'Erro';
         renderQueue();
     };
     img.src = item.previewUrl;
 };
 
 async function downloadAllZip() {
-    if (typeof JSZip === 'undefined') {
-        toast("Biblioteca JSZip não carregada.");
-        return;
-    }
-    
+    if (typeof JSZip === 'undefined') return;
     const zip = new JSZip();
     let count = 0;
     
@@ -304,16 +300,16 @@ async function downloadAllZip() {
     
     if (count === 0) return;
     
-    toast(window.t('tZipping'));
+    toast("Gerando arquivo ZIP...");
     try {
         const content = await zip.generateAsync({ type: "blob" });
         const link = document.createElement("a");
         link.href = URL.createObjectURL(content);
-        link.download = "imagens_silva_digital_tech.zip";
+        link.download = "imagens_otimizadas_silvadigitaltech.zip";
         document.body.appendChild(link);
         link.click();
         link.remove();
-        toast("Download concluído!");
+        toast("Download em lote concluído!");
     } catch(e) {
         toast("Erro ao gerar ZIP.");
     }
@@ -321,6 +317,7 @@ async function downloadAllZip() {
 
 function toast(message) {
     const t = $('toast');
+    if(!t) return;
     t.textContent = message;
     t.classList.add('show');
     clearTimeout(t.timer);

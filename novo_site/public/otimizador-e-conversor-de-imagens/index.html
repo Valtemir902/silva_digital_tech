@@ -6,12 +6,11 @@
   <meta name="referrer" content="no-referrer">
   <title>Otimizador de Imagens PRO | Silva Digital Tech</title>
   
-  <meta name="description" content="Ferramenta web profissional para compactação e conversão de imagens com controle individual. Processamento Client-Side seguro.">
+  <meta name="description" content="Ferramenta web profissional para compactação e conversão de imagens com controle individual e botões de download direto.">
   
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous"></script>
 </head>
 <body>
   <div class="app-shell">
@@ -28,32 +27,24 @@
 
       <nav class="nav-list" aria-label="Seções">
         <button class="nav-button active" type="button" data-view="dashboard" aria-current="page">
-          <span aria-hidden="true">▦</span> <span data-i18n="navDashboard">Painel de Otimização</span>
-        </button>
-        <button class="nav-button" type="button" data-view="settings">
-          <span aria-hidden="true">⚙</span> <span data-i18n="navCompany">Configurações Padrão</span>
+          <span aria-hidden="true">▦</span> <span>Painel de Otimização</span>
         </button>
       </nav>
 
       <div class="security-note">
-        <strong data-i18n="securityTitle">Modo local 100% Seguro</strong>
-        <p data-i18n="securityDesc">Processamento Client-Side. As imagens nunca são enviadas para nenhum servidor.</p>
+        <strong>Modo local 100% Seguro</strong>
+        <p>Processamento Client-Side. As imagens nunca são enviadas para nenhum servidor.</p>
       </div>
     </aside>
 
     <main class="main">
       <header class="topbar">
         <div>
-          <p class="eyebrow" data-i18n="eyebrowDashboard">Ferramenta Universal</p>
-          <h1 id="pageTitle" data-i18n="title">Otimizador de Imagens PRO</h1>
+          <p class="eyebrow">Ferramenta Universal</p>
+          <h1 id="pageTitle">Otimizador de Imagens PRO</h1>
         </div>
         <div class="topbar-actions">
-          <select id="langSelect" class="lang-select">
-            <option value="pt">PT-BR</option>
-            <option value="en">EN-US</option>
-            <option value="es">ES</option>
-          </select>
-          <button class="primary-button" type="button" id="headerAddBtn" data-i18n="btnSelect">Adicionar Imagens</button>
+          <button class="primary-button" type="button" id="headerAddBtn">Adicionar Imagens</button>
         </div>
       </header>
 
@@ -61,68 +52,42 @@
         
         <div class="finance-hero">
           <div style="flex-grow: 1;">
-            <p class="eyebrow" style="color: var(--accent);">Alta Performance & Conversão Direta</p>
-            <h3 data-i18n="dropTitle">Arraste e solte suas imagens</h3>
-            <span data-i18n="dropDesc">Suporta PNG, JPG, WebP, ICO, GIF, SVG, AVIF, BMP, TIFF, HEIC</span>
+            <p class="eyebrow" style="color: var(--accent);">Alta Performance & Conversão Instantânea</p>
+            <h3>Arraste e solte suas imagens</h3>
+            <span>Suporta PNG, JPG, WebP, ICO, GIF, SVG, AVIF, BMP, TIFF, HEIC</span>
           </div>
           <div class="dropzone" id="dropzone">
             <input type="file" id="fileInput" multiple accept="image/*,.ico,.bmp,.tiff,.svg,.avif,.heic" class="file-input-hidden">
             <div class="drop-icon">
               <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
             </div>
-            <button class="ghost-button mt-3" type="button" onclick="document.getElementById('fileInput').click()" data-i18n="btnSelect">Selecionar Arquivos</button>
+            <button class="ghost-button mt-3" type="button" onclick="document.getElementById('fileInput').click()">Selecionar Arquivos</button>
           </div>
         </div>
 
         <div class="panel">
           <div class="panel-header">
-            <h2 data-i18n="queueTitle">Fila de Processamento & Conversão Direta</h2>
+            <h2>Fila de Processamento & Conversão Direta</h2>
             <div>
-              <button class="danger-button" style="padding: 6px 12px; font-size: 0.8rem;" type="button" id="clearAllBtn" data-i18n="btnClear">Limpar Fila</button>
-              <button class="primary-button" style="padding: 6px 12px; font-size: 0.8rem;" type="button" id="processAllBtn" data-i18n="btnProcess">Processar Tudo</button>
-              <button class="ghost-button" style="padding: 6px 12px; font-size: 0.8rem; display:none;" type="button" id="downloadAllBtn" data-i18n="btnDownloadAll">Baixar Todas (ZIP)</button>
+              <button class="danger-button" style="padding: 8px 16px; font-size: 0.85rem;" type="button" id="clearAllBtn">Limpar Fila</button>
+              <button class="ghost-button" style="padding: 8px 16px; font-size: 0.85rem; display:none;" type="button" id="downloadAllBtn">Baixar Todas (ZIP)</button>
             </div>
           </div>
           <div class="list" id="fileListContainer">
             <div id="emptyState" class="empty-state">
-              <p data-i18n="emptyQueue">Nenhuma imagem carregada na fila ainda.</p>
+              <p>Nenhuma imagem carregada na fila ainda. Selecione ou arraste acima.</p>
             </div>
           </div>
         </div>
       </section>
-
-      <section class="view" id="settings" aria-labelledby="settingsTitle">
-        <div class="section-bar">
-          <div>
-            <p class="eyebrow" data-i18n="eyebrowCompany">Preferências</p>
-            <h2 id="settingsTitle" data-i18n="navCompany">Configurações Padrão</h2>
-          </div>
-        </div>
-        <div class="panel form-grid">
-           <label class="full"><span data-i18n="lblDefaultFormat">Formato de Saída Padrão ao Adicionar</span>
-              <select id="defaultOutputFormat">
-                <option value="original">Manter Formato Original</option>
-                <option value="image/webp">WebP (Recomendado Web)</option>
-                <option value="image/jpeg">JPG / JPEG</option>
-                <option value="image/png">PNG</option>
-                <option value="image/avif">AVIF (Alta Compressão)</option>
-                <option value="image/x-icon">ICO (Favicon / App)</option>
-                <option value="image/bmp">BMP</option>
-                <option value="image/tiff">TIFF</option>
-                <option value="image/gif">GIF</option>
-              </select>
-            </label>
-        </div>
-      </section>
       
       <footer style="margin-top: 40px; text-align: center; color: var(--muted); font-size: 0.8rem;">
-        <p data-i18n="footer">© 2026 Silva Digital Tech - Control Center PRO V4. Processamento 100% local.</p>
+        <p>© 2026 Silva Digital Tech - Control Center PRO V4. Processamento 100% local.</p>
       </footer>
     </main>
   </div>
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
