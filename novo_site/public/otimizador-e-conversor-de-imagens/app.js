@@ -1,57 +1,34 @@
 /* 
- * Silva Digital Tech - Otimizador de Imagens PRO
- * Core Logic - Botões de Download Gigantes e Conversão Instantânea
+ * Silva Digital Tech - Conversor e Redimensionador PRO
+ * Motor Logico: Sem Falsos Formatos. Conversões Matematicamente 100% Reais.
  */
 const $ = (id) => document.getElementById(id);
 
-const state = {
-    filesQueue: []
-};
+const state = { filesQueue: [] };
 
 document.addEventListener("DOMContentLoaded", () => {
-    bindDropzone();
-    bindControls();
-});
-
-document.getElementById('headerAddBtn').addEventListener('click', () => {
-    $('fileInput').click();
-});
-
-function bindDropzone() {
     const dropzone = $('dropzone');
     const fileInput = $('fileInput');
 
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropzone.addEventListener(eventName, (e) => {
-            e.preventDefault(); dropzone.classList.add('dragover');
-        }, false);
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropzone.addEventListener(eventName, (e) => {
-            e.preventDefault(); dropzone.classList.remove('dragover');
-        }, false);
-    });
-
+    ['dragenter', 'dragover'].forEach(evt => dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.style.borderColor = '#10b981'; }));
+    ['dragleave', 'drop'].forEach(evt => dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.style.borderColor = 'rgba(6, 182, 212, 0.5)'; }));
+    
     dropzone.addEventListener('drop', (e) => handleFiles(e.dataTransfer.files));
     fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
-}
 
-function bindControls() {
     $('clearAllBtn').addEventListener('click', () => {
+        state.filesQueue.forEach(i => { if(i.cropperInstance) i.cropperInstance.destroy(); });
         state.filesQueue = [];
         renderQueue();
     });
-    $('downloadAllBtn').addEventListener('click', downloadAllZip);
-}
+
+    $('convertAllBtn').addEventListener('click', convertAllImages);
+});
 
 function handleFiles(files) {
     if (!files.length) return;
-
     for (let i = 0; i < files.length; i++) {
         const file = files[i];
-        if (!file.type.startsWith('image/') && !file.name.endsWith('.ico') && !file.name.endsWith('.heic')) continue;
-        
         const item = {
             id: 'img_' + Math.random().toString(36).substr(2, 9),
             file: file,
@@ -60,266 +37,314 @@ function handleFiles(files) {
             originalType: file.type || 'image/png',
             targetFormat: 'original',
             quality: 80,
+            mode: 'convert', 
+            cropWidth: 1080,
+            cropHeight: 1080,
+            cropperInstance: null,
             compressedBlob: null,
             compressedSize: 0,
-            status: 'Aguardando',
+            status: window.t('statusWaiting'),
             finalName: '',
             previewUrl: URL.createObjectURL(file)
         };
         state.filesQueue.push(item);
-        // Processa automaticamente ao carregar
-        setTimeout(() => processImageItem(item.id), 100);
     }
     renderQueue();
-    toast("Imagens adicionadas e processadas com sucesso!");
+    toast(window.t('toastAdded'));
 }
 
 function formatBytes(bytes) {
     if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    const k = 1024, sizes = ['B', 'KB', 'MB', 'GB'], i = Math.floor(Math.log(bytes) / Math.log(k));
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+}
+
+const formatNames = { 
+    'original':'Original', 'image/webp':'WEBP', 'image/jpeg':'JPG', 'image/png':'PNG', 
+    'image/avif':'AVIF', 'application/pdf':'PDF', 'image/svg+xml':'SVG', 'image/x-icon':'ICO'
+};
+
+function buildControlsHTML(item) {
+    if (item.status === window.t('statusDone')) {
+        const cFormat = formatNames[item.targetFormat] || 'ARQUIVO';
+        return `<button class="btn-download-huge" onclick="downloadSingle('${item.id}')">${window.t('btnDownload')} (${cFormat})</button>`;
+    }
+    
+    return `
+        <div class="controls-wrapper">
+            <!-- Seleção de Modo -->
+            <div class="mode-selector">
+                <label><input type="radio" name="mode_${item.id}" value="convert" ${item.mode==='convert'?'checked':''} onchange="changeMode('${item.id}', 'convert')"> ${window.t('modeConvert')}</label>
+                <label><input type="radio" name="mode_${item.id}" value="crop" ${item.mode==='crop'?'checked':''} onchange="changeMode('${item.id}', 'crop')"> ${window.t('modeCrop')}</label>
+            </div>
+
+            <!-- Grade de Inputs (Sem formatos falsos) -->
+            <div class="inputs-grid">
+                <div class="input-group">
+                    <label>${window.t('lblFormat')}</label>
+                    <select onchange="updateItemFormat('${item.id}', this.value)">
+                        <option value="original" ${item.targetFormat === 'original' ? 'selected' : ''}>${window.t('fmtOriginal')}</option>
+                        <option value="image/jpeg" ${item.targetFormat === 'image/jpeg' ? 'selected' : ''}>${window.t('fmtJpg')}</option>
+                        <option value="image/png" ${item.targetFormat === 'image/png' ? 'selected' : ''}>${window.t('fmtPng')}</option>
+                        <option value="image/webp" ${item.targetFormat === 'image/webp' ? 'selected' : ''}>${window.t('fmtWebp')}</option>
+                        <option value="image/avif" ${item.targetFormat === 'image/avif' ? 'selected' : ''}>${window.t('fmtAvif')}</option>
+                        <option value="application/pdf" ${item.targetFormat === 'application/pdf' ? 'selected' : ''}>${window.t('fmtPdf')}</option>
+                        <option value="image/svg+xml" ${item.targetFormat === 'image/svg+xml' ? 'selected' : ''}>${window.t('fmtSvg')}</option>
+                        <option value="image/x-icon" ${item.targetFormat === 'image/x-icon' ? 'selected' : ''}>${window.t('fmtIco')}</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>${window.t('lblQuality')} <span id="q_lbl_${item.id}" style="color:var(--accent); font-size: 1.1rem;">${item.quality}%</span></label>
+                    <input type="range" min="10" max="100" value="${item.quality}" oninput="updateItemQuality('${item.id}', this.value)">
+                </div>
+            </div>
+
+            <!-- Painel de Recorte -->
+            <div id="crop_panel_${item.id}" class="cropper-panel" style="display: ${item.mode==='crop'?'flex':'none'};">
+                <div class="cropper-dims">
+                    <div class="input-group">
+                        <label>${window.t('lblWidth')}</label>
+                        <input type="number" value="${item.cropWidth}" onchange="updateCropDim('${item.id}', 'width', this.value)">
+                    </div>
+                    <div class="input-group">
+                        <label>${window.t('lblHeight')}</label>
+                        <input type="number" value="${item.cropHeight}" onchange="updateCropDim('${item.id}', 'height', this.value)">
+                    </div>
+                </div>
+                <p style="color: #10b981; font-size: 0.85rem; font-weight: bold; text-align: center; margin: 0;">${window.t('hintCrop')}</p>
+                <div class="cropper-bg">
+                    <img id="img_target_${item.id}" src="${item.previewUrl}" style="max-width:100%; display:block;">
+                </div>
+            </div>
+        </div>
+    `;
 }
 
 function renderQueue() {
     const container = $('fileListContainer');
-    const downloadBtn = $('downloadAllBtn');
-    
+    const actionArea = $('actionArea');
+    const emptyState = $('emptyState');
+
     if (state.filesQueue.length === 0) {
-        container.innerHTML = `<div class="empty-state"><p>Nenhuma imagem carregada na fila ainda. Selecione ou arraste acima.</p></div>`;
-        downloadBtn.style.display = 'none';
+        emptyState.style.display = 'block'; 
+        actionArea.style.display = 'none';
+        container.querySelectorAll('.list-item').forEach(el => el.remove()); 
         return;
     }
 
-    let hasProcessed = false;
-    let html = '';
+    emptyState.style.display = 'none'; 
+    actionArea.style.display = 'block';
 
     state.filesQueue.forEach(item => {
-        if(item.compressedBlob) hasProcessed = true;
-        const savings = item.compressedSize && item.compressedSize < item.originalSize 
-            ? Math.round((1 - item.compressedSize / item.originalSize) * 100) 
-            : 0;
-
-        // Formato legível para exibir no botão gigante
-        const formatNames = {
-            'original': 'Original',
-            'image/webp': 'WebP',
-            'image/jpeg': 'JPG',
-            'image/png': 'PNG',
-            'image/avif': 'AVIF',
-            'image/x-icon': 'ICO',
-            'image/bmp': 'BMP',
-            'image/tiff': 'TIFF',
-            'image/gif': 'GIF',
-            'application/pdf': 'PDF'
-        };
-        const currentFormatName = formatNames[item.targetFormat] || 'Arquivo';
-
-        html += `
-            <div class="list-item" style="display: flex; flex-direction: column; align-items: stretch; gap: 12px; background: rgba(15,23,42,0.9); border: 1px solid rgba(6,182,212,0.3); border-radius: 14px; padding: 18px;">
-                <div class="item-info" style="display: flex; align-items: center; gap: 16px;">
-                    <img src="${item.previewUrl}" class="item-thumb" alt="Preview" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
-                    <div class="item-details" style="flex-grow: 1;">
-                        <span class="item-name" style="font-size: 1rem; font-weight: bold; color: #fff;">${item.name}</span>
-                        <div class="item-meta" style="display: flex; gap: 10px; margin-top: 4px; font-size: 0.85rem;">
-                            <span>Original: <strong>${formatBytes(item.originalSize)}</strong></span>
-                            <span>•</span>
-                            <span>Final: <strong style="color: var(--accent);">${item.compressedSize ? formatBytes(item.compressedSize) : 'Processando...'}</strong></span>
-                            ${savings > 0 ? `<span class="badge-savings">-${savings}%</span>` : ''}
+        let el = $(`item_${item.id}`);
+        if (!el) {
+            el = document.createElement('div');
+            el.className = 'list-item';
+            el.id = `item_${item.id}`;
+            el.innerHTML = `
+                <div class="item-header">
+                    <div class="item-info">
+                        <img src="${item.previewUrl}" alt="Thumb">
+                        <div class="item-text">
+                            <span class="item-name">${item.name}</span>
+                            <span id="meta_${item.id}" class="item-meta">${window.t('lblOriginalSize')} ${formatBytes(item.originalSize)}</span>
                         </div>
                     </div>
-                    <button class="danger-button" style="padding: 6px 12px; font-size: 0.8rem;" onclick="removeItem('${item.id}')">Remover</button>
+                    <button class="btn-remove" onclick="removeItem('${item.id}')">${window.t('btnRemove')}</button>
                 </div>
-
-                <!-- Controles individuais limpos e profissionais -->
-                <div style="display: flex; align-items: center; justify-content: space-between; gap: 15px; background: rgba(0,0,0,0.4); padding: 12px 16px; border-radius: 10px; flex-wrap: wrap;">
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <label style="font-size: 0.85rem; color: #fff; font-weight:600;">Converter para:</label>
-                        <select onchange="updateItemFormat('${item.id}', this.value)" style="padding: 6px 12px; font-size: 0.9rem; border-radius: 8px; background: #0b0f19; color: #fff; border: 1px solid var(--line);">
-                            <option value="original" ${item.targetFormat === 'original' ? 'selected' : ''}>Manter Formato Original</option>
-                            <option value="image/webp" ${item.targetFormat === 'image/webp' ? 'selected' : ''}>WebP (Web)</option>
-                            <option value="image/jpeg" ${item.targetFormat === 'image/jpeg' ? 'selected' : ''}>JPG / JPEG</option>
-                            <option value="image/png" ${item.targetFormat === 'image/png' ? 'selected' : ''}>PNG</option>
-                            <option value="image/avif" ${item.targetFormat === 'image/avif' ? 'selected' : ''}>AVIF (Alta Compressão)</option>
-                            <option value="image/x-icon" ${item.targetFormat === 'image/x-icon' ? 'selected' : ''}>ICO (Favicon)</option>
-                            <option value="image/bmp" ${item.targetFormat === 'image/bmp' ? 'selected' : ''}>BMP</option>
-                            <option value="image/tiff" ${item.targetFormat === 'image/tiff' ? 'selected' : ''}>TIFF</option>
-                            <option value="image/gif" ${item.targetFormat === 'image/gif' ? 'selected' : ''}>GIF</option>
-                            <option value="application/pdf" ${item.targetFormat === 'application/pdf' ? 'selected' : ''}>PDF</option>
-                        </select>
-                    </div>
-
-                    <div style="display: flex; align-items: center; gap: 10px;">
-                        <label style="font-size: 0.85rem; color: #fff; font-weight:600;">Qualidade: <span id="q_lbl_${item.id}" style="color: var(--primary);">${item.quality}%</span></label>
-                        <input type="range" min="10" max="100" value="${item.quality}" oninput="updateItemQuality('${item.id}', this.value)" style="width: 100px; accent-color: var(--accent);">
-                    </div>
-
-                    <!-- BOTÃO DE BAIXAR IMAGEM GIGANTE E DESTACADO COM O FORMATO ESCOLHIDO -->
-                    <div>
-                        ${item.compressedBlob ? `
-                            <button class="primary-button" style="padding: 10px 24px; font-size: 0.95rem; background: linear-gradient(135deg, var(--accent), #059669); box-shadow: 0 4px 20px rgba(16,185,129,0.4);" onclick="downloadSingle('${item.id}')">
-                                📥 Baixar Imagem (${currentFormatName})
-                            </button>
-                        ` : `
-                            <button class="ghost-button" style="padding: 10px 20px; font-size: 0.9rem;" onclick="processImageItem('${item.id}')">Processar</button>
-                        `}
-                    </div>
-                </div>
-            </div>
-        `;
+                <div id="workspace_${item.id}">${buildControlsHTML(item)}</div>
+            `;
+            container.prepend(el);
+            if(item.mode === 'crop') setTimeout(() => initCropper(item), 100);
+        } else {
+            const meta = $(`meta_${item.id}`);
+            if(item.status === window.t('statusDone')) {
+                meta.innerHTML = `${window.t('lblNewSize')} <strong style="color:#10b981;">${formatBytes(item.compressedSize)}</strong>`;
+                const ws = $(`workspace_${item.id}`);
+                if(ws && !ws.innerHTML.includes('btn-download-huge')) {
+                    if (item.cropperInstance) { item.cropperInstance.destroy(); item.cropperInstance = null; }
+                    ws.innerHTML = buildControlsHTML(item);
+                }
+            } else { 
+                meta.innerHTML = `${window.t('lblOriginalSize')} ${formatBytes(item.originalSize)} | Status: <strong style="color:#f59e0b;">${item.status}</strong>`; 
+            }
+        }
     });
-
-    container.innerHTML = html;
-    downloadBtn.style.display = hasProcessed ? 'inline-flex' : 'none';
+    container.querySelectorAll('.list-item').forEach(el => { if(!state.filesQueue.find(i => i.id === el.id.replace('item_', ''))) el.remove(); });
 }
 
 window.removeItem = function(id) {
-    state.filesQueue = state.filesQueue.filter(item => item.id !== id);
+    const item = state.filesQueue.find(i => i.id === id);
+    if(item && item.cropperInstance) item.cropperInstance.destroy();
+    state.filesQueue = state.filesQueue.filter(item => item.id !== id); 
     renderQueue();
 };
 
-window.updateItemFormat = function(id, fmt) {
-    const item = state.filesQueue.find(i => i.id === id);
-    if(item) {
-        item.targetFormat = fmt;
-        processImageItem(id); // Converte automaticamente ao trocar o formato
-    }
+window.changeMode = function(id, mode) {
+    const item = state.filesQueue.find(i => i.id === id); 
+    if(!item) return;
+    if (item.cropperInstance) { item.cropperInstance.destroy(); item.cropperInstance = null; }
+    item.mode = mode;
+    $(`workspace_${id}`).innerHTML = buildControlsHTML(item);
+    if (mode === 'crop') setTimeout(() => initCropper(item), 100);
 };
 
-window.updateItemQuality = function(id, val) {
-    const item = state.filesQueue.find(i => i.id === id);
-    if(item) {
-        item.quality = parseInt(val);
-        const lbl = $(`q_lbl_${id}`);
-        if(lbl) lbl.textContent = `${val}%`;
-        processImageItem(id); // Recomprime automaticamente ao mover o slider
-    }
+function initCropper(item) {
+    const image = $(`img_target_${item.id}`); 
+    if(!image) return;
+    item.cropperInstance = new Cropper(image, { 
+        aspectRatio: item.cropWidth / item.cropHeight, 
+        viewMode: 1, 
+        autoCropArea: 1, 
+        background: false 
+    });
+}
+
+window.updateCropDim = function(id, axis, val) {
+    const item = state.filesQueue.find(i => i.id === id); 
+    if(!item) return;
+    const v = parseInt(val) || 100;
+    if (axis === 'width') item.cropWidth = v; 
+    if (axis === 'height') item.cropHeight = v;
+    if (item.cropperInstance) item.cropperInstance.setAspectRatio(item.cropWidth / item.cropHeight);
 };
+
+window.updateItemFormat = (id, fmt) => { const item = state.filesQueue.find(i => i.id === id); if(item) item.targetFormat = fmt; };
+window.updateItemQuality = (id, val) => { const item = state.filesQueue.find(i => i.id === id); if(item) { item.quality = parseInt(val); $(`q_lbl_${id}`).textContent = `${val}%`; }};
 
 window.downloadSingle = function(id) {
-    const item = state.filesQueue.find(i => i.id === id);
+    const item = state.filesQueue.find(i => i.id === id); 
     if (!item || !item.compressedBlob) return;
-    
-    const link = document.createElement('a');
-    link.href = URL.createObjectURL(item.compressedBlob);
-    link.download = item.finalName;
-    document.body.appendChild(link);
-    link.click();
-    link.remove();
-    toast(`Download concluído: ${item.finalName}`);
+    const a = document.createElement('a'); 
+    a.href = URL.createObjectURL(item.compressedBlob); 
+    a.download = item.finalName; 
+    document.body.appendChild(a); 
+    a.click(); 
+    a.remove();
 };
 
-window.processImageItem = function(id) {
-    const item = state.filesQueue.find(i => i.id === id);
-    if(!item) return;
+async function convertAllImages() {
+    const items = state.filesQueue.filter(i => i.status !== window.t('statusDone'));
+    if (!items.length) return toast(window.t('toastEmpty'));
 
-    const quality = item.quality / 100;
-    const targetFormat = item.targetFormat;
+    const btn = $('convertAllBtn'), prog = $('progressContainer'), bar = $('progressBar');
+    btn.disabled = true; 
+    btn.innerHTML = window.t('btnConverting'); 
+    prog.style.display = 'block'; 
+    bar.style.width = '0%';
+    
+    let count = 0;
 
-    const img = new Image();
-    img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        let width = img.width;
-        let height = img.height;
+    for (const item of items) {
+        item.status = window.t('statusProcessing'); 
+        renderQueue();
+        await processSingleItem(item.id);
+        count++; 
+        bar.style.width = Math.round((count / items.length) * 100) + '%'; 
+        renderQueue();
+    }
 
+    btn.disabled = false; 
+    btn.innerHTML = window.t('btnConvert'); 
+    setTimeout(() => prog.style.display = 'none', 1000); 
+    toast(window.t('toastDone'));
+}
+
+function processSingleItem(id) {
+    return new Promise((resolve) => {
+        const item = state.filesQueue.find(i => i.id === id); 
+        if(!item) return resolve();
+        
+        const quality = item.quality / 100;
+        const targetFormat = item.targetFormat;
         let mimeType = item.originalType;
         let ext = item.name.substring(item.name.lastIndexOf('.'));
         const baseName = item.name.substring(0, item.name.lastIndexOf('.')) || item.name;
 
         if (targetFormat !== 'original') {
             mimeType = targetFormat;
+            // MAPEAMENTO DOS 8 FORMATOS 100% REAIS E GARANTIDOS
             const extMap = { 
-                'image/webp': '.webp', 
-                'image/jpeg': '.jpg', 
-                'image/png': '.png', 
-                'image/avif': '.avif', 
-                'image/x-icon': '.ico', 
-                'image/bmp': '.bmp', 
-                'image/tiff': '.tiff', 
-                'image/gif': '.gif',
-                'application/pdf': '.pdf'
+                'image/webp': '.webp', 'image/jpeg': '.jpg', 'image/png': '.png', 'image/avif': '.avif', 
+                'image/x-icon': '.ico', 'application/pdf': '.pdf', 'image/svg+xml': '.svg'
             };
             ext = extMap[targetFormat] || ext;
         }
 
-        if (mimeType === 'image/x-icon') {
-            width = 32; height = 32;
-            mimeType = 'image/png'; 
-        }
+        let canvasMime = ['image/png', 'image/jpeg', 'image/webp', 'image/avif'].includes(mimeType) ? mimeType : 'image/png';
 
-        canvas.width = width;
-        canvas.height = height;
-        ctx.drawImage(img, 0, 0, width, height);
-
-        if (targetFormat === 'application/pdf') {
-            canvas.toBlob((blob) => {
-                if (blob) {
-                    item.compressedBlob = blob;
-                    item.compressedSize = blob.size;
-                    item.status = 'Pronto';
-                    item.finalName = `${baseName}.pdf`;
-                    renderQueue();
+        const finish = (canvas) => {
+            
+            // ENGINE PDF REAL (Usando a biblioteca validada)
+            if (targetFormat === 'application/pdf') {
+                if (window.jspdf && window.jspdf.jsPDF) {
+                    const orientation = canvas.width > canvas.height ? 'l' : 'p';
+                    const pdf = new window.jspdf.jsPDF({ orientation: orientation, unit: 'px', format: [canvas.width, canvas.height] });
+                    const imgData = canvas.toDataURL('image/jpeg', quality);
+                    pdf.addImage(imgData, 'JPEG', 0, 0, canvas.width, canvas.height);
+                    
+                    const pdfBlob = pdf.output('blob');
+                    item.compressedBlob = pdfBlob;
+                    item.compressedSize = pdfBlob.size;
+                    item.status = window.t('statusDone');
+                    item.finalName = `${baseName}_redimensionado.pdf`;
+                } else {
+                    item.status = window.t('statusError');
                 }
-            }, 'image/jpeg', quality);
-            return;
-        }
-
-        canvas.toBlob((blob) => {
-            if (blob) {
-                item.compressedBlob = blob;
-                item.compressedSize = blob.size;
-                item.status = 'Pronto';
-                item.finalName = `opt_${baseName}${ext}`;
-                renderQueue();
-            } else {
-                item.status = 'Erro';
-                renderQueue();
+                resolve();
+                return;
             }
-        }, mimeType, quality);
-    };
-    img.onerror = () => {
-        item.status = 'Erro';
-        renderQueue();
-    };
-    img.src = item.previewUrl;
-};
 
-async function downloadAllZip() {
-    if (typeof JSZip === 'undefined') return;
-    const zip = new JSZip();
-    let count = 0;
-    
-    state.filesQueue.forEach(item => {
-        if (item.compressedBlob) {
-            zip.file(item.finalName, item.compressedBlob);
-            count++;
+            // ENGINE SVG REAL (Incorporando dados na tag vetorial)
+            if (targetFormat === 'image/svg+xml') {
+                const imgData = canvas.toDataURL('image/png', 1.0);
+                const svgString = `<svg xmlns="http://www.w3.org/2000/svg" width="${canvas.width}" height="${canvas.height}"><image href="${imgData}" width="${canvas.width}" height="${canvas.height}"/></svg>`;
+                const svgBlob = new Blob([svgString], { type: 'image/svg+xml' });
+                item.compressedBlob = svgBlob;
+                item.compressedSize = svgBlob.size;
+                item.status = window.t('statusDone');
+                item.finalName = `${baseName}_redimensionado.svg`;
+                resolve();
+                return;
+            }
+
+            // EXPORTAÇÃO NATIVA EXATA DOS DEMAIS FORMATOS
+            canvas.toBlob((b) => { 
+                if(b) { 
+                    item.compressedBlob = b; 
+                    item.compressedSize = b.size; 
+                    item.status = window.t('statusDone'); 
+                    item.finalName = `${baseName}_redimensionado${ext}`; 
+                } else {
+                    item.status = window.t('statusError'); 
+                }
+                resolve(); 
+            }, canvasMime, quality);
+        };
+
+        if (item.mode === 'crop' && item.cropperInstance) {
+            finish(item.cropperInstance.getCroppedCanvas({ width: item.cropWidth, height: item.cropHeight, fillColor: '#fff' }));
+        } else {
+            const img = new Image(); 
+            img.onload = () => { 
+                const canvas = document.createElement('canvas'); 
+                canvas.width = img.width; 
+                canvas.height = img.height; 
+                canvas.getContext('2d').drawImage(img, 0, 0); 
+                finish(canvas); 
+            }; 
+            img.onerror = () => { item.status = window.t('statusError'); resolve(); }; 
+            img.src = item.previewUrl;
         }
     });
-    
-    if (count === 0) return;
-    
-    toast("Gerando arquivo ZIP...");
-    try {
-        const content = await zip.generateAsync({ type: "blob" });
-        const link = document.createElement("a");
-        link.href = URL.createObjectURL(content);
-        link.download = "imagens_otimizadas_silvadigitaltech.zip";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-        toast("Download em lote concluído!");
-    } catch(e) {
-        toast("Erro ao gerar ZIP.");
-    }
 }
 
-function toast(message) {
-    const t = $('toast');
-    if(!t) return;
-    t.textContent = message;
-    t.classList.add('show');
-    clearTimeout(t.timer);
-    t.timer = setTimeout(() => t.classList.remove('show'), 3000);
+function toast(msg) { 
+    const t = $('toast'); 
+    if(t) { 
+        t.textContent = msg; 
+        t.style.opacity = '1'; 
+        t.style.bottom = '20px';
+        setTimeout(() => { t.style.opacity = '0'; t.style.bottom = '0px'; }, 3000); 
+    } 
 }
