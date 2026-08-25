@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>Otimizador de Imagens PRO | Silva Digital Tech</title>
+  
+  <meta name="description" content="Ferramenta web profissional para compactação e conversão de imagens em lote. Processamento Client-Side seguro.">
+  <meta name="keywords" content="compactar imagem, converter png para webp, otimizador de imagens, redimensionador, micro-saas, silva digital tech">
+  
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Otimizador de Imagens PRO | Silva Digital Tech">
+  <meta property="og:description" content="Otimize e converta suas imagens direto no navegador com máxima performance e privacidade.">
+  
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Silva Digital Tech Image Compressor PRO",
+    "operatingSystem": "All",
+    "applicationCategory": "MultimediaApplication",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "BRL"
+    },
+    "description": "Ferramenta profissional de manipulação, conversão e compressão de imagens 100% client-side."
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegação principal">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <img src="favicon.svg" alt="Logo" style="width: 28px; height: 28px;">
+        </div>
+        <div>
+          <strong>Silva Digital Tech</strong>
+          <span>Otimizador de Imagens</span>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Seções">
+        <button class="nav-button active" type="button" data-view="dashboard" aria-current="page">
+          <span aria-hidden="true">▦</span> <span data-i18n="navDashboard">Painel de Otimização</span>
+        </button>
+        <button class="nav-button" type="button" data-view="settings">
+          <span aria-hidden="true">⚙</span> <span data-i18n="navCompany">Configurações Padrão</span>
+        </button>
+      </nav>
+
+      <div class="ad-container sidebar-ad">
+        <span class="ad-label" data-i18n="adLabel">Publicidade</span>
+      </div>
+
+      <div class="security-note">
+        <strong data-i18n="securityTitle">Modo local 100% Seguro</strong>
+        <p data-i18n="securityDesc">Processamento Client-Side. As imagens nunca são enviadas para nenhum servidor.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow" data-i18n="eyebrowDashboard">Ferramenta Universal</p>
+          <h1 id="pageTitle" data-i18n="title">Otimizador de Imagens PRO</h1>
+        </div>
+        <div class="topbar-actions">
+          <select id="langSelect" class="lang-select">
+            <option value="pt">PT-BR</option>
+            <option value="en">EN-US</option>
+            <option value="es">ES</option>
+          </select>
+          <button class="primary-button" type="button" id="headerAddBtn" data-i18n="btnSelect">Adicionar Imagens</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboard" aria-labelledby="pageTitle">
+        
+        <div class="finance-hero">
+          <div style="flex-grow: 1;">
+            <p class="eyebrow" style="color: var(--accent);">Alta Performance</p>
+            <h3 data-i18n="dropTitle">Arraste e solte suas imagens</h3>
+            <span data-i18n="dropDesc">Suporta PNG, JPG, WebP, ICO, GIF, SVG (Múltiplos arquivos)</span>
+          </div>
+          <div class="dropzone" id="dropzone">
+            <input type="file" id="fileInput" multiple accept="image/*,.ico,.bmp,.tiff,.svg,.avif" class="file-input-hidden">
+            <div class="drop-icon">
+              <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+            </div>
+            <button class="ghost-button mt-3" type="button" onclick="document.getElementById('fileInput').click()" data-i18n="btnSelect">Selecionar Arquivos</button>
+          </div>
+        </div>
+
+        <div class="split-layout">
+          <section class="panel form-grid">
+            <div class="panel-header full">
+              <h2 data-i18n="settingsTitle">Configurações de Saída</h2>
+            </div>
+            <label class="full"><span data-i18n="lblFormat">Formato de Conversão</span>
+              <select id="outputFormat">
+                <option value="original" data-i18n="fmtOriginal">Manter Formato Original</option>
+                <option value="image/webp" data-i18n="fmtWebp">WebP (Recomendado Web)</option>
+                <option value="image/jpeg" data-i18n="fmtJpg">JPG / JPEG</option>
+                <option value="image/png" data-i18n="fmtPng">PNG</option>
+                <option value="image/x-icon" data-i18n="fmtIco">ICO (Favicon / App)</option>
+              </select>
+            </label>
+            <label class="full">
+              <div style="display:flex; justify-content: space-between;">
+                <span data-i18n="lblQuality">Qualidade da Imagem</span>
+                <strong id="qualityValue" style="color: var(--accent);">80%</strong>
+              </div>
+              <input type="range" id="qualityRange" min="10" max="100" value="80" class="range-slider">
+            </label>
+
+            <div class="form-actions full mt-4">
+              <button class="primary-button full" type="button" id="processAllBtn" data-i18n="btnProcess">Processar e Comprimir Tudo</button>
+            </div>
+            
+            <div class="ad-container full mt-4">
+              <span class="ad-label" data-i18n="adLabel">Publicidade</span>
+              <!-- AdSense placeholder -->
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2 data-i18n="queueTitle">Fila de Processamento</h2>
+              <div>
+                <button class="danger-button" style="padding: 4px 10px; min-height: 28px; font-size: 0.75rem;" type="button" id="clearAllBtn" data-i18n="btnClear">Limpar Fila</button>
+                <button class="primary-button" style="padding: 4px 10px; min-height: 28px; font-size: 0.75rem; display:none;" type="button" id="downloadAllBtn" data-i18n="btnDownloadAll">Baixar Todas (ZIP)</button>
+              </div>
+            </div>
+            <div class="list" id="fileListContainer">
+              <div id="emptyState" class="empty-state">
+                <p data-i18n="emptyQueue">Nenhuma imagem carregada na fila ainda.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="settings" aria-labelledby="settingsTitle">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow" data-i18n="eyebrowCompany">Preferências</p>
+            <h2 id="settingsTitle" data-i18n="navCompany">Configurações Padrão</h2>
+          </div>
+        </div>
+        <div class="panel form-grid">
+           <p style="color: var(--muted); grid-column: 1/-1;">As configurações de formato e qualidade na tela principal são salvas automaticamente nesta sessão.</p>
+        </div>
+      </section>
+      
+      <footer style="margin-top: 40px; text-align: center; color: var(--muted); font-size: 0.8rem;">
+        <p data-i18n="footer">© 2026 Silva Digital Tech - Control Center PRO V4. Processamento 100% local.</p>
+      </footer>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
