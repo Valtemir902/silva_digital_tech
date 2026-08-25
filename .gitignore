@@ -23,6 +23,10 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-*.exe
-instalador_pronto/
+node_modules/
 dist/
+.astro/
+build/
+instalador_pronto/
+*.exe
+*.pyc
