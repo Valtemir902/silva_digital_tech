@@ -1,112 +1,135 @@
 /* 
- * Silva Digital Tech - Otimizador de Imagens PRO
- * Multi-language Core
+ * Silva Digital Tech - Conversor e Redimensionador PRO
+ * Multi-language Core de Elite (Formatos 100% Nativos)
  */
 const translations = {
     pt: {
-        title: "Otimizador de Imagens PRO",
+        title: "Conversor e Redimensionador PRO",
         navDashboard: "Painel de Otimização",
-        navCompany: "Configurações Padrão",
-        adLabel: "Publicidade - AdSense",
+        securityBadge: "✓ Local & Seguro",
         securityTitle: "Modo Local 100% Seguro",
         securityDesc: "Processamento Client-Side. As imagens nunca são enviadas para nenhum servidor.",
         eyebrowDashboard: "Ferramenta Universal",
-        eyebrowCompany: "Preferências",
-        dropTitle: "Arraste e solte suas imagens",
-        dropDesc: "Suporta PNG, JPG, WebP, ICO, GIF, SVG (Múltiplos arquivos)",
-        btnSelect: "Selecionar Imagens",
-        settingsTitle: "Configurações de Saída",
-        lblFormat: "Formato de Conversão",
-        fmtOriginal: "Manter Formato Original",
-        fmtWebp: "WebP (Recomendado Web)",
-        fmtJpg: "JPG / JPEG",
-        fmtPng: "PNG",
-        fmtIco: "ICO (Favicon / App)",
-        lblQuality: "Qualidade da Imagem",
-        btnProcess: "Processar e Comprimir Tudo",
-        queueTitle: "Fila de Processamento",
-        btnClear: "Limpar",
-        btnDownloadAll: "Baixar Todas (ZIP)",
-        emptyQueue: "Nenhuma imagem carregada na fila ainda.",
-        lblOriginal: "Original:",
-        lblFinal: "Final:",
-        statusWaiting: "Aguardando",
-        statusProcessed: "Concluído",
+        dropTitle: "Clique ou arraste as imagens aqui",
+        dropDesc: "Formatos 100% integrados (WebP, JPG, PNG, PDF, AVIF, SVG, ICO...)",
+        btnSelect: "Selecionar Arquivos",
+        btnConvert: "🚀 CONVERTER IMAGENS",
+        btnConverting: "⏳ PROCESSANDO...",
+        btnClear: "Limpar Todas as Imagens da Fila",
+        emptyQueue: "Nenhuma imagem na fila. Adicione para começar.",
+        footer: "© 2026 Silva Digital Tech - Processamento Client-Side (Sem Upload).",
+        modeConvert: "🔄 Conversão Padrão",
+        modeCrop: "✂️ Redimensionar & Recortar",
+        lblFormat: "Formato Final:",
+        // FORMATOS DE SAÍDA 100% REAIS
+        fmtOriginal: "Manter Original",
+        fmtJpg: "JPG / JPEG (Comum)",
+        fmtPng: "PNG (Fundo Transparente)",
+        fmtWebp: "WebP (Ideal para Sites)",
+        fmtAvif: "AVIF (Ultra Compressão)",
+        fmtPdf: "PDF (Documento Real)",
+        fmtSvg: "SVG (Vetor Embutido)",
+        fmtIco: "ICO (Ícone / Favicon)",
+        // CONTROLES
+        lblQuality: "Qualidade:",
+        lblWidth: "Largura Fixa (px):",
+        lblHeight: "Altura Fixa (px):",
+        hintCrop: "💡 Arraste e dê zoom na imagem abaixo para enquadrar perfeitamente.",
+        statusWaiting: "Aguardando Configuração",
+        statusProcessing: "Processando...",
+        statusDone: "Pronto",
         statusError: "Erro",
-        btnDownload: "Baixar",
-        tAdded: "Imagens adicionadas à fila.",
-        tZipping: "Gerando arquivo ZIP...",
-        footer: "© 2026 Silva Digital Tech - Control Center PRO V4. Processamento 100% local."
+        lblOriginalSize: "Original:",
+        lblNewSize: "Novo Tamanho:",
+        btnRemove: "×",
+        btnDownload: "📥 BAIXAR IMAGEM",
+        toastAdded: "Imagens adicionadas com sucesso!",
+        toastEmpty: "Nenhuma imagem aguardando conversão.",
+        toastDone: "Processo Concluído! Botões de download liberados."
     },
     en: {
-        title: "Image Optimizer PRO",
+        title: "Image Converter & Resizer PRO",
         navDashboard: "Optimization Dashboard",
-        navCompany: "Default Settings",
-        adLabel: "Advertisement - AdSense",
+        securityBadge: "✓ Local & Secure",
         securityTitle: "100% Secure Local Mode",
         securityDesc: "Client-Side processing. Images are never uploaded to any server.",
         eyebrowDashboard: "Universal Tool",
-        eyebrowCompany: "Preferences",
-        dropTitle: "Drag and drop your images",
-        dropDesc: "Supports PNG, JPG, WebP, ICO, GIF, SVG (Multiple files)",
-        btnSelect: "Select Images",
-        settingsTitle: "Output Settings",
-        lblFormat: "Conversion Format",
-        fmtOriginal: "Keep Original Format",
-        fmtWebp: "WebP (Web Recommended)",
-        fmtJpg: "JPG / JPEG",
-        fmtPng: "PNG",
-        fmtIco: "ICO (Favicon / App)",
-        lblQuality: "Image Quality",
-        btnProcess: "Process and Compress All",
-        queueTitle: "Processing Queue",
-        btnClear: "Clear",
-        btnDownloadAll: "Download All (ZIP)",
-        emptyQueue: "No images loaded in the queue yet.",
-        lblOriginal: "Original:",
-        lblFinal: "Final:",
-        statusWaiting: "Waiting",
-        statusProcessed: "Done",
+        dropTitle: "Click or drag images here",
+        dropDesc: "100% Integrated formats (WebP, JPG, PNG, PDF, AVIF, SVG, ICO...)",
+        btnSelect: "Select Files",
+        btnConvert: "🚀 CONVERT IMAGES",
+        btnConverting: "⏳ PROCESSING...",
+        btnClear: "Clear All Images",
+        emptyQueue: "No images in the queue. Add some to start.",
+        footer: "© 2026 Silva Digital Tech - Client-Side Processing (No Upload).",
+        modeConvert: "🔄 Standard Conversion",
+        modeCrop: "✂️ Resize & Crop",
+        lblFormat: "Final Format:",
+        fmtOriginal: "Keep Original",
+        fmtJpg: "JPG / JPEG (Standard)",
+        fmtPng: "PNG (Transparent Background)",
+        fmtWebp: "WebP (Ideal for Web)",
+        fmtAvif: "AVIF (Ultra Compression)",
+        fmtPdf: "PDF (Real Document)",
+        fmtSvg: "SVG (Embedded Vector)",
+        fmtIco: "ICO (Icon / Favicon)",
+        lblQuality: "Quality:",
+        lblWidth: "Fixed Width (px):",
+        lblHeight: "Fixed Height (px):",
+        hintCrop: "💡 Drag and zoom the image below to frame it perfectly.",
+        statusWaiting: "Waiting for Configuration",
+        statusProcessing: "Processing...",
+        statusDone: "Ready",
         statusError: "Error",
-        btnDownload: "Download",
-        tAdded: "Images added to queue.",
-        tZipping: "Generating ZIP file...",
-        footer: "© 2026 Silva Digital Tech - Control Center PRO V4. 100% local processing."
+        lblOriginalSize: "Original:",
+        lblNewSize: "New Size:",
+        btnRemove: "×",
+        btnDownload: "📥 DOWNLOAD IMAGE",
+        toastAdded: "Images successfully added!",
+        toastEmpty: "No images waiting for conversion.",
+        toastDone: "Process Complete! Download buttons unlocked."
     },
     es: {
-        title: "Optimizador de Imágenes PRO",
+        title: "Conversor y Redimensionador PRO",
         navDashboard: "Panel de Optimización",
-        navCompany: "Ajustes Predeterminados",
-        adLabel: "Publicidad - AdSense",
+        securityBadge: "✓ Local y Seguro",
         securityTitle: "Modo Local 100% Seguro",
         securityDesc: "Procesamiento del lado del cliente. Las imágenes nunca se suben a ningún servidor.",
         eyebrowDashboard: "Herramienta Universal",
-        eyebrowCompany: "Preferencias",
-        dropTitle: "Arrastra y suelta tus imágenes",
-        dropDesc: "Soporta PNG, JPG, WebP, ICO, GIF, SVG (Múltiples archivos)",
-        btnSelect: "Seleccionar Imágenes",
-        settingsTitle: "Ajustes de Salida",
-        lblFormat: "Formato de Conversión",
-        fmtOriginal: "Mantener Formato Original",
-        fmtWebp: "WebP (Recomendado)",
-        fmtJpg: "JPG / JPEG",
-        fmtPng: "PNG",
-        fmtIco: "ICO (Favicon / App)",
-        lblQuality: "Calidad de Imagen",
-        btnProcess: "Procesar y Comprimir Todo",
-        queueTitle: "Cola de Procesamiento",
-        btnClear: "Limpiar",
-        btnDownloadAll: "Descargar Todas (ZIP)",
-        emptyQueue: "Aún no hay imágenes en la cola.",
-        lblOriginal: "Original:",
-        lblFinal: "Final:",
-        statusWaiting: "Esperando",
-        statusProcessed: "Completado",
+        dropTitle: "Haz clic o arrastra las imágenes aquí",
+        dropDesc: "Formatos 100% integrados (WebP, JPG, PNG, PDF, AVIF, SVG, ICO...)",
+        btnSelect: "Seleccionar Archivos",
+        btnConvert: "🚀 CONVERTIR IMÁGENES",
+        btnConverting: "⏳ PROCESANDO...",
+        btnClear: "Limpiar Todas las Imágenes",
+        emptyQueue: "No hay imágenes en la cola. Añade para empezar.",
+        footer: "© 2026 Silva Digital Tech - Procesamiento Local (Sin Subidas).",
+        modeConvert: "🔄 Conversión Estándar",
+        modeCrop: "✂️ Redimensionar y Recortar",
+        lblFormat: "Formato Final:",
+        fmtOriginal: "Mantener Original",
+        fmtJpg: "JPG / JPEG (Estándar)",
+        fmtPng: "PNG (Fondo Transparente)",
+        fmtWebp: "WebP (Ideal para Web)",
+        fmtAvif: "AVIF (Ultra Compresión)",
+        fmtPdf: "PDF (Documento Real)",
+        fmtSvg: "SVG (Vector Integrado)",
+        fmtIco: "ICO (Icono / Favicon)",
+        lblQuality: "Calidad:",
+        lblWidth: "Ancho Fijo (px):",
+        lblHeight: "Alto Fijo (px):",
+        hintCrop: "💡 Arrastra y haz zoom en la imagen para encuadrarla perfectamente.",
+        statusWaiting: "Esperando Configuración",
+        statusProcessing: "Procesando...",
+        statusDone: "Listo",
         statusError: "Error",
-        btnDownload: "Descargar",
-        tAdded: "Imágenes añadidas a la cola.",
-        tZipping: "Generando archivo ZIP...",
-        footer: "© 2026 Silva Digital Tech - Control Center PRO V4. Procesamiento 100% local."
+        lblOriginalSize: "Original:",
+        lblNewSize: "Nuevo Tamaño:",
+        btnRemove: "×",
+        btnDownload: "📥 DESCARGAR IMAGEN",
+        toastAdded: "¡Imágenes añadidas con éxito!",
+        toastEmpty: "No hay imágenes esperando conversión.",
+        toastDone: "¡Proceso Completado! Botones de descarga desbloqueados."
     }
 };
 
@@ -120,9 +143,12 @@ window.t = function(key) {
 function applyTranslations() {
     document.documentElement.lang = window.currentLang;
     document.querySelectorAll('[data-i18n]').forEach(el => {
-        el.innerHTML = t(el.getAttribute('data-i18n'));
+        el.innerHTML = window.t(el.getAttribute('data-i18n'));
     });
-    document.title = t('title') + " | Silva Digital Tech";
+    
+    document.title = window.t('title') + " | Silva Digital Tech";
+    const titleEl = document.getElementById('pageTitle');
+    if(titleEl) titleEl.innerText = window.t('title');
     
     const langSelect = document.getElementById('langSelect');
     if(langSelect) langSelect.value = window.currentLang;
@@ -130,11 +156,4 @@ function applyTranslations() {
 
 document.addEventListener('DOMContentLoaded', () => {
     applyTranslations();
-    const langSelect = document.getElementById('langSelect');
-    if (langSelect) {
-        langSelect.addEventListener('change', (e) => {
-            localStorage.setItem('silva_img_lang', e.target.value);
-            window.location.reload();
-        });
-    }
 });
