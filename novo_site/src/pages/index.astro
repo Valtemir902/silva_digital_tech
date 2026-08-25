@@ -1,5 +1,20 @@
 ---
 import '../styles/global.css';
+
+// =========================================================================
+// MOTOR CMS DE ELITE: Leitura Automática dos Arquivos Gerados pelo Python
+// =========================================================================
+const aplicativosFiles = Object.values(import.meta.glob('../content/aplicativos/*.md', { eager: true }));
+const artigosFiles = Object.values(import.meta.glob('../content/artigos/*.md', { eager: true }));
+
+// Filtra os aplicativos automaticamente pelas categorias do seu Painel Python
+const appsMobile = aplicativosFiles.filter(app => app.frontmatter.categoria === "Aplicativos Mobile");
+const appsSoftware = aplicativosFiles.filter(app => app.frontmatter.categoria === "Softwares & Automações");
+const appsWeb = aplicativosFiles.filter(app => app.frontmatter.categoria === "Soluções Web & Sites");
+
+// Ordena os artigos do Blog para que o mais novo gerado pelo painel fique no topo
+const artigosOrdenados = artigosFiles.sort((a, b) => new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime());
+// =========================================================================
 ---
 
 <!DOCTYPE html>
@@ -9,7 +24,6 @@ import '../styles/global.css';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Silva Digital Tech | Apps, Web e Sistemas</title>
     
-    <!-- CAMINHOS CORRIGIDOS PARA A PASTA PUBLIC (com / no começo) -->
     <link rel="icon" type="image/svg+xml" href="/assets/icone-silva.svg">
     <link rel="apple-touch-icon" href="/assets/icone-silva.svg">
     
@@ -33,7 +47,6 @@ import '../styles/global.css';
     <meta name="twitter:title" content="Silva Digital Tech | Engenharia de Elite para Apps e Softwares">
     <meta name="twitter:description" content="Software House especializada em Inteligência Artificial, automação em Python e aplicativos mobile de alta performance.">
     
-    <!-- ADICIONADO is:inline PARA O ASTRO IGNORAR SCRIPTS EXTERNOS -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous" is:inline></script>
     
     <script type="application/ld+json" id="jsonld-schema" is:inline>
@@ -66,7 +79,6 @@ import '../styles/global.css';
     </script>
     
     <script src="https://cdn.tailwindcss.com" is:inline></script>
-    <!-- CAMINHO CORRIGIDO -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
@@ -131,6 +143,7 @@ import '../styles/global.css';
         </div>
     </div>
 
+    <!-- SESSÃO DE PORTFÓLIO GLOBAL COM INJEÇÃO AUTOMÁTICA -->
     <section id="portfolio" class="py-32 px-6 max-w-7xl mx-auto relative overflow-hidden">
         <div class="absolute -left-40 top-20 w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px] pointer-events-none"></div>
         <div class="absolute -right-40 bottom-20 w-96 h-96 bg-blue-500/10 rounded-full blur-[100px] pointer-events-none"></div>
@@ -139,6 +152,7 @@ import '../styles/global.css';
             Nosso Portfólio Global
         </h3>
         
+        <!-- CATEGORIA: MOBILE -->
         <div class="mb-20" data-aos="fade-up">
             <div class="flex items-center gap-4 mb-8">
                 <i class="fa-solid fa-mobile-screen text-2xl text-emerald-400"></i>
@@ -146,26 +160,25 @@ import '../styles/global.css';
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 relative z-10">
+                <!-- Card Estático: Agro Expert -->
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
-                            <!-- CAMINHO DA IMAGEM AGRO EXPERT -->
                             <img src="/apps/agro-expert/assets/favicon.png" alt="Ícone Agro Expert" class="w-16 h-16 rounded-2xl shadow-xl shadow-emerald-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500">
                             <span class="text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-solid fa-lock text-xs mr-1"></i> ERP Seguro</span>
                         </div>
                         <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors">Agro Expert</h4>
                         <p data-i18n="agroDesc" class="text-slate-400 text-sm leading-relaxed mb-6">O ERP agrícola mais completo na palma da sua mão. Tecnologia de precisão e IA para monitoramento rural, funcionando 100% offline.</p>
                     </div>
-                    <!-- CAMINHO DO LINK AGRO EXPERT -->
                     <a href="/apps/agro-expert/index.html" class="inline-flex items-center gap-3 text-emerald-400 text-sm font-semibold group-hover:text-emerald-300 transition-colors bg-emerald-500/10 hover:bg-emerald-500/20 px-5 py-2.5 rounded-xl w-max">
                         <span data-i18n="verApp">Ver página oficial &rarr;</span>
                     </a>
                 </div>
 
+                <!-- Card Estático: Trilha Navigator -->
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-cyan-500/50 hover:shadow-[0_0_30px_rgba(34,211,238,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
-                            <!-- CAMINHO DA IMAGEM TRILHA NAVIGATOR -->
                             <img src="/apps/trilha-navigator/assets/favicon.png" alt="Ícone Trilha Navigator" class="w-16 h-16 rounded-2xl shadow-xl shadow-cyan-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500">
                             <div class="flex flex-col items-end gap-2">
                                 <span class="text-[10px] font-bold bg-cyan-500/10 border border-cyan-500/30 text-cyan-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-solid fa-satellite text-xs mr-1"></i> Radar Mesh</span>
@@ -175,14 +188,31 @@ import '../styles/global.css';
                         <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-cyan-400 transition-colors">Trilha Navigator</h4>
                         <p data-i18n="trilhaDesc" class="text-slate-400 text-sm leading-relaxed mb-6">Sua bússola definitiva para a aventura. Sistema de navegação GPS robusto que não depende de sinal de internet para guiar suas rotas.</p>
                     </div>
-                    <!-- CAMINHO DO LINK TRILHA NAVIGATOR -->
                     <a href="/apps/trilha-navigator/index.html" class="inline-flex items-center gap-3 text-cyan-400 text-sm font-semibold group-hover:text-cyan-300 transition-colors bg-cyan-500/10 hover:bg-cyan-500/20 px-5 py-2.5 rounded-xl border border-cyan-500/20 w-max">
                         <span data-i18n="verApp">Ver página oficial &rarr;</span>
                     </a>
                 </div>
+
+                <!-- CARDS DINÂMICOS GERADOS PELO PYTHON (MOBILE) -->
+                {appsMobile.map(app => (
+                    <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <img src={app.frontmatter.icone} alt={app.frontmatter.title} class="w-16 h-16 rounded-2xl shadow-xl shadow-emerald-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500" />
+                                <span class="text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-solid fa-bolt text-xs mr-1"></i> {app.frontmatter.tag}</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors">{app.frontmatter.title}</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{app.frontmatter.descricao}</p>
+                        </div>
+                        <a href={app.frontmatter.link} class="inline-flex items-center gap-3 text-emerald-400 text-sm font-semibold group-hover:text-emerald-300 transition-colors bg-emerald-500/10 hover:bg-emerald-500/20 px-5 py-2.5 rounded-xl w-max">
+                            Acessar &rarr;
+                        </a>
+                    </div>
+                ))}
             </div>
         </div>
 
+        <!-- CATEGORIA: SOFTWARES -->
         <div class="mb-20" data-aos="fade-up">
             <div class="flex items-center gap-4 mb-8">
                 <i class="fa-brands fa-python text-2xl text-yellow-400"></i>
@@ -190,6 +220,7 @@ import '../styles/global.css';
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 relative z-10">
+                <!-- Card Estático: ProFrame -->
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-yellow-500/50 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -202,9 +233,27 @@ import '../styles/global.css';
                         <p data-i18n="proframeDesc" class="text-slate-400 text-sm leading-relaxed mb-6">Software de edição de vídeo avançada construído em Python. Pipeline de renderização automatizada e ferramentas de pós-produção profissional.</p>
                     </div>
                 </div>
+
+                <!-- CARDS DINÂMICOS GERADOS PELO PYTHON (SOFTWARE) -->
+                {appsSoftware.map(app => (
+                    <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-yellow-500/50 hover:shadow-[0_0_30px_rgba(234,179,8,0.15)] transition-all duration-500 group">
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <img src={app.frontmatter.icone} alt={app.frontmatter.title} class="w-16 h-16 rounded-2xl shadow-xl shadow-yellow-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500" />
+                                <span class="text-[10px] font-bold bg-yellow-500/10 border border-yellow-500/30 text-yellow-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-brands fa-python text-xs mr-1"></i> {app.frontmatter.tag}</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-yellow-400 transition-colors">{app.frontmatter.title}</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{app.frontmatter.descricao}</p>
+                        </div>
+                        <a href={app.frontmatter.link} class="inline-flex items-center gap-3 text-yellow-400 text-sm font-semibold group-hover:text-yellow-300 transition-colors bg-yellow-500/10 hover:bg-yellow-500/20 px-5 py-2.5 rounded-xl w-max">
+                            Acessar &rarr;
+                        </a>
+                    </div>
+                ))}
             </div>
         </div>
 
+        <!-- CATEGORIA: WEB -->
         <div data-aos="fade-up">
             <div class="flex items-center gap-4 mb-8">
                 <i class="fa-solid fa-laptop-code text-2xl text-indigo-400"></i>
@@ -212,7 +261,7 @@ import '../styles/global.css';
             </div>
             
             <div class="grid md:grid-cols-2 gap-8 relative z-10">
-                
+                <!-- Cards Estáticos Antigos -->
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -229,29 +278,21 @@ import '../styles/global.css';
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-emerald-500/50 hover:shadow-[0_0_30px_rgba(16,185,129,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
-                            
                             <div class="w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 border border-emerald-500/40 rounded-2xl flex items-center justify-center shadow-[0_0_20px_rgba(16,185,129,0.2)] group-hover:shadow-[0_0_30px_rgba(16,185,129,0.5)] group-hover:border-emerald-400 group-hover:scale-110 transition-all duration-500 relative overflow-hidden">
-                                <div class="absolute inset-0 bg-emerald-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                                 <svg class="w-8 h-8 text-emerald-400 relative z-10 drop-shadow-[0_0_8px_rgba(52,211,153,0.8)]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                                    <circle cx="9" cy="15" r="1.5" fill="#fff" stroke="none"></circle>
-                                    <circle cx="12" cy="11" r="1.5" fill="#fff" stroke="none"></circle>
-                                    <circle cx="15" cy="15" r="1.5" fill="#fff" stroke="none"></circle>
                                 </svg>
                             </div>
-
                             <span data-i18n="tagFreeTool" class="text-[10px] font-bold bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 px-3 py-1.5 rounded-full uppercase">Ferramenta Gratuita</span>
                         </div>
                         <h4 data-i18n="crmTitle" class="text-2xl font-bold mb-3 text-white group-hover:text-emerald-400 transition-colors">MicroCRM: Recibos & Orçamentos</h4>
                         <p data-i18n="crmDesc" class="text-slate-400 text-sm leading-relaxed mb-6">Gerador profissional de PDFs em tempo real. Funciona offline, sem mensalidades. Calcule taxas, aplique descontos e gerencie clientes direto do navegador.</p>
                     </div>
-                    <!-- CAMINHO DO LINK GERADOR DE RECIBOS -->
                     <a href="/gerador-de-recibos-e-orcamentos/" target="_blank" class="inline-flex items-center gap-3 text-emerald-400 text-sm font-semibold group-hover:text-emerald-300 transition-colors bg-emerald-500/10 hover:bg-emerald-500/20 px-5 py-2.5 rounded-xl w-max">
                         <span data-i18n="btnAcessarTool">Acessar Ferramenta &rarr;</span>
                     </a>
                 </div>
 
-                <!-- CARD DO OTIMIZADOR DE IMAGENS ADICIONADO DIRETAMENTE -->
                 <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-blue-500/50 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] transition-all duration-500 group">
                     <div>
                         <div class="flex justify-between items-start mb-6">
@@ -268,11 +309,27 @@ import '../styles/global.css';
                     </a>
                 </div>
 
+                <!-- CARDS DINÂMICOS GERADOS PELO PYTHON (WEB) -->
+                {appsWeb.map(app => (
+                    <div class="glass-card bg-slate-900/60 backdrop-blur-xl border border-slate-700/50 rounded-3xl p-8 flex flex-col justify-between hover:border-indigo-500/50 hover:shadow-[0_0_30px_rgba(99,102,241,0.15)] transition-all duration-500 group">
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <img src={app.frontmatter.icone} alt={app.frontmatter.title} class="w-16 h-16 rounded-2xl shadow-xl shadow-indigo-500/20 object-cover border border-slate-700/50 group-hover:scale-110 transition-transform duration-500" />
+                                <span class="text-[10px] font-bold bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 px-3 py-1.5 rounded-full uppercase"><i class="fa-solid fa-code text-xs mr-1"></i> {app.frontmatter.tag}</span>
+                            </div>
+                            <h4 class="text-2xl font-bold mb-3 text-white group-hover:text-indigo-400 transition-colors">{app.frontmatter.title}</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{app.frontmatter.descricao}</p>
+                        </div>
+                        <a href={app.frontmatter.link} class="inline-flex items-center gap-3 text-indigo-400 text-sm font-semibold group-hover:text-indigo-300 transition-colors bg-indigo-500/10 hover:bg-indigo-500/20 px-5 py-2.5 rounded-xl w-max">
+                            Acessar &rarr;
+                        </a>
+                    </div>
+                ))}
             </div>
         </div>
     </section>
 
-    <!-- NOVA SEÇÃO: BLOG / CENTRAL DE CONHECIMENTO -->
+    <!-- NOVA SEÇÃO: BLOG / CENTRAL DE CONHECIMENTO (DINÂMICA) -->
     <section class="py-24 px-6 max-w-7xl mx-auto border-t border-slate-800/50">
         <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
             <div>
@@ -287,7 +344,8 @@ import '../styles/global.css';
             </a>
         </div>
 
-        <a href="/blog/tecnologia-extrema-no-campo.html" class="block group relative rounded-3xl overflow-hidden border border-slate-700/50 hover:border-emerald-500/50 transition-all duration-500 bg-slate-900/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)]">
+        <!-- POST FIXO DE DESTAQUE (ANTIGO) -->
+        <a href="/blog/tecnologia-extrema-no-campo.html" class="block group relative rounded-3xl overflow-hidden border border-slate-700/50 hover:border-emerald-500/50 transition-all duration-500 bg-slate-900/40 hover:shadow-[0_0_40px_rgba(16,185,129,0.15)] mb-8">
             <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
                 <div class="md:col-span-5 bg-gradient-to-br from-slate-800 to-slate-950 p-8 flex items-center justify-center relative overflow-hidden min-h-[250px]">
                     <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(16,185,129,0.2),_transparent_60%)] group-hover:scale-110 transition-transform duration-700"></div>
@@ -300,7 +358,6 @@ import '../styles/global.css';
                 <div class="md:col-span-7 p-8 md:p-10 flex flex-col justify-center">
                     <div class="flex gap-4 text-xs text-slate-500 font-medium mb-4">
                         <span><i class="fa-regular fa-calendar mr-1"></i> Julho 2026</span>
-                        <span><i class="fa-regular fa-clock mr-1"></i> 12 min de leitura</span>
                     </div>
                     <h4 class="text-2xl font-bold text-slate-200 mb-4 group-hover:text-blue-400 transition-colors">A Fronteira Offline: Poder de Processamento no Fim do Mundo</h4>
                     <p class="text-slate-400 text-sm leading-relaxed mb-6">Como algoritmos táticos, comunicação Mesh e IA local estão erradicando a dependência de internet para produtores de café, exploradores em florestas densas e profissionais autônomos.</p>
@@ -310,6 +367,43 @@ import '../styles/global.css';
                 </div>
             </div>
         </a>
+
+        <!-- ARTIGOS DINÂMICOS GERADOS PELO PYTHON -->
+        {artigosOrdenados.map(artigo => {
+            const slug = artigo.file.split('/').pop().replace('.md', '');
+            const postUrl = `/blog/${slug}.html`;
+            
+            return (
+                <a href={postUrl} class="block group relative rounded-3xl overflow-hidden border border-slate-700/50 hover:border-blue-500/50 transition-all duration-500 bg-slate-900/40 hover:shadow-[0_0_40px_rgba(59,130,246,0.15)] mb-8">
+                    <div class="grid grid-cols-1 md:grid-cols-12 gap-0">
+                        <div class="md:col-span-5 bg-gradient-to-br from-slate-800 to-slate-950 p-8 flex items-center justify-center relative overflow-hidden min-h-[250px]">
+                            <div class="absolute inset-0 bg-[radial-gradient(circle_at_center,_rgba(59,130,246,0.2),_transparent_60%)] group-hover:scale-110 transition-transform duration-700"></div>
+                            
+                            {artigo.frontmatter.image && artigo.frontmatter.image.length > 5 ? (
+                                <img src={artigo.frontmatter.image} alt={artigo.frontmatter.title} class="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-60 transition-opacity duration-500" />
+                            ) : (
+                                <i class="fa-solid fa-newspaper text-6xl text-blue-400/20 absolute -right-4 -bottom-4 transform -rotate-12 group-hover:text-blue-400/40 transition-colors duration-500"></i>
+                            )}
+                            
+                            <div class="text-center relative z-10 w-full px-4">
+                                <h4 class="text-white font-black text-2xl leading-tight drop-shadow-lg">{artigo.frontmatter.title}</h4>
+                            </div>
+                        </div>
+                        <div class="md:col-span-7 p-8 md:p-10 flex flex-col justify-center">
+                            <div class="flex gap-4 text-xs text-slate-500 font-medium mb-4">
+                                <span><i class="fa-regular fa-calendar mr-1"></i> {artigo.frontmatter.date}</span>
+                            </div>
+                            <h4 class="text-2xl font-bold text-slate-200 mb-4 group-hover:text-blue-400 transition-colors">{artigo.frontmatter.title}</h4>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6">{artigo.frontmatter.description}</p>
+                            <span class="text-blue-400 font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                                Ler artigo completo <i class="fa-solid fa-arrow-right"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            );
+        })}
+
     </section>
 
     <footer class="py-12 text-center text-slate-500 border-t border-slate-800/50 bg-slate-950">
@@ -319,7 +413,7 @@ import '../styles/global.css';
         </p>
     </footer>
 
-    <!-- MODAL QUEM SOMOS -->
+    <!-- MODAIS E SCRIPTS -->
     <div id="aboutModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-2xl w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative transform scale-95 transition-transform duration-300" id="aboutModalBox">
             <button onclick="closeAboutModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors bg-slate-800 rounded-full w-8 h-8 flex items-center justify-center">
@@ -338,7 +432,6 @@ import '../styles/global.css';
         </div>
     </div>
 
-    <!-- MODAL DE CONTATO -->
     <div id="contactModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-slate-950/80 backdrop-blur-md opacity-0 transition-opacity duration-300 px-4">
         <div class="bg-slate-900 border border-slate-700 rounded-3xl p-8 max-w-lg w-full shadow-[0_0_50px_rgba(0,0,0,0.8)] relative transform scale-95 transition-transform duration-300" id="contactModalBox">
             <button onclick="closeContactModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors bg-slate-800 rounded-full w-8 h-8 flex items-center justify-center">
@@ -380,7 +473,6 @@ import '../styles/global.css';
         </div>
     </div>
 
-    <!-- SCRIPTS MANTIDOS COM is:inline -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" is:inline></script>
     <script src="/js/i18n.js" is:inline></script>
     <script is:inline>
