@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  
+  <!-- SEO DE ELITE: Título e Descrição com Gatilhos de Busca Global -->
+  <title>Conversor e Redimensionador de Imagens PRO | Silva Digital Tech</title>
+  <meta name="description" content="Ferramenta gratuita para converter, redimensionar e recortar imagens online. Suporte a HEIC para JPG, WebP, AVIF, PNG, PDF. Processe em lote com 100% de privacidade (Client-Side).">
+  <meta name="keywords" content="image converter, image resizer, heic to jpg, webp to png, bulk image compressor, conversor de imagens, redimensionar foto, converter imagem para pdf, crop image online">
+  <meta name="author" content="Silva Digital Tech">
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg?v=2.0">
+  
+  <!-- SCRIPT ADSENSE (Configurado com seu Publisher ID) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous"></script>
+  
+  <!-- SCHEMA.ORG (Para o Google entender que é um App Web Gratuito) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Conversor e Redimensionador PRO",
+    "url": "https://silvadigitaltech.com/apps/otimizador-e-conversor-de-imagens/",
+    "description": "Converta e redimensione imagens (HEIC, WebP, JPG, PNG, PDF) instantaneamente no navegador com total privacidade.",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "All",
+    "offers": {
+      "@type": "Offer",
+      "price": "0.00",
+      "priceCurrency": "BRL"
+    }
+  }
+  </script>
+
+  <!-- BIBLIOTECAS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  
+  <style>
+    /* RESET E BASE RESPONSIVA */
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: #0b0f19; color: #f3f4f6; overflow-x: hidden; min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* CABEÇALHO LIMPO E FIXO */
+    .topbar { display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid rgba(6, 182, 212, 0.2); position: sticky; top: 0; z-index: 50; backdrop-filter: blur(10px); }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .brand img { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #06b6d4, #10b981); padding: 2px;}
+    .brand-text { display: flex; flex-direction: column; }
+    .brand-text span { font-size: 0.7rem; color: #06b6d4; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; line-height: 1; margin-bottom: 2px;}
+    .brand-text h1 { font-size: 1.25rem; font-weight: 800; background: linear-gradient(90deg, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1;}
+    .security-badge { font-size: 0.75rem; color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 10px; border-radius: 6px; background: rgba(16, 185, 129, 0.1); font-weight: bold; }
+    
+    /* LAYOUT PRINCIPAL DE 3 COLUNAS (Laterais para Anúncios, Centro para Ferramenta) */
+    .page-wrapper {
+        display: grid;
+        grid-template-columns: 220px minmax(auto, 800px) 220px;
+        gap: 30px;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 30px 20px;
+        align-items: start;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    /* COLUNAS LATERAIS DE PUBLICIDADE (SKYSCRAPER ADS) */
+    .ad-sidebar {
+        background: rgba(15, 23, 42, 0.5);
+        border: 1px dashed rgba(6, 182, 212, 0.3);
+        border-radius: 12px;
+        min-height: 600px; 
+        position: sticky;
+        top: 90px; 
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+        text-align: center;
+        overflow: hidden;
+    }
+    .ad-label {
+        font-size: 0.65rem; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 10px; font-weight: bold; letter-spacing: 1px;
+    }
+
+    /* CONTAINER CENTRAL DA FERRAMENTA */
+    .tool-container {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    /* ÁREA DE UPLOAD (DROPZONE) */
+    .dropzone { width: 100%; border: 2px dashed rgba(6, 182, 212, 0.5); border-radius: 16px; background: rgba(15, 23, 42, 0.8); padding: 30px 20px; text-align: center; cursor: pointer; transition: all 0.3s ease; margin-bottom: 20px; }
+    .dropzone:hover { background: rgba(6, 182, 212, 0.1); border-color: #06b6d4; }
+    .dropzone svg { color: #06b6d4; margin-bottom: 10px; }
+    .dropzone h3 { font-size: 1.3rem; margin-bottom: 5px; color: #fff; }
+    .dropzone p { font-size: 0.85rem; color: #94a3b8; }
+    .file-input-hidden { display: none; }
+    
+    /* BOTÕES GLOBAIS */
+    .btn-giant { width: 100%; padding: 18px; font-size: 1.2rem; font-weight: 900; text-transform: uppercase; border-radius: 12px; background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3); cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; margin-bottom: 15px; }
+    .btn-giant:hover { transform: translateY(-2px); box-shadow: 0 12px 25px rgba(16, 185, 129, 0.5); }
+    .btn-giant:disabled { background: #475569; cursor: not-allowed; transform: none; box-shadow: none; }
+    
+    .danger-button { width: 100%; padding: 12px; font-size: 1rem; font-weight: bold; background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 10px; cursor: pointer; transition: 0.2s; margin-bottom: 20px;}
+    .danger-button:hover { background: rgba(239, 68, 68, 0.2); }
+
+    .btn-download-huge { width: 100%; padding: 16px; font-size: 1.1rem; font-weight: 900; background: linear-gradient(135deg, #3b82f6, #2563eb); color: white; border: none; border-radius: 10px; box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4); cursor: pointer; transition: 0.3s; text-transform: uppercase; text-align: center; display: block; }
+    .btn-download-huge:hover { transform: translateY(-2px); background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+    
+    /* BARRA DE PROGRESSO */
+    .progress-container { width: 100%; height: 22px; background: rgba(255,255,255,0.1); border-radius: 11px; overflow: hidden; display: none; margin-bottom: 20px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5); }
+    .progress-bar { height: 100%; width: 0%; background: linear-gradient(90deg, #3b82f6, #10b981); transition: width 0.3s ease; }
+    
+    /* CARD DO ARQUIVO (A MÁGICA RESPONSIVA) */
+    .list-item { background: #1e293b; border: 1px solid rgba(6,182,212,0.3); border-radius: 16px; padding: 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); overflow: hidden; }
+    
+    .item-header { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 15px; }
+    .item-info { display: flex; align-items: center; gap: 15px; flex-grow: 1; overflow: hidden; }
+    .item-info img { width: 60px; height: 60px; border-radius: 10px; object-fit: cover; border: 2px solid rgba(255,255,255,0.1); flex-shrink: 0; }
+    .item-text { display: flex; flex-direction: column; overflow: hidden; }
+    .item-name { font-size: 1.1rem; font-weight: bold; color: #fff; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .item-meta { font-size: 0.85rem; color: #94a3b8; margin-top: 4px; }
+    
+    .btn-remove { background: transparent; color: #ef4444; border: none; font-size: 1.5rem; cursor: pointer; padding: 0 5px; flex-shrink: 0; }
+    .btn-remove:hover { color: #f87171; }
+
+    /* CONTROLES (FORMATO, QUALIDADE, MODO) */
+    .controls-wrapper { display: flex; flex-direction: column; gap: 15px; }
+    
+    .mode-selector { display: flex; gap: 20px; background: rgba(0,0,0,0.2); padding: 10px 15px; border-radius: 10px; flex-wrap: wrap;}
+    .mode-selector label { cursor: pointer; font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 8px; color: #e2e8f0; }
+    .mode-selector input[type="radio"] { width: 18px; height: 18px; accent-color: #10b981; cursor: pointer; }
+
+    .inputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
+    .input-group { display: flex; flex-direction: column; gap: 8px; }
+    .input-group label { font-size: 0.9rem; font-weight: bold; color: #cbd5e1; }
+    .input-group select, .input-group input[type="number"] { width: 100%; padding: 12px; border-radius: 8px; background: #0f172a; color: #fff; border: 1px solid rgba(6,182,212,0.5); outline: none; font-size: 1rem; }
+    .input-group input[type="range"] { width: 100%; height: 8px; accent-color: #10b981; cursor: pointer; margin-top: 10px; }
+
+    /* PAINEL DE CORTE (CROPPER) */
+    .cropper-panel { display: none; flex-direction: column; gap: 15px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 12px; border: 1px solid rgba(16,185,129,0.3); margin-top: 10px; }
+    .cropper-dims { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .cropper-bg { width: 100%; height: 350px; background-color: #000; border-radius: 8px; overflow: hidden; position: relative; }
+    
+    .toast { position: fixed; bottom: 20px; right: 20px; background: #1e293b; color: #fff; padding: 15px 25px; border-radius: 8px; border-left: 4px solid #10b981; box-shadow: 0 10px 25px rgba(0,0,0,0.5); opacity: 0; pointer-events: none; transition: 0.3s; z-index: 100; font-weight: bold; }
+
+    /* COMPORTAMENTO EM CELULARES E TABLETS MENORES */
+    @media (max-width: 1150px) {
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .ad-sidebar {
+            width: 100%;
+            min-height: 120px;
+            position: static;
+        }
+        .ad-sidebar.ad-left { display: none; }
+    }
+
+    @media (max-width: 600px) {
+        .item-header { flex-direction: column; align-items: stretch; }
+        .btn-remove { align-self: flex-end; margin-top: -50px; }
+        .cropper-bg { height: 280px; }
+    }
+  </style>
+</head>
+<body>
+  
+  <header class="topbar">
+    <div class="brand">
+      <img src="favicon.svg?v=2.0" alt="Icon">
+      <div class="brand-text">
+          <span data-i18n="eyebrowDashboard">Ferramenta Universal</span>
+          <h1 id="pageTitle" data-i18n="title">Conversor e Redimensionador PRO</h1>
+      </div>
+    </div>
+    <div class="security-badge" data-i18n="securityBadge">✓ Local & Seguro</div>
+  </header>
+
+  <div class="page-wrapper">
+      
+      <!-- LATERAL ESQUERDA: PUBLICIDADE -->
+      <aside class="ad-sidebar ad-left">
+          <span class="ad-label">Publicidade</span>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-5388021156952745"
+               data-ad-slot="AUTO_SLOT_LEFT"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+
+      <!-- CENTRO: FERRAMENTA PRINCIPAL -->
+      <main class="tool-container">
+        
+        <div class="dropzone" id="dropzone" onclick="document.getElementById('fileInput').click()">
+          <input type="file" id="fileInput" multiple accept="image/*,.ico,.bmp,.tiff,.svg,.avif,.heic,.raw" class="file-input-hidden">
+          <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+          <h3 data-i18n="dropTitle">Clique ou arraste as imagens aqui</h3>
+          <p data-i18n="dropDesc">Todos os formatos suportados (WebP, JPG, PNG, PDF, AVIF, ICO, BMP, TIFF...)</p>
+        </div>
+
+        <div id="fileListContainer">
+          <div id="emptyState" style="text-align: center; padding: 40px; color: #64748b; border: 2px dashed rgba(255,255,255,0.1); border-radius: 12px; margin-bottom: 20px;" data-i18n="emptyQueue">
+            Nenhuma imagem na fila. Adicione para começar.
+          </div>
+        </div>
+
+        <div id="actionArea" style="display: none; margin-top: 10px;">
+            <button id="convertAllBtn" class="btn-giant" data-i18n="btnConvert">🚀 CONVERTER IMAGENS</button>
+            <div id="progressContainer" class="progress-container">
+                <div id="progressBar" class="progress-bar"></div>
+            </div>
+            <button class="danger-button" id="clearAllBtn" data-i18n="btnClear">Limpar Todas as Imagens da Fila</button>
+        </div>
+
+      </main>
+
+      <!-- LATERAL DIREITA: PUBLICIDADE -->
+      <aside class="ad-sidebar ad-right">
+          <span class="ad-label">Publicidade</span>
+          <ins class="adsbygoogle"
+               style="display:block"
+               data-ad-client="ca-pub-5388021156952745"
+               data-ad-slot="AUTO_SLOT_RIGHT"
+               data-ad-format="auto"
+               data-full-width-responsive="true"></ins>
+          <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </aside>
+
+  </div>
+  
+  <footer style="padding: 20px; text-align: center; color: #64748b; font-size: 0.85rem;" data-i18n="footer">
+    © 2026 Silva Digital Tech - Processamento Client-Side (Sem Upload).
+  </footer>
+
+  <div class="toast" id="toast"></div>
+  
+  <!-- O SEGREDO MÁGICO: CACHE BUSTING (?v=2.0) -->
+  <script src="i18n.js?v=2.0"></script>
+  <script src="app.js?v=2.0"></script>
+</body>
+</html>

@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO ULTRA MEGA AVANÇADO EXCLUSIVO PARA O TRILHA NAVIGATOR PRO -->
+    <title>Trilha Navigator PRO | GPS Offline, Rádio Mesh e Mapa Tático</title>
+    <meta name="description" content="O sistema de navegação e mapeamento tático mais avançado. Rádio Mesh offline, GPS de alta precisão, topografia agrícola e Radar Cloud. Baixe o Trilha Navigator PRO.">
+    <meta name="keywords" content="Trilha Navigator PRO, GPS offline, Rádio Mesh, rádio P2P sem internet, mapa tático, georreferenciamento celular, topografia agrícola, medir hectare pelo celular, KML, GPX, navegação off-road, rastreador SOS tático, app militar navegação">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Ícone na Aba do Navegador -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- Open Graph Específico -->
+    <meta property="og:title" content="Trilha Navigator PRO | Domine Qualquer Terreno">
+    <meta property="og:description" content="Navegue sem internet, comunique-se via Rádio Mesh offline e mapeie propriedades rurais com precisão tática.">
+    <meta property="og:image" content="assets/favicon.png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous"></script>
+    
+    <!-- SEO DE ELITE: SCHEMA GRAPH COM SUPORTE A IA DE RASTREAMENTO -->
+    <script type="application/ld+json" id="jsonld-schema">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "Trilha Navigator PRO",
+          "url": "https://silvadigitaltech.com/apps/trilha-navigator/"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "Trilha Navigator PRO",
+          "operatingSystem": "Android",
+          "applicationCategory": "NavigationApplication",
+          "applicationSubCategory": "Tactical GPS & Off-Grid Communication",
+          "softwareRequirements": "Android 5.0 ou superior",
+          "featureList": "Navegação offline, Rádio Mesh P2P, Medição de área, Radar Cloud, SOS Tático",
+          "description": "O sistema de navegação e mapeamento tático mais avançado. Rádio Mesh offline, GPS de alta precisão e topografia agrícola.",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "BRL"
+          },
+          "author": {
+            "@type": "Organization",
+            "name": "Silva Digital Tech",
+            "url": "https://silvadigitaltech.com"
+          }
+        }
+      ]
+    }
+    </script>
+    
+    <!-- Tailwind CSS & Isolated Styles -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../../css/global.css">
+    
+    <!-- FontAwesome (Para ícones táticos) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        .radar-bg {
+            background-image: radial-gradient(circle at center, rgba(16, 185, 129, 0.05) 0%, transparent 70%),
+                              linear-gradient(rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.9)),
+                              url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCI+CgkJPHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6IiBmaWxsPSJub25lIi8+CgkJPHBhdGggZD0iTTAgMGg0MHY0MEgwVjB6IiBmaWxsPSJub25lIiBzdHJva2U9InJnYmEoNTYsIDE4OSwgMjQ4LCAwLjE1KSIgc3Ryb2tlLXdpZHRoPSIxIi8+Cjwvc3ZnPg==');
+        }
+        .btn-tactical {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .btn-tactical:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(56, 189, 248, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen radar-bg overflow-x-hidden selection:bg-cyan-500 selection:text-white">
+
+    <nav class="glass-nav fixed w-full z-50 py-4 px-6 flex justify-between items-center border-b border-slate-800">
+        <a href="../../index.html" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-800/50 border border-slate-700 text-slate-300 font-medium text-sm hover:bg-slate-800 hover:text-white hover:scale-105 transition-all cursor-pointer shadow-lg">
+            <i class="fa-solid fa-arrow-left text-cyan-400"></i> 
+            <span id="navBackButton">Voltar para Silva Digital Tech</span>
+        </a>
+        <div class="text-xs font-bold bg-slate-900 border border-cyan-900/50 text-cyan-400 px-4 py-1.5 rounded-full tracking-widest uppercase shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+            <i class="fa-solid fa-satellite-dish mr-1"></i> TACTICAL ENGINE
+        </div>
+    </nav>
+
+    <main class="pt-32 max-w-7xl mx-auto px-6 pb-24">
+        
+        <!-- HEADER / HERO -->
+        <header class="text-center mb-20 relative" data-aos="fade-down">
+            <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-cyan-500/20 rounded-full blur-[80px] pointer-events-none"></div>
+            
+            <img src="assets/favicon.png" alt="Logo Trilha Navigator PRO" class="relative z-10 w-28 h-28 rounded-[2rem] border-2 border-slate-700 shadow-[0_0_40px_rgba(34,211,238,0.3)] mx-auto mb-8 object-cover hover:scale-105 transition-transform duration-500">
+            
+            <h1 id="appTitle" class="text-5xl md:text-7xl font-black tracking-tighter mb-6 text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-400">
+                Trilha Navigator PRO
+            </h1>
+            <p id="appSubtitle" class="text-lg md:text-xl text-slate-400 max-w-3xl mx-auto leading-relaxed font-light mb-10">
+                O sistema de navegação e mapeamento tático mais avançado do mercado, desenvolvido para exploradores, off-road, militares e profissionais do agronegócio. Transforme o seu celular num GPS de alta precisão que funciona 100% sem internet.
+            </p>
+
+            <a href="https://play.google.com/store/apps/details?id=br.com.silvadigitaltech.trilhanavigator&pcampaignid=web_share" target="_blank" class="btn-tactical inline-flex items-center gap-3 bg-cyan-500 hover:bg-cyan-400 text-slate-950 px-8 py-4 rounded-xl font-bold text-lg shadow-[0_0_20px_rgba(6,182,212,0.4)]">
+                <i class="fa-brands fa-google-play text-2xl"></i>
+                <span id="playStoreBtn">Baixar na Google Play</span>
+            </a>
+        </header>
+
+        <!-- SEÇÃO DE RECURSOS PRO -->
+        <section class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-24">
+            
+            <!-- Recurso 1 -->
+            <div class="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-cyan-500/50 hover:-translate-y-2 transition-all duration-300 group" data-aos="fade-up" data-aos-delay="100">
+                <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center mb-6 border border-slate-700 group-hover:bg-cyan-500/10 group-hover:border-cyan-500/30 transition-colors">
+                    <i class="fa-solid fa-map-location-dot text-2xl text-cyan-400"></i>
+                </div>
+                <h3 id="feat1_title" class="font-bold text-xl mb-3 text-white tracking-wide">Navegação Off-Grid</h3>
+                <p id="feat1_desc" class="text-slate-400 text-sm leading-relaxed">
+                    Motor de rastreamento com filtro anti-ruído. Navegue com mapas de satélite táticos e tenha suporte total a ficheiros KML, KMZ e GPX.
+                </p>
+            </div>
+
+            <!-- Recurso 2 -->
+            <div class="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-emerald-500/50 hover:-translate-y-2 transition-all duration-300 group relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
+                <div class="absolute -right-10 -top-10 w-32 h-32 bg-emerald-500/10 rounded-full blur-2xl"></div>
+                <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center mb-6 border border-slate-700 group-hover:bg-emerald-500/10 group-hover:border-emerald-500/30 transition-colors">
+                    <i class="fa-solid fa-walkie-talkie text-2xl text-emerald-400"></i>
+                </div>
+                <h3 id="feat2_title" class="font-bold text-xl mb-3 text-white tracking-wide">Rádio Mesh Offline (P2P)</h3>
+                <p id="feat2_desc" class="text-slate-400 text-sm leading-relaxed">
+                    Sem internet? O sistema conecta celulares via sinais de rádio a curta distância. Veja a posição dos seus amigos e envie mensagens de áudio encriptadas pela selva.
+                </p>
+            </div>
+
+            <!-- Recurso 3 -->
+            <div class="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-amber-500/50 hover:-translate-y-2 transition-all duration-300 group" data-aos="fade-up" data-aos-delay="300">
+                <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center mb-6 border border-slate-700 group-hover:bg-amber-500/10 group-hover:border-amber-500/30 transition-colors">
+                    <i class="fa-solid fa-ruler-combined text-2xl text-amber-400"></i>
+                </div>
+                <h3 id="feat3_title" class="font-bold text-xl mb-3 text-white tracking-wide">Ferramentas de Mapeamento</h3>
+                <p id="feat3_desc" class="text-slate-400 text-sm leading-relaxed">
+                    Calcule áreas agrícolas em hectares e perímetros tocando no mapa. Registe Waypoints com fotos e utilize o Cone de Visão (FOV) georreferenciado.
+                </p>
+            </div>
+
+            <!-- Recurso 4 -->
+            <div class="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-indigo-500/50 hover:-translate-y-2 transition-all duration-300 group lg:col-start-1 lg:col-span-1" data-aos="fade-up" data-aos-delay="400">
+                <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center mb-6 border border-slate-700 group-hover:bg-indigo-500/10 group-hover:border-indigo-500/30 transition-colors">
+                    <i class="fa-solid fa-radar text-2xl text-indigo-400"></i>
+                </div>
+                <h3 id="feat4_title" class="font-bold text-xl mb-3 text-white tracking-wide flex items-center gap-2">Radar Cloud <span class="text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded">PRO</span></h3>
+                <p id="feat4_desc" class="text-slate-400 text-sm leading-relaxed">
+                    Conecte-se aos códigos da sua equipa e acompanhe a posição de todos em tempo real via rede, ideal para resgates, gestão de frotas e eventos.
+                </p>
+            </div>
+
+            <!-- Recurso 5 -->
+            <div class="p-8 rounded-3xl bg-slate-900/60 border border-slate-800 hover:border-red-500/50 hover:-translate-y-2 transition-all duration-300 group lg:col-span-2 relative overflow-hidden" data-aos="fade-up" data-aos-delay="500">
+                <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-red-500/10 rounded-full blur-3xl"></div>
+                <div class="w-14 h-14 bg-slate-800 rounded-xl flex items-center justify-center mb-6 border border-slate-700 group-hover:bg-red-500/10 group-hover:border-red-500/30 transition-colors">
+                    <i class="fa-solid fa-triangle-exclamation text-2xl text-red-500"></i>
+                </div>
+                <h3 id="feat5_title" class="font-bold text-xl mb-3 text-white tracking-wide">SOS Tático de Emergência</h3>
+                <p id="feat5_desc" class="text-slate-400 text-sm leading-relaxed max-w-xl">
+                    Painel de emergência integrado e letal. Em caso de perigo extremo, envie as suas coordenadas decimais imediatas via SMS ou WhatsApp para os seus contactos de segurança com um único toque. Ferramenta de sobrevivência indispensável.
+                </p>
+            </div>
+
+        </section>
+    </main>
+    
+    <!-- Footer Global -->
+    <footer class="border-t border-slate-900 py-12 text-center flex flex-col items-center justify-center gap-4 bg-slate-950/80 backdrop-blur-md">
+        <div class="flex gap-6 mb-2">
+            <a href="politica.html" id="policyLink" class="text-sm text-slate-500 hover:text-cyan-400 transition flex items-center gap-2">
+                <i class="fa-solid fa-shield-halved text-xs"></i> Política de Privacidade
+            </a>
+            <a href="../../app-ads.txt" target="_blank" class="text-sm text-slate-500 hover:text-cyan-400 transition flex items-center gap-2">
+                <i class="fa-solid fa-file-code text-xs"></i> app-ads.txt
+            </a>
+        </div>
+        <p class="text-slate-600 text-sm" id="footerText">&copy; 2026 Silva Digital Tech. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, offset: 50 });
+        
+        // Motor de Dicionário Isolado Tático (Mundial)
+        const appTranslations = {
+            pt: {
+                backBtn: "Voltar para Silva Digital Tech",
+                playStoreBtn: "Baixar na Google Play",
+                subtitle: "O sistema de navegação e mapeamento tático mais avançado do mercado, desenvolvido para exploradores, off-road, militares e profissionais do agronegócio. Transforme o seu celular num GPS de alta precisão que funciona 100% sem internet.",
+                f1t: "Navegação Off-Grid e Mapas Táticos", 
+                f1d: "Motor de rastreamento com filtro anti-ruído. Navegue com mapas de satélite táticos e tenha suporte total a ficheiros KML, KMZ e GPX.",
+                f2t: "Rádio Mesh Offline (P2P)", 
+                f2d: "Sem internet? O sistema conecta celulares usando sinais de rádio a curta distância. Veja a posição da equipa e envie mensagens de áudio encriptadas pela rede mesh.",
+                f3t: "Ferramentas Profissionais de Mapeamento", 
+                f3d: "Calcule distâncias e áreas agrícolas em hectares. Registe Waypoints (Alfinetes) com fotos e utilize o Cone de Visão (FOV) direcional.",
+                f4t: "Radar Cloud <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "Conecte-se aos códigos dos seus amigos e acompanhe a posição de todos em tempo real via rede, ideal para resgates e gestão de frotas.",
+                f5t: "SOS Tático", 
+                f5d: "Painel de emergência integrado que envia as suas coordenadas decimais imediatas via SMS ou WhatsApp para os seus contactos de segurança com um toque.",
+                policy: "Política de Privacidade",
+                footer: "&copy; 2026 Silva Digital Tech. Todos os direitos reservados."
+            },
+            en: {
+                backBtn: "Back to Silva Digital Tech",
+                playStoreBtn: "Download on Google Play",
+                subtitle: "The most advanced tactical navigation and mapping system on the market, built for explorers, off-roaders, military, and agribusiness professionals. Turn your phone into a high-precision GPS that works 100% offline.",
+                f1t: "Off-Grid Nav & Tactical Maps", 
+                f1d: "Tracking engine with anti-noise filter. Navigate with tactical satellite maps and full support for KML, KMZ, and GPX file imports.",
+                f2t: "Offline Mesh Radio (P2P)", 
+                f2d: "No internet? The system connects phones using short-range radio signals. See team positions and send encrypted audio messages through the mesh network.",
+                f3t: "Professional Mapping Tools", 
+                f3d: "Calculate distances and agricultural areas in hectares. Drop Waypoints with attached photos and use the directional Field of View (FOV) cone.",
+                f4t: "Radar Cloud <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "Connect to your friends' codes and track everyone's position in real-time over the network, ideal for rescues and fleet management.",
+                f5t: "Tactical SOS", 
+                f5d: "Integrated emergency panel that sends your immediate decimal coordinates via SMS or WhatsApp to your safety contacts with a single tap.",
+                policy: "Privacy Policy",
+                footer: "&copy; 2026 Silva Digital Tech. All rights reserved."
+            },
+            es: {
+                backBtn: "Volver a Silva Digital Tech",
+                playStoreBtn: "Descargar en Google Play",
+                subtitle: "El sistema de navegación y mapeo táctico más avanzado, desarrollado para exploradores, off-road, militares y profesionales del agronegocio. Convierte tu celular en un GPS de alta precisión 100% sin internet.",
+                f1t: "Navegación Off-Grid y Mapas Tácticos", 
+                f1d: "Motor de rastreo con filtro anti-ruido. Navega con mapas satelitales tácticos y soporte total para importar archivos KML, KMZ y GPX.",
+                f2t: "Radio Mesh Offline (P2P)", 
+                f2d: "¿Sin internet? Conecta celulares usando señales de radio a corta distancia. Ve la posición del equipo y envía mensajes de audio encriptados por la red mesh.",
+                f3t: "Herramientas de Mapeo Profesionales", 
+                f3d: "Calcula distancias y áreas agrícolas en hectáreas. Registra Waypoints con fotos adjuntas y utiliza el Cono de Visión (FOV) direccional.",
+                f4t: "Radar Cloud <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "Conéctate a los códigos de tus amigos y monitorea la posición de todos en tiempo real a través de la red, ideal para rescates y gestión de flotas.",
+                f5t: "SOS Táctico", 
+                f5d: "Panel de emergencia integrado que envía tus coordenadas decimales inmediatas vía SMS o WhatsApp a tus contactos de seguridad con un solo toque.",
+                policy: "Política de Privacidad",
+                footer: "&copy; 2026 Silva Digital Tech. Todos los derechos reservados."
+            },
+            fr: {
+                backBtn: "Retour à Silva Digital Tech",
+                playStoreBtn: "Télécharger sur Google Play",
+                subtitle: "Le système de navigation et de cartographie tactique le plus avancé du marché, conçu pour les explorateurs, les militaires et les professionnels de l'agro-industrie. Transformez votre téléphone en un GPS de haute précision qui fonctionne 100 % hors ligne.",
+                f1t: "Navigation Off-Grid et Cartes Tactiques", 
+                f1d: "Moteur de suivi avec filtre anti-bruit. Naviguez avec des cartes satellites tactiques et un support complet pour les fichiers KML, KMZ et GPX.",
+                f2t: "Radio Mesh Hors Ligne (P2P)", 
+                f2d: "Pas d'internet ? Le système connecte les téléphones via des signaux radio à courte portée. Consultez les positions de l'équipe et envoyez des messages audio cryptés.",
+                f3t: "Outils de Cartographie Professionnels", 
+                f3d: "Calculez les distances et les surfaces agricoles en hectares. Enregistrez des points de repère avec des photos et utilisez le cône de champ de vision (FOV).",
+                f4t: "Radar Cloud <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "Connectez-vous aux codes de vos amis et suivez la position de tous en temps réel sur le réseau, idéal pour les sauvetages et la gestion de flotte.",
+                f5t: "SOS Tactique", 
+                f5d: "Panneau d'urgence intégré qui envoie vos coordonnées décimales immédiates par SMS ou WhatsApp à vos contacts de sécurité en un seul clic.",
+                policy: "Politique de Confidentialité",
+                footer: "&copy; 2026 Silva Digital Tech. Tous droits réservés."
+            },
+            de: {
+                backBtn: "Zurück zu Silva Digital Tech",
+                playStoreBtn: "Herunterladen bei Google Play",
+                subtitle: "Das fortschrittlichste taktische Navigations- und Kartensystem auf dem Markt, entwickelt für Entdecker, Offroader, Militärs und Agrarprofis. Verwandeln Sie Ihr Handy in ein hochpräzises GPS, das 100 % offline funktioniert.",
+                f1t: "Off-Grid-Navigation & Taktische Karten", 
+                f1d: "Tracking-Engine mit Anti-Rausch-Filter. Navigieren Sie mit taktischen Satellitenkarten und voller Unterstützung für KML-, KMZ- und GPX-Dateien.",
+                f2t: "Offline-Mesh-Radio (P2P)", 
+                f2d: "Kein Internet? Das System verbindet Handys über Kurzstrecken-Funksignale. Sehen Sie Teampositionen und senden Sie verschlüsselte Audionachrichten.",
+                f3t: "Professionelle Kartierungs-Tools", 
+                f3d: "Berechnen Sie Entfernungen und landwirtschaftliche Flächen in Hektar. Setzen Sie Wegpunkte mit Fotos und nutzen Sie den FOV-Kegel.",
+                f4t: "Radar Cloud <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "Verbinden Sie sich mit den Codes Ihrer Freunde und verfolgen Sie die Position aller in Echtzeit über das Netzwerk, ideal für Rettungen und Flottenmanagement.",
+                f5t: "Taktisches SOS", 
+                f5d: "Integriertes Notfall-Panel, das Ihre sofortigen Dezimal-Koordinaten per SMS oder WhatsApp mit einem einzigen Tippen an Ihre Sicherheitskontakte sendet.",
+                policy: "Datenschutzrichtlinie",
+                footer: "&copy; 2026 Silva Digital Tech. Alle Rechte vorbehalten."
+            },
+            ru: {
+                backBtn: "Назад к Silva Digital Tech",
+                playStoreBtn: "Скачать в Google Play",
+                subtitle: "Самая передовая система тактической навигации и картографии на рынке, разработанная для исследователей, военных и специалистов агробизнеса. Превратите свой телефон в высокоточный GPS, работающий на 100% автономно.",
+                f1t: "Автономная навигация и Тактические Карты", 
+                f1d: "Механизм отслеживания с фильтром шума. Навигация по тактическим спутниковым картам и полная поддержка импорта файлов KML, KMZ и GPX.",
+                f2t: "Оффлайн Mesh-радио (P2P)", 
+                f2d: "Нет интернета? Система соединяет телефоны с помощью радиосигналов малого радиуса действия. Просматривайте позиции команды и отправляйте зашифрованные аудиосообщения.",
+                f3t: "Профессиональные Инструменты Картографии", 
+                f3d: "Рассчитывайте расстояния и сельскохозяйственные площади в гектарах. Ставьте путевые точки с фотографиями и используйте направленный конус поля зрения (FOV).",
+                f4t: "Radar Cloud <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "Подключайтесь к кодам друзей и отслеживайте положение каждого в режиме реального времени по сети, что идеально подходит для спасательных операций и управления автопарком.",
+                f5t: "Тактический SOS", 
+                f5d: "Встроенная панель экстренной помощи, которая отправляет ваши точные десятичные координаты по SMS или WhatsApp вашим контактам безопасности одним касанием.",
+                policy: "Политика конфиденциальности",
+                footer: "&copy; 2026 Silva Digital Tech. Все права защищены."
+            },
+            zh: {
+                backBtn: "返回 Silva Digital Tech",
+                playStoreBtn: "在 Google Play 下载",
+                subtitle: "市场上最先进的战术导航和制图系统，专为探险家、越野者、军人和农业企业专业人士打造。将您的手机变成 100% 离线工作的高精度 GPS。",
+                f1t: "离网导航和战术地图", 
+                f1d: "具有抗噪过滤器的跟踪引擎。使用战术卫星地图导航，并全面支持 KML、KMZ 和 GPX 文件导入。",
+                f2t: "离线网状无线电 (P2P)", 
+                f2d: "没有互联网？系统使用短程无线电信号连接手机。查看团队位置并通过网状网络发送加密的音频消息。",
+                f3t: "专业制图工具", 
+                f3d: "计算距离和以公顷为单位的农业面积。放置带有照片的航点并使用定向视野 (FOV) 锥。",
+                f4t: "雷达云 <span class='text-[10px] bg-indigo-500/20 text-indigo-300 px-2 py-1 rounded'>PRO</span>", 
+                f4d: "连接到朋友的代码并在网络上实时跟踪每个人的位置，非常适合救援和车队管理。",
+                f5t: "战术 SOS", 
+                f5d: "集成的紧急面板，只需轻轻一按即可通过 SMS 或 WhatsApp 将您的即时十进制坐标发送给您的安全联系人。",
+                policy: "隐私政策",
+                footer: "&copy; 2026 Silva Digital Tech. 版权所有。"
+            }
+        };
+
+        const currentLang = localStorage.getItem('selectedLanguage') || 'pt';
+        if(appTranslations[currentLang]) {
+            document.getElementById('navBackButton').innerHTML = appTranslations[currentLang].backBtn;
+            document.getElementById('playStoreBtn').innerHTML = appTranslations[currentLang].playStoreBtn;
+            document.getElementById('appSubtitle').innerHTML = appTranslations[currentLang].subtitle;
+            
+            document.getElementById('feat1_title').innerHTML = appTranslations[currentLang].f1t;
+            document.getElementById('feat1_desc').innerHTML = appTranslations[currentLang].f1d;
+            
+            document.getElementById('feat2_title').innerHTML = appTranslations[currentLang].f2t;
+            document.getElementById('feat2_desc').innerHTML = appTranslations[currentLang].f2d;
+            
+            document.getElementById('feat3_title').innerHTML = appTranslations[currentLang].f3t;
+            document.getElementById('feat3_desc').innerHTML = appTranslations[currentLang].f3d;
+            
+            document.getElementById('feat4_title').innerHTML = appTranslations[currentLang].f4t;
+            document.getElementById('feat4_desc').innerHTML = appTranslations[currentLang].f4d;
+            
+            document.getElementById('feat5_title').innerHTML = appTranslations[currentLang].f5t;
+            document.getElementById('feat5_desc').innerHTML = appTranslations[currentLang].f5d;
+
+            document.getElementById('policyLink').innerHTML = `<i class="fa-solid fa-shield-halved text-xs"></i> ` + appTranslations[currentLang].policy;
+            document.getElementById('footerText').innerHTML = appTranslations[currentLang].footer;
+            
+            // ATUALIZAÇÃO DO SCHEMA JSON-LD EM TEMPO REAL PARA SEO GLOBAL MÁXIMO
+            const schemaElement = document.getElementById('jsonld-schema');
+            if (schemaElement) {
+                const schemaData = {
+                    "@context": "https://schema.org",
+                    "@graph": [
+                        {
+                            "@type": "WebSite",
+                            "name": "Trilha Navigator PRO",
+                            "url": window.location.href
+                        },
+                        {
+                            "@type": "SoftwareApplication",
+                            "name": "Trilha Navigator PRO",
+                            "operatingSystem": "Android",
+                            "applicationCategory": "NavigationApplication",
+                            "applicationSubCategory": currentLang === 'pt' ? "GPS Tático e Comunicação Off-Grid" : currentLang === 'en' ? "Tactical GPS & Off-Grid Communication" : "GPS Táctico y Comunicación Off-Grid",
+                            "softwareRequirements": "Android 5.0+",
+                            "featureList": currentLang === 'pt' ? "Navegação offline, Rádio Mesh P2P, Medição de área, Radar Cloud, SOS Tático" : currentLang === 'en' ? "Offline Navigation, P2P Mesh Radio, Area Measurement, Radar Cloud, Tactical SOS" : "Navegación offline, Radio Mesh P2P, Medición de área, Radar Cloud, SOS Táctico",
+                            "description": appTranslations[currentLang].subtitle,
+                            "offers": {
+                                "@type": "Offer",
+                                "price": "0",
+                                "priceCurrency": currentLang === 'pt' ? "BRL" : "USD"
+                            },
+                            "author": {
+                                "@type": "Organization",
+                                "name": "Silva Digital Tech",
+                                "url": "../../index.html"
+                            }
+                        }
+                    ]
+                };
+                schemaElement.text = JSON.stringify(schemaData);
+            }
+        }
+    </script>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745"
+    crossorigin="anonymous"></script>
+<!-- silvadigitaltech sites -->
+<ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-5388021156952745"
+    data-ad-slot="5513311007"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>

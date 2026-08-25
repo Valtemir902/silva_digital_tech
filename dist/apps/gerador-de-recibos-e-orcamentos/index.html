@@ -1,0 +1,374 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>MicroCRM Recibos e Orcamentos</title>
+  
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745" crossorigin="anonymous"></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navegacao principal">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">MR</div>
+        <div>
+          <strong>MicroCRM</strong>
+          <span>Recibos e orcamentos</span>
+        </div>
+      </div>
+
+      <nav class="nav-list" aria-label="Secoes">
+        <button class="nav-button active" type="button" data-view="dashboard" aria-current="page">
+          <span aria-hidden="true">▦</span> Painel
+        </button>
+        <button class="nav-button" type="button" data-view="finance">
+          <span aria-hidden="true">◍</span> Financeiro
+        </button>
+        <button class="nav-button" type="button" data-view="clients">
+          <span aria-hidden="true">◉</span> Clientes
+        </button>
+        <button class="nav-button" type="button" data-view="documents">
+          <span aria-hidden="true">▤</span> Recibos e orcamentos
+        </button>
+        <button class="nav-button" type="button" data-view="settings">
+          <span aria-hidden="true">⚙</span> Empresa
+        </button>
+      </nav>
+
+      <div class="ad-container sidebar-ad">
+        <span class="ad-label">Publicidade</span>
+        </div>
+
+      <div class="security-note">
+        <strong>Modo local</strong>
+        <p>Os dados ficam somente neste navegador. Nao ha servidor, login externo ou envio automatico para a internet.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Prestadores de servicos</p>
+          <h1 id="pageTitle">Painel</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="primary-button" type="button" id="newDocShortcut">Novo documento</button>
+        </div>
+      </header>
+
+      <section class="view active" id="dashboard" aria-labelledby="pageTitle">
+        <div class="metrics-grid">
+          <article class="metric-card">
+            <span>Clientes</span>
+            <strong id="metricClients">0</strong>
+          </article>
+          <article class="metric-card">
+            <span>Documentos</span>
+            <strong id="metricDocs">0</strong>
+          </article>
+          <article class="metric-card">
+            <span>Em aberto</span>
+            <strong id="metricOpen">R$ 0,00</strong>
+          </article>
+          <article class="metric-card">
+            <span>Recebido</span>
+            <strong id="metricPaid">R$ 0,00</strong>
+          </article>
+        </div>
+
+        <div class="split-layout">
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Documentos recentes</h2>
+              <button class="icon-button" type="button" data-view-jump="documents" title="Ver documentos">→</button>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Codigo</th>
+                    <th>Cliente</th>
+                    <th>Tipo</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody id="recentDocs"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Acoes rapidas</h2>
+            </div>
+            <div class="quick-actions">
+              <button type="button" data-view-jump="clients">Cadastrar cliente</button>
+              <button type="button" data-view-jump="documents" data-new-doc-type="recibo">Gerar recibo</button>
+              <button type="button" data-view-jump="documents" data-new-doc-type="orcamento">Gerar orcamento</button>
+            </div>
+            
+            <div class="ad-container" style="margin-top: 15px;">
+              <span class="ad-label">Publicidade</span>
+              </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="finance" aria-labelledby="financeTitle">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow">Analise financeira</p>
+            <h2 id="financeTitle">Painel financeiro</h2>
+          </div>
+          <div class="segmented-control" aria-label="Periodo financeiro">
+            <button class="segment active" type="button" data-period="all">Tudo</button>
+            <button class="segment" type="button" data-period="90">90 dias</button>
+            <button class="segment" type="button" data-period="30">30 dias</button>
+          </div>
+        </div>
+
+        <div class="finance-hero">
+          <div>
+            <p class="eyebrow">Saude do caixa</p>
+            <h3 id="financeHeadline">R$ 0,00</h3>
+            <span id="financeSubtitle">Receita confirmada no periodo</span>
+          </div>
+          <div class="finance-score" aria-label="Indicador financeiro">
+            <span id="financeScore">0%</span>
+            <small>Conversao</small>
+          </div>
+        </div>
+
+        <div class="metrics-grid finance-metrics">
+          <article class="metric-card accent-card">
+            <span>Receita paga</span>
+            <strong id="financePaid">R$ 0,00</strong>
+          </article>
+          <article class="metric-card">
+            <span>A receber</span>
+            <strong id="financeReceivable">R$ 0,00</strong>
+          </article>
+          <article class="metric-card">
+            <span>Ticket medio</span>
+            <strong id="financeAverage">R$ 0,00</strong>
+          </article>
+          <article class="metric-card">
+            <span>Documentos ativos</span>
+            <strong id="financeActiveDocs">0</strong>
+          </article>
+        </div>
+
+        <div class="analytics-grid">
+          <section class="panel chart-panel">
+            <div class="panel-header">
+              <h2>Receita por mes</h2>
+              <span class="pill" id="financeTrend">Estavel</span>
+            </div>
+            <canvas id="revenueChart" width="900" height="360" aria-label="Grafico de receita por mes"></canvas>
+          </section>
+
+          <section class="panel chart-panel compact-chart">
+            <div class="panel-header">
+              <h2>Status</h2>
+              <span class="pill">Pipeline</span>
+            </div>
+            <canvas id="statusChart" width="420" height="360" aria-label="Distribuicao por status"></canvas>
+          </section>
+
+          <section class="panel chart-panel">
+            <div class="panel-header">
+              <h2>Top clientes</h2>
+              <span class="pill">Por valor</span>
+            </div>
+            <div class="rank-list" id="topClientsList"></div>
+          </section>
+
+          <section class="panel chart-panel">
+            <div class="panel-header">
+              <h2>Insights</h2>
+              <span class="pill">Automatico</span>
+            </div>
+            <div class="insight-list" id="financeInsights"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="clients" aria-labelledby="clientsTitle">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow">Relacionamento</p>
+            <h2 id="clientsTitle">Clientes</h2>
+          </div>
+          <button class="primary-button" type="button" id="clearClientForm">Novo cliente</button>
+        </div>
+
+        <div class="split-layout">
+          <form class="panel form-grid" id="clientForm" autocomplete="off">
+            <input type="hidden" id="clientId">
+            <label>Nome
+              <input id="clientName" required maxlength="80" placeholder="Ex.: Ana Souza">
+            </label>
+            <label>Telefone
+              <input id="clientPhone" maxlength="30" placeholder="(00) 00000-0000">
+            </label>
+            <label>Email
+              <input id="clientEmail" maxlength="80" type="email" placeholder="cliente@email.com">
+            </label>
+            <label>Documento
+              <input id="clientTaxId" maxlength="30" placeholder="CPF ou CNPJ">
+            </label>
+            <label class="full">Endereco
+              <input id="clientAddress" maxlength="140" placeholder="Rua, numero, bairro, cidade">
+            </label>
+            <label class="full">Observacoes
+              <textarea id="clientNotes" maxlength="500" rows="4"></textarea>
+            </label>
+            <div class="form-actions full">
+              <button class="primary-button" type="submit">Salvar cliente</button>
+              <button class="danger-button" type="button" id="deleteClient">Excluir</button>
+            </div>
+          </form>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Lista de clientes</h2>
+              <input class="search-input" id="clientSearch" placeholder="Buscar cliente">
+            </div>
+            <div class="list" id="clientList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="documents" aria-labelledby="documentsTitle">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow">Financeiro simples</p>
+            <h2 id="documentsTitle">Recibos e orcamentos</h2>
+          </div>
+          <button class="primary-button" type="button" id="clearDocForm">Novo documento</button>
+        </div>
+
+        <div class="doc-layout">
+          <form class="panel form-grid" id="docForm" autocomplete="off">
+            <input type="hidden" id="docId">
+            <label>Tipo
+              <select id="docType">
+                <option value="orcamento">Orcamento</option>
+                <option value="recibo">Recibo</option>
+              </select>
+            </label>
+            <label>Status
+              <select id="docStatus">
+                <option value="aberto">Aberto</option>
+                <option value="aprovado">Aprovado</option>
+                <option value="pago">Pago</option>
+                <option value="cancelado">Cancelado</option>
+              </select>
+            </label>
+            <label>Cliente
+              <select id="docClient" required></select>
+            </label>
+            <label>Data
+              <input id="docDate" type="date" required>
+            </label>
+            <label class="full">Descricao do servico
+              <textarea id="docDescription" rows="3" maxlength="700" required placeholder="Descreva o servico prestado ou orcado"></textarea>
+            </label>
+
+            <fieldset class="items-box full">
+              <legend>Itens</legend>
+              <div id="itemsList"></div>
+              <button class="ghost-button" type="button" id="addItem">Adicionar item</button>
+            </fieldset>
+
+            <label>Desconto
+              <input id="docDiscount" type="number" min="0" step="0.01" value="0">
+            </label>
+            <label>Validade/Prazo
+              <input id="docDue" maxlength="60" placeholder="Ex.: 7 dias">
+            </label>
+
+            <div class="doc-total full">
+              <span>Total</span>
+              <strong id="docTotal">R$ 0,00</strong>
+            </div>
+
+            <div class="form-actions full">
+              <button class="primary-button" type="submit">Salvar documento</button>
+              <button class="ghost-button" type="button" id="printDoc">Imprimir/PDF</button>
+              <button class="ghost-button" type="button" id="downloadShareDoc">Baixar PDF e compartilhar</button>
+              <button class="danger-button" type="button" id="deleteDoc">Excluir</button>
+            </div>
+            
+            <div class="ad-container full" style="margin-top: 10px; width: 100%;">
+              <span class="ad-label">Publicidade</span>
+              </div>
+          </form>
+
+          <section class="panel">
+            <div class="panel-header">
+              <h2>Historico</h2>
+              <input class="search-input" id="docSearch" placeholder="Buscar documento">
+            </div>
+            <div class="list" id="docList"></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="view" id="settings" aria-labelledby="settingsTitle">
+        <div class="section-bar">
+          <div>
+            <p class="eyebrow">Identidade</p>
+            <h2 id="settingsTitle">Dados da empresa</h2>
+          </div>
+        </div>
+        <form class="panel form-grid" id="settingsForm" autocomplete="off">
+          <label>Nome da empresa
+            <input id="bizName" maxlength="90" placeholder="Seu nome ou empresa">
+          </label>
+          <label>Documento
+            <input id="bizTaxId" maxlength="40" placeholder="CPF/CNPJ">
+          </label>
+          <label>Telefone
+            <input id="bizPhone" maxlength="40">
+          </label>
+          <label>Email
+            <input id="bizEmail" type="email" maxlength="90">
+          </label>
+          <label class="full">Endereco
+            <input id="bizAddress" maxlength="160">
+          </label>
+          <label class="full">Mensagem padrao
+            <textarea id="bizMessage" rows="4" maxlength="500" placeholder="Obrigado pela preferencia."></textarea>
+          </label>
+          <div class="form-actions full">
+            <button class="primary-button" type="submit">Salvar empresa</button>
+          </div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="app.js?v=2" defer></script>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5388021156952745"
+    crossorigin="anonymous"></script>
+<!-- silvadigitaltech sites -->
+<ins class="adsbygoogle"
+    style="display:block"
+    data-ad-client="ca-pub-5388021156952745"
+    data-ad-slot="5513311007"
+    data-ad-format="auto"
+    data-full-width-responsive="true"></ins>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</body>
+</html>

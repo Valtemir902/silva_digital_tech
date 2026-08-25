@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="100%" height="100%">
+  <!-- Fundo do Ícone (Quadrado com Bordas Arredondadas) -->
+  <rect width="200" height="200" rx="45" fill="#020617" />
+
+  <defs>
+    <!-- Gradiente Ciano/Azul (Neon) -->
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22d3ee" />
+      <stop offset="100%" stop-color="#3b82f6" />
+    </linearGradient>
+
+    <!-- Efeito de Brilho -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="blur" />
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Hexágono de Segurança (Fundo) -->
+  <path d="M 100 30 L 160 65 L 160 135 L 100 170 L 40 135 L 40 65 Z" fill="none" stroke="#334155" stroke-width="10" stroke-linejoin="round"/>
+
+  <!-- O 'S' Tecnológico (Grosso para leitura em miniatura) -->
+  <path d="M 135 65 L 65 65 L 50 100 L 140 100 L 125 135 L 55 135" fill="none" stroke="url(#neonCyan)" stroke-width="18" stroke-linecap="square" stroke-linejoin="miter" filter="url(#glow)"/>
+
+  <!-- Pontos de Conexão (Nós) -->
+  <circle cx="135" cy="65" r="9" fill="#ffffff" />
+  <circle cx="55" cy="135" r="9" fill="#ffffff" />
+</svg>
